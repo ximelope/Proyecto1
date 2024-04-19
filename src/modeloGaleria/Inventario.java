@@ -13,6 +13,7 @@ public class Inventario {
 		bodega = new HashMap<String,Pieza>( );
 		exhibicion = new HashMap<String,Pieza>( );
 		this.administrador= administrador;
+		
 	}
 	
 	public Collection<Pieza> getBodega (){
