@@ -1,5 +1,5 @@
 package modeloGaleria;
 
-public class Administrador {
-
+public class Administrador extends Usuario {
+	private String usuario,
 }

@@ -1,5 +1,5 @@
 package modeloGaleria;
 
-public class Propietario {
+public class Propietario extends Usuario{
 
 }
