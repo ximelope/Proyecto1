@@ -11,6 +11,7 @@ public abstract class Pieza {
 	protected float valorFijo;
 	protected float valorMinimoSubasta;
 	protected Propietario propietario;
+	private Propietario propietarioNuevo;
 	
 	
 	public String getTitulo() {
@@ -40,6 +41,12 @@ public abstract class Pieza {
 	public Propietario getPropietario() {
 		return propietario;
 	}
+	public void setPropietario(Propietario propietarioNuevo) {
+		this.propietario = propietarioNuevo;
+	}
+	public Propietario getPropietarioNuevo() {
+		return propietarioNuevo;
+	}
 	
 	// Constructor
 	public Pieza(String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoSubasta,
@@ -54,6 +61,5 @@ public abstract class Pieza {
 		this.valorMinimoSubasta = valorMinimoSubasta;
 		this.propietario = propietario;
 	}
-	
 
 }
