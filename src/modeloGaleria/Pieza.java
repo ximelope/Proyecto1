@@ -25,7 +25,7 @@ public abstract class Pieza {
 	public String getAutor() {
 		return autor;
 	}
-	public boolean isExhibida() {
+	public boolean getExhibida() {
 		return exhibida;
 	}
 	public boolean isPermisoSubasta() {

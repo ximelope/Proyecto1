@@ -24,8 +24,14 @@ public class Inventario {
 	public Administrador getAdministrador () {
 		return administrador;
 	}
-	private void cargarPiezas() {
-		
-		
+	protected void cargarPiezas(Pieza pieza) {
+		Boolean estado = pieza.getExhibida();
+		if (estado==true) {
+			this.exhibicion.put(pieza.getTitulo(), pieza);
+		}
+		else {
+			this.bodega.put(pieza.getTitulo(), pieza);
+		}
 	}
+	
 }
