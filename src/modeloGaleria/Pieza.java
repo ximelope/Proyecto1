@@ -14,7 +14,7 @@ public abstract class Pieza {
 	protected String estadoDePieza;
 	
 	public abstract String getTitulo();
-	public abstract int getAno();
+	public abstract int getAno();	
 	public abstract String getLugarCreacion();
 	public abstract String getAutor();
 	public abstract boolean isExhibida();
@@ -26,10 +26,9 @@ public abstract class Pieza {
 	
 	
 	
-	
 	// Constructor
-	public Pieza(String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoSubasta,
-			float valorFijo, double valorMinimoSubasta, Propietario propietario) {
+	public Pieza(String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoVenta,
+			float valorFijo, double valorMinimoSubasta, Propietario propietario, String estadoDePieza) {
 		this.titulo = titulo;
 		this.ano = ano;
 		this.lugarCreacion = lugarCreacion;
