@@ -19,11 +19,11 @@ public class OperadorRegistro{
 	private Map<Pieza, Map<Comprador, Double>> ofertasRegistro = new HashMap<>();
 	//Preguntar lo del formato de fecha
 	
-	public OperadorRegistro(Date fecha, float monto, Comprador comprador, Subasta subasta, float valorMinimo, Date fechaInicial, Date fechaFinal, Pieza pieza) 
+	public OperadorRegistro(Date fecha, float monto, Comprador comprador, Subasta subasta, float valorMinimo, Date fechaInicial, Date fechaFinal, Pieza pieza, int id) 
 	{
 		this.fecha = fecha;
 		this.monto = monto;
-		this.subasta = new Subasta(fechaInicial, fechaFinal, pieza);
+		this.subasta = new Subasta(id, fechaInicial, fechaFinal, pieza);
 		this.valorInicial = (subasta.getValorInicial());
 		this.valorMinimo = (subasta.getValorMinimo());
 		this.fechaInicial = (subasta.getFechaInicial());

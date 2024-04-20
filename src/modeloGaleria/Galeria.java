@@ -10,6 +10,7 @@ public class Galeria {
 	private HashMap<String, Video> videos  = new HashMap<>();
 	private HashMap<String, Fotografia> fotografias = new HashMap<>();
 	private HashMap<String, Impresion> impresiones = new HashMap<>();
+	private HashMap<String, Pieza> piezas = new HashMap<>();
 	private Administrador administrador;
 	public HashMap<String, String> usuarios = new HashMap<>();
 	
@@ -18,26 +19,8 @@ public class Galeria {
 
 	            cargarUsuarios();
 
-	            cargarTarifa(new File(
-	                    "../proyecto1/entrega3/proyecto1_hotel/data/tarifa.txt"), tarifasEstandar);
-	            cargarTarifa(new File(
-	                    "../proyecto1/entrega3/proyecto1_hotel/data/tarifa2.txt"), tarifasSuite);
-	            cargarTarifa(new File(
-	                    "../proyecto1/entrega3/proyecto1_hotel/data/tarifa3.txt"), tarifasSuite2);
-
-	            cargarHabitaciones();
-
-	            cargarPlatos();
-
-	            cargarHuespedes();
-
-	            cargarGrupos();
-
-	            cargarReservas();
-
-	            cargarServicios();
-
-	            cargarConsumos();
+	            //cargarClientes(new File(
+	                    //"../proyecto1/entrega3/proyecto1_hotel/data/tarifa.txt"), tarifasEstandar);
 
 	        } catch (Exception e) {
 	            e.printStackTrace();
@@ -73,12 +56,17 @@ public class Galeria {
 	            if (opcion == 1) {
 	                File archivoPiezas = new File(
 	                        "../proyecto1/entrega3/proyecto1_hotel/data/habitaciones2.txt");
-	                admin.cargarPieza(archivoPiezas, esculturas,pinturas, fotografias, videos, impresiones );
+	                admin.cargarPieza(archivoPiezas,piezas,  esculturas,pinturas, fotografias, videos, impresiones );
 	            } else if (opcion == 2) {
-	                admin.pedir_crearPieza();
+	                admin.pedir_crearPieza(piezas,  esculturas,pinturas, fotografias, videos, impresiones);
 	                
 	            } else if (opcion == 3) {
-	                logOut();
+	                almacenarEsculturas();
+	                almacenarPinturas();
+	                almacenarFotografias();
+	                almacenarImpresiones();
+	                almacenarVideos();
+	                
 	            } else {
 	                System.out.println("Opcion Inválida");
 	            }
@@ -143,7 +131,7 @@ public class Galeria {
 	        System.out.println("Cargando base de datos de Usuarios");
 	        try {
 	            BufferedReader br = new BufferedReader(new FileReader(new File(
-	                    "../proyecto1/entrega3/proyecto1_hotel/data/database.txt")));
+	                    "../proyecto/src/data/Usuarios.txt")));
 	            String linea;
 	            linea = br.readLine();
 	            while (linea != null) {
@@ -154,6 +142,7 @@ public class Galeria {
 	                usuarios.put(usuario, contrasena);
 
 	                linea = br.readLine();
+	                System.out.println(linea);
 	            }
 	            br.close();
 	        } catch (Exception e) {

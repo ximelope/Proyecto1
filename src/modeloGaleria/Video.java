@@ -13,9 +13,9 @@ public class Video extends Pieza{
 	}
 	
 	public Video(String tipo, String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoSubasta,
-			float valorFijo, float valorMinimoSubasta, Propietario propietario,String estado, float duracion, boolean necesidadElectricidad) {
+			int valorFijo, int valorMinimoSubasta, Propietario propietario, float duracion, boolean necesidadElectricidad) {
 		
-		super(tipo, titulo, ano, lugarCreacion, autor, exhibida, permisoSubasta, valorFijo, valorMinimoSubasta, propietario, estado);
+		super(tipo, titulo, ano, lugarCreacion, autor, exhibida, permisoSubasta, valorFijo, valorMinimoSubasta, propietario);
 		this.duracion= duracion;
 		this.necesidadElectricidad= necesidadElectricidad;
 	}

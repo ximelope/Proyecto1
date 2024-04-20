@@ -11,8 +11,8 @@ public abstract class Pieza {
 	protected String autor;
 	protected boolean exhibida; 
 	protected boolean permisoVenta;
-	protected float valorFijo;
-	protected double valorMinimoSubasta;
+	protected int valorFijo;
+	protected int valorMinimoSubasta;
 	protected Propietario propietario;
 	protected String estadoDePieza;
 	
@@ -34,10 +34,10 @@ public abstract class Pieza {
 	public boolean isPermisoVenta() {
 		return permisoVenta;
 	}
-	public float getValorFijo() {
+	public int getValorFijo() {
 		return valorFijo;
 	}
-	public double getValorMinimoSubasta() {
+	public int getValorMinimoSubasta() {
 		return valorMinimoSubasta;
 	}
 	public Propietario getPropietario() {
@@ -54,7 +54,7 @@ public abstract class Pieza {
 	
 	// Constructor
 	public Pieza(String tipo,String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoVenta,
-			float valorFijo, double valorMinimoSubasta, Propietario propietario, String estadoDePieza) {
+			int valorFijo, int valorMinimoSubasta, Propietario propietario) {
 		this.tipo= tipo;
 		this.titulo = titulo;
 		this.ano = ano;
@@ -65,7 +65,7 @@ public abstract class Pieza {
 		this.valorFijo = valorFijo;
 		this.valorMinimoSubasta = valorMinimoSubasta;
 		this.propietario = propietario;
-		this.estadoDePieza= estadoDePieza;
+		this.estadoDePieza= "Disponible";
 	}
 	
 }

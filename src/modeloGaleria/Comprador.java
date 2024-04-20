@@ -4,16 +4,16 @@ import java.util.Collection;
 public class Comprador extends Usuario{
     private String correoElectronico;
     private int numeroDeTelefono;
-    public boolean verificado;
-    private double valorMax;
+    private String estado;// Vrificado, Bloqueado, NoAplica
+    private int valorMax;
     protected Collection<Pieza> infocompras;
 	
-    public Comprador (String login, String contraseña, String rol, String correo, int numero, double valorMax) {
-        super(login,contraseña,rol);
+    public Comprador (String login, String contraseña, String correo, int numero, int valorMax) {
+        super(login,contraseña);
         this.correoElectronico= correo;
         this.numeroDeTelefono= numero;
         this.valorMax = valorMax;
-        this.verificado = false;
+        this.estado = "NoAplica";
     }
 
     public String getCorreoElectronico() {
@@ -24,15 +24,15 @@ public class Comprador extends Usuario{
         return numeroDeTelefono;
     }
 
-    public double getValorMax() {
+    public int getValorMax() {
         return valorMax;
     }
-    public boolean isVerificado() {
-        return verificado;
+    public String getEstado() {
+        return estado;
     }
-    
-    public void setVerificado(boolean verificado) {
-        this.verificado = verificado; }
+    public void cambiarEstado( String nuevoEstado) {
+    	this.estado= nuevoEstado;
+    }
 
     public void comprarObra(Pieza pieza, int numeroDeTelefono) {
         Venta venta = new Venta();
