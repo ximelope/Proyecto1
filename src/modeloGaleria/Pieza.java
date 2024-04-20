@@ -1,7 +1,5 @@
 package modeloGaleria;
 
-import java.util.Date;
-
 public abstract class Pieza {
 	
 	protected String tipo;

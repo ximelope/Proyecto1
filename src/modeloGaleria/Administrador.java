@@ -228,7 +228,7 @@ public class Administrador extends Usuario {
 	            return null;
 	        }
 	    }
-	public boolean verificacionDeCliente (Comprador comprador) {
+	public static boolean verificacionDeCliente (Comprador comprador) {
 		int numero= comprador.getNumeroDeTelefono();
 		int digitos = String.valueOf(numero).length();
 		if (digitos==10) {
