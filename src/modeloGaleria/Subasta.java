@@ -7,8 +7,7 @@ public class Subasta {
 	private Pieza pieza;
 	private double valorInicial;
 	private double valorMinimo;
-	private String nombreComprador;
-	private String tituloPieza;
+	private Comprador comprador;
 
 	public Subasta(Date fechaInicial, Date fechaFinal, Pieza pieza) {
         this.fechaInicial = fechaInicial;
@@ -16,7 +15,6 @@ public class Subasta {
         this.pieza = pieza;
         this.valorInicial = (pieza.getValorMinimoSubasta())*(3/4);
         this.valorMinimo = pieza.getValorMinimoSubasta();
-		this.tituloPieza = (pieza.getTitulo());
     }
 	
 	public Date getFechaInicial() {
@@ -35,19 +33,16 @@ public class Subasta {
 	public Pieza getPieza() {
 		return pieza;
 	}
-
-	public void setNombreCompradorDesdeRegistro(OperadorRegistro registro, String tituloObra) {
-		if (registro.getCompradorOfertaMasAlta(tituloObra) == null) {
-			this.nombreComprador = "No hay comprador";
-		}
-		else this.nombreComprador = registro.getCompradorOfertaMasAlta(tituloObra);
-    }
-
-    public String getNombreComprador() {
-        return nombreComprador;
-    }
-
-	public String getTituloPieza() {
-		return tituloPieza;
+	public Comprador getComprador() {
+		return comprador;
 	}
+
+
+	public void setNombreCompradorDesdeRegistro(OperadorRegistro registro, Pieza pieza) {
+		if (registro.getCompradorOfertaMasAlta(pieza) == null) {
+			this.comprador = null;
+		}
+		else this.comprador = registro.getCompradorOfertaMasAlta(pieza);
+    }
+
 }

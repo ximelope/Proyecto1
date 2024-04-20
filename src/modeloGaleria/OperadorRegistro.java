@@ -11,16 +11,15 @@ public class OperadorRegistro {
 	private Date fechaInicial;
 	private Date fechaFinal;
 	private double monto;
-	private String UsuarioComprador;
+	private Comprador comprador;
 	private Subasta subasta;
 	private double valorInicial;
 	private double valorMinimo;
 	private Pieza pieza;
-	private Map<String, Map<String, Double>> ofertasRegistro = new HashMap<>();
-	private String tituloPieza;
+	private Map<Pieza, Map<Comprador, Double>> ofertasRegistro = new HashMap<>();
 	//Preguntar lo del formato de fecha
 	
-	public OperadorRegistro(Date fecha, float monto, String UsuarioComprador, Subasta subasta, float valorMinimo, Date fechaInicial, Date fechaFinal, Pieza pieza) 
+	public OperadorRegistro(Date fecha, float monto, Comprador comprador, Subasta subasta, float valorMinimo, Date fechaInicial, Date fechaFinal, Pieza pieza) 
 	{
 		this.fecha = fecha;
 		this.monto = monto;
@@ -29,8 +28,8 @@ public class OperadorRegistro {
 		this.fechaInicial = (subasta.getFechaInicial());
 		this.fechaFinal = (subasta.getFechaFinal());
 		this.pieza = (subasta.getPieza());
-		this.UsuarioComprador = UsuarioComprador;
-		this.tituloPieza = (subasta.getTituloPieza());
+		this.comprador = comprador;
+		this.pieza = pieza;
 	}
 	
 	public Date getFecha() {
@@ -49,8 +48,8 @@ public class OperadorRegistro {
 		return monto;
 	}
 	
-	public String getUsuarioComprador() {
-		return UsuarioComprador;
+	public Comprador getComprador() {
+		return comprador;
 	}
 	
 	public Subasta getSubasta() {
@@ -68,31 +67,27 @@ public class OperadorRegistro {
 	public Pieza getPieza() {
 		return pieza;
 	}
-
-	public String getTituloPieza() {
-		return tituloPieza;
-	}
 	
-	public void ofertasSubastaRegistro (String tituloPieza, String UsuarioComprador, double monto, Date fecha, Date fechaInicial, Date fechaFinal, double valorInicial) {
+	public void ofertasSubastaRegistro (Pieza pieza, Comprador comprador, double monto, Date fecha, Date fechaInicial, Date fechaFinal, double valorInicial) {
 		if (monto >= valorInicial) {
 			if (fecha.compareTo(fechaFinal) <= 0 || fecha.compareTo(fechaInicial) >= 0) {
-				if (!ofertasRegistro.containsKey(tituloPieza)) {
-					ofertasRegistro.put(tituloPieza, new HashMap<>());
+				if (!ofertasRegistro.containsKey(pieza)) {
+					ofertasRegistro.put(pieza, new HashMap<>());
 				}
-				ofertasRegistro.get(tituloPieza).put(UsuarioComprador, monto);
+				ofertasRegistro.get(pieza).put(comprador, monto);
 		   }   
 	   }
    }
 
-	public Map.Entry<String, Double> getOfertaMasAlta(String tituloPieza) {
-	    if (ofertasRegistro.containsKey(tituloPieza)) {
-	        return Collections.max(ofertasRegistro.get(tituloPieza).entrySet(), Map.Entry.comparingByValue());
+	public Map.Entry<Comprador, Double> getOfertaMasAlta(Pieza pieza) {
+	    if (ofertasRegistro.containsKey(pieza)) {
+	        return Collections.max(ofertasRegistro.get(pieza).entrySet(), Map.Entry.comparingByValue());
 	    }
 	    return null;
 	}
 
-	public String getCompradorOfertaMasAlta(String tituloObra) {
-		Map.Entry<String, Double> ofertaMasAlta = getOfertaMasAlta(tituloObra);
+	public Comprador getCompradorOfertaMasAlta(Pieza pieza) {
+		Map.Entry<Comprador, Double> ofertaMasAlta = getOfertaMasAlta(pieza);
 		if (ofertaMasAlta != null) {
 			return ofertaMasAlta.getKey();
 		}
