@@ -10,7 +10,7 @@ public class Administrador extends Usuario {
 	
 	public Administrador (String login, String contraseña, String rol) {
 		super(login, contraseña, rol);
-		this.inventario = new Inventario()
+		this.inventario = new Inventario();
 	}
 	protected void crearPiezadocumento(File documento) {
 		
@@ -22,9 +22,16 @@ public class Administrador extends Usuario {
 		Propietario propietario = crearPropietario(loginPropietario, contraseñaPropietario, correo, numeroDeTelefono);
 		Pieza pieza= new Escultura(titulo, ano, lugarCreacion, autor, exhibida, permisoSubasta,
 				valorFijo, valorMinimoSubasta, propietario, alto, ancho, profundidad, material, peso, electricidad, otros);
-			
+	}
+		
+	protected void crearPiezaPintura(String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoSubasta,
+			float valorFijo, float valorMinimoSubasta, String loginPropietario, String contraseñaPropietario,
+			String correo, int numeroDeTelefono, float alto, float ancho, String materialBase, String tipoPinturas) {
+		Propietario propietario = crearPropietario(loginPropietario, contraseñaPropietario, correo, numeroDeTelefono);
+		Pieza pieza = new Pintura(titulo, ano, lugarCreacion, autor, exhibida, permisoSubasta )
 		
 	}
+			
 	private void crearPropietarioDocumento(File document) {
 		
 	}
@@ -35,6 +42,7 @@ public class Administrador extends Usuario {
 		return propietario;
 	}
 	private void añadirPieza (Pieza pieza) {
+		
 		
 		
 	}
