@@ -15,7 +15,7 @@ public class Comprador extends Usuario{
         this.valorMax = valorMax;
         this.verificado = false;
     }
-    
+
     public String getCorreoElectronico() {
         return correoElectronico;
     }
@@ -34,8 +34,10 @@ public class Comprador extends Usuario{
     public void setVerificado(boolean verificado) {
         this.verificado = verificado; }
 
-    public void comprarObra(Pieza pieza) {
-        this.infocompras.add(pieza);
+    public void comprarObra(Pieza pieza, int numeroDeTelefono) {
+        Venta venta = new Venta();
+        if (venta.efectuarVenta(pieza) == true) {
+            this.infocompras.add(pieza);}
     }
 
 }

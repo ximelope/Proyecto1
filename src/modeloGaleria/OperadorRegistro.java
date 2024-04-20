@@ -23,6 +23,7 @@ public class OperadorRegistro {
 	{
 		this.fecha = fecha;
 		this.monto = monto;
+		this.subasta = new Subasta(fechaInicial, fechaFinal, pieza);
 		this.valorInicial = (subasta.getValorInicial());
 		this.valorMinimo = (subasta.getValorMinimo());
 		this.fechaInicial = (subasta.getFechaInicial());
