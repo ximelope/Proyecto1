@@ -4,8 +4,8 @@ public class Propietario extends Usuario{
 	private String correoElectronico;
 	private int numeroDeTelefono;
 	
-	public Propietario (String login, String contraseña, String rol, String correo, int numero) {
-		super(login,contraseña,rol);
+	public Propietario (String login, String contraseña, String correo, int numero) {
+		super(login,contraseña);
 		this.correoElectronico= correo;
 		this.numeroDeTelefono= numero;
 	}
