@@ -17,3 +17,5 @@ public class Propietario extends Usuario{
 	}
 
 }
+
+
