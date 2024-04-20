@@ -38,8 +38,8 @@ public class Pintura extends Pieza {
 	public boolean isExhibida() {
 		return exhibida;
 	}
-	public boolean isPermisoSubasta() {
-		return permisoSubasta;
+	public boolean isPermisoVenta() {
+		return permisoVenta;
 	}
 	public float getValorFijo() {
 		return valorFijo;

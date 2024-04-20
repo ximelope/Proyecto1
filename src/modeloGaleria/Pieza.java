@@ -7,7 +7,7 @@ public abstract class Pieza {
 	protected String lugarCreacion;
 	protected String autor;
 	protected boolean exhibida; 
-	protected boolean permisoSubasta;
+	protected boolean permisoVenta;
 	protected float valorFijo;
 	protected double valorMinimoSubasta;
 	protected Propietario propietario;
@@ -35,7 +35,7 @@ public abstract class Pieza {
 		this.lugarCreacion = lugarCreacion;
 		this.autor = autor;
 		this.exhibida = exhibida;
-		this.permisoSubasta = permisoVenta;
+		this.permisoVenta = permisoVenta;
 		this.valorFijo = valorFijo;
 		this.valorMinimoSubasta = valorMinimoSubasta;
 		this.propietario = propietario;
