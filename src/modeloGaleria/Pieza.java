@@ -9,7 +9,7 @@ public abstract class Pieza {
 	protected boolean exhibida; 
 	protected boolean permisoSubasta;
 	protected float valorFijo;
-	protected float valorMinimoSubasta;
+	protected double valorMinimoSubasta;
 	protected Propietario propietario;
 	private Propietario propietarioNuevo;
 	
@@ -35,7 +35,7 @@ public abstract class Pieza {
 	public float getValorFijo() {
 		return valorFijo;
 	}
-	public float getValorMinimoSubasta() {
+	public double getValorMinimoSubasta() {
 		return valorMinimoSubasta;
 	}
 	public Propietario getPropietario() {
@@ -50,7 +50,7 @@ public abstract class Pieza {
 	
 	// Constructor
 	public Pieza(String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoSubasta,
-			float valorFijo, float valorMinimoSubasta, Propietario propietario) {
+			float valorFijo, double valorMinimoSubasta, Propietario propietario) {
 		this.titulo = titulo;
 		this.ano = ano;
 		this.lugarCreacion = lugarCreacion;
