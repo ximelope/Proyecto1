@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class OperadorRegistro {
+public class OperadorRegistro{
 
 
 	private Date fecha;
