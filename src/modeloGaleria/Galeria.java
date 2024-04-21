@@ -110,7 +110,8 @@ public class Galeria {
 	            }else if (opcion == 4) {
 	                operador.crearRegistro_pedir(piezas, registros, clientes, administrador);
 	            }else if (opcion == 5) {
-	                operador.crearRegistro_pedir(piezas, registros, clientes, administrador);
+	                almacenarRegistros();
+	                almacenarSubastas();
 	            } else {
 	                System.out.println("Opcion Inválida");
 	            }
@@ -118,9 +119,9 @@ public class Galeria {
 	    }
 	 public void infoCajero(String usuario, String contrasena) {
 	        int opcion;
-	        //Cajero admin = new Cajero(usuario, contrasena);
+	        Cajero admin = new Cajero(usuario, contrasena);
 	        do {
-	            System.out.println("Opciones Administrador");
+	            System.out.println("Opciones Cajero");
 	            System.out.println("1.) Cargar Piezas al inventario ");
 	            System.out.println("2.) Crear Pieza y añadir al inventario");
 	            System.out.println("3.) Cerrar Sesión ");

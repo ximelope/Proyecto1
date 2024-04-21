@@ -137,14 +137,9 @@ public class Operador extends Usuario {
 		}
 				if (monto >= valorInicial) {
 					if (parsedFecha.compareTo(fechaFinal) <= 0 || parsedFecha.compareTo(fechaInicial) >= 0) {
-<<<<<<< HEAD
-						if (administrador.verificacionDeCliente(cliente) == "Verificado") {
+						if ("Verificado".equals(cliente.getEstado())) {
 							Registro registro = new Registro(parsedFecha, monto, cliente, pieza,subastas.get(idSubasta));
 							registros.put(String.valueOf(registro.getMonto()), registro);
-=======
-						if ("Verificado".equals(cliente.getEstado())) {
-							Registro registro = new Registro(parsedFecha, monto, cliente, pieza);
->>>>>>> branch 'master' of https://github.com/ximelope/Proyecto1.git
 							Subasta subasta = subastas.get(idSubasta);
 							(subasta.getRegistros()).add(registro);
 						}

@@ -39,6 +39,13 @@ public class Registro {
 		this.pieza= pieza;
 		this.subasta= subasta;
 	}
+	public Registro (Date fecha, float monto, Comprador cliente, Pieza pieza) {
+		this.fecha= fecha;
+		this.monto = monto;
+		this.cliente = cliente;
+		this.pieza= pieza;
+		
+	}
 	
 
 }

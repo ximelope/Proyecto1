@@ -1,1 +1,1 @@
-Impresion;1;1;1;1;true;true;1;1;1;1;1;1;1;1.0;1;1.0;1.0
+Video;Linda;2000;Bogota;Juan;true;false;2000;2000;Santiago;1102;a.com;3112;Disponible,2.0;true

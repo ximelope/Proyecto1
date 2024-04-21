@@ -8,17 +8,9 @@ public class Venta {
 
     private Pieza pieza;
     private int numeroFactura;
-    private Date fechaVenta;
+    private String fechaVenta;
+    private Cajero cajero;
 
-    public Venta(String fechaVentaString) {
-        this.numeroFactura = generarNumeroFactura();
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
-			try {
-				this.fechaVenta = formatoFecha.parse(fechaVentaString);
-			} catch (ParseException e) {
-				e.printStackTrace();
-			};   
-    }
     
     public Pieza getPieza() {
         return pieza;
@@ -28,7 +20,7 @@ public class Venta {
         return numeroFactura;
     }
 
-    public Date getFechaVenta() {
+    public String getFechaVenta() {
         return this.fechaVenta;
     }
 
@@ -38,14 +30,27 @@ public class Venta {
         return 1000 + rand.nextInt(9000);
     }
 
+    public Venta(Pieza pieza, String fechaVenta, Cajero cajero) {
+        this.numeroFactura = generarNumeroFactura();
+        this.pieza= pieza;
+        this.fechaVenta= fechaVenta;
+        this.cajero= cajero;
+    }
     public boolean efectuarVenta (Pieza pieza, Comprador cliente){
         if (pieza.isPermisoVenta() == true && pieza.getEstadoDePieza().equals("Disponible")){
             pieza.estadoDePieza = "Vendida";  
-            Registro registro = new Registro(fechaVenta, pieza.getValorFijo(), cliente, pieza);
-            Cajero.confirmarPago(registro);
-            return true; 
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
+            Date ParsedFecha= null;
+            try {
+            	ParsedFecha = formatoFecha.parse(fechaVenta);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            Registro registro = new Registro(ParsedFecha, pieza.getValorFijo(), cliente, pieza);
+            cajero.confirmarPago(registro);
+            return true;
         }
-        return false;
+		return false;
     }
-
 }

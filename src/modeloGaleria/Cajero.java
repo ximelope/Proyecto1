@@ -9,7 +9,7 @@ public class Cajero extends Usuario{
 	public Cajero(String login, String contrasena) {
 		super(login, contrasena);
 	}
-	public static void confirmarPago(Registro registro) {
+	public void confirmarPago(Registro registro) {
 		String estado = registro.getCliente().getEstado();
 		Comprador cliente = (Comprador) registro.getCliente();
 		if (estado.equals("Verificado")) {
@@ -25,4 +25,8 @@ public class Cajero extends Usuario{
 		}
 		
 	}
+	public void crearVenta(Pieza pieza, String fechaVenta ) {
+		Venta venta = new Venta(Pieza pieza, String fechaVenta);
+	}
+	
 }
