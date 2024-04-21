@@ -8,6 +8,11 @@ public class Venta {
     private int numeroFactura;
     private String fechaVenta;
 
+
+    public Venta() {
+        this.numeroFactura = generarNumeroFactura();
+    }
+
     
     public Pieza getPieza() {
         return pieza;
@@ -27,7 +32,6 @@ public class Venta {
         // Genera un número aleatorio entre 1000 y 9999.
         return 1000 + rand.nextInt(9000);
     }
-
     
     
     public Venta(Pieza pieza, String fechaVenta) {
