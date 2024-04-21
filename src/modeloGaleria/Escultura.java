@@ -26,9 +26,11 @@ public class Escultura extends Pieza{
 	public String getMaterialEscultura() {
 		return materialEscultura;
 	}
+	
 	public float getPeso() {
 		return peso;
 	}
+	
 	public boolean getNecesidadElectricidad() {
 		return necesitaElectricidad;
 	}
@@ -46,4 +48,3 @@ public class Escultura extends Pieza{
 		this.detallesInstalacion= detallesInstalacion;
 	}
 }
-		

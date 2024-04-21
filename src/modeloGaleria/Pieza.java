@@ -20,15 +20,18 @@ public abstract class Pieza {
 	public int getAno() {
 		return ano;
 	}
+	
 	public String getLugarCreacion() {
 		return lugarCreacion;
 	}
+	
 	public String getAutor() {
 		return autor;
 	}
 	public boolean isExhibida() {
 		return exhibida;
 	}
+	
 	public boolean isPermisoVenta() {
 		return permisoVenta;
 	}
@@ -48,8 +51,11 @@ public abstract class Pieza {
 		return tipo;
 	}
 
-	public void setPropietario(Propietario propietario) {
+	public void cambiarPropietario(Propietario propietario) {
         this.propietario = propietario;
+    }
+	public void cambiarEstado(String estado) {
+        this.estadoDePieza = estado;
     }
 	
 	
