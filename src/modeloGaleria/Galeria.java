@@ -361,10 +361,14 @@ public class Galeria {
 				for(Subasta pieza : subastas.values()) {
 					String id = pieza.getId();
 	                Date fechaInicial= pieza.getFechaInicial();
+	                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+	                String fecha= sdf.format(fechaInicial);
+	      
 	                Date fechaFinal = pieza.getFechaFinal();
+	                String fechaF= sdf.format(fechaFinal);
 	                String titulo= pieza.getPieza().getTitulo();
 					
-					textos+= id + ";"+ fechaInicial+";"+fechaFinal+";"+ titulo +"\n";
+					textos+= id + ";"+ fecha+";"+fechaF+";"+ titulo +"\n";
 				}
 				bw.write(textos);
 	            bw.close();

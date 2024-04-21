@@ -4,15 +4,10 @@ import java.util.HashMap;
 
 
 public class Administrador extends Usuario {
-	private Inventario inventario;
-	public Inventario getInventario() {
-		return inventario;
-	}
 	
 	
 	public Administrador (String login, String contraseña) {
 		super(login, contraseña);
-		this.inventario = new Inventario();
 	}
 	public  void cargarPieza(File archivo,  HashMap<String, Pieza> piezas,HashMap<String, Escultura> esculturas, HashMap<String, Pintura> pinturas, HashMap<String, Fotografia> fotografias, HashMap<String, Video> videos, HashMap<String, Impresion> impresiones) {
         System.out.println("Cargando piezas desde Archivo");
@@ -232,14 +227,14 @@ public class Administrador extends Usuario {
         }
     }
 	
-	public String verificacionDeCliente (Comprador comprador) {
+	public void verificacionDeCliente (Comprador comprador) {
 		int numero= comprador.getNumeroDeTelefono();
 		int digitos = String.valueOf(numero).length();
 		String devolver = "Negado";
-		if (digitos==4) {
-			devolver = "Verificado";
+		if (digitos==8) {
+			devolver ="Verificado";
 		}
-		return devolver;
+		comprador.cambiarEstado(devolver);
 		
 	}
 }
