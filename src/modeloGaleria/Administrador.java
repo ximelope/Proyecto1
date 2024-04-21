@@ -36,45 +36,45 @@ public class Administrador extends Usuario {
                     int numeroDeTelefono= Integer.valueOf(partes[12]);
                     
                     if (tipo.equals("Escultura")) {
-                    	float alto = Float.parseFloat(partes[13]);
-                    	float ancho = Float.parseFloat(partes[14]);
-                    	float profundidad = Float.parseFloat(partes[15]);
-                    	String materialEscultura = partes[16];
-                    	float peso = Float.parseFloat(partes[17]);
-                    	boolean necesidadElectricidad = Boolean.valueOf(partes[18]);
-                    	String detallesInstalacion = partes [19];
+                    	float alto = Float.parseFloat(partes[14]);
+                    	float ancho = Float.parseFloat(partes[15]);
+                    	float profundidad = Float.parseFloat(partes[16]);
+                    	String materialEscultura = partes[17];
+                    	float peso = Float.parseFloat(partes[18]);
+                    	boolean necesidadElectricidad = Boolean.valueOf(partes[19]);
+                    	String detallesInstalacion = partes [20];
                     	Pieza pieza= crearPiezaEscultura(esculturas, tipo, titulo,ano, lugarCreacion, autor, exhibida, permisoVenta,valorFijo, valorMinimoSubasta,
                     			loginPropietario, contrasenaPropietario, correo, numeroDeTelefono,alto,ancho, profundidad, materialEscultura, peso, necesidadElectricidad, detallesInstalacion);
                     	añadirPieza(pieza, piezas);
                     	
                     } else if (tipo.equals("Pintura")) {
-                    	float alto = Float.parseFloat(partes[13]);
-                    	float ancho = Float.parseFloat(partes[14]);
-                    	String materialBase = partes[15];
-                    	String tipoPintura = partes[16];
+                    	float alto = Float.parseFloat(partes[14]);
+                    	float ancho = Float.parseFloat(partes[15]);
+                    	String materialBase = partes[16];
+                    	String tipoPintura = partes[17];
                     	Pieza pieza = crearPiezaPintura(pinturas, tipo, titulo,ano, lugarCreacion, autor, exhibida, permisoVenta,valorFijo, valorMinimoSubasta,loginPropietario, contrasenaPropietario, correo, numeroDeTelefono,alto,ancho, materialBase, tipoPintura);
                     	añadirPieza(pieza, piezas);
 
                     }else if (tipo.equals("Video")) {
-                    	float duracion = Float.parseFloat(partes[13]);
-                    	boolean necesidadElectricidad = Boolean.valueOf(partes[14]);
+                    	float duracion = Float.parseFloat(partes[14]);
+                    	boolean necesidadElectricidad = Boolean.valueOf(partes[15]);
                     	Pieza pieza = crearPiezaVideo(videos, tipo, titulo,ano, lugarCreacion, autor, exhibida, permisoVenta,valorFijo, valorMinimoSubasta,
                     			loginPropietario, contrasenaPropietario, correo, numeroDeTelefono,duracion,necesidadElectricidad);
                     	añadirPieza(pieza, piezas);
 
                     }else if (tipo.equals("Fotografia")) {
-                    	float resolucion = Float.parseFloat(partes[13]);
-                    	String tecnica = partes[14];
-                    	float ancho = Float.parseFloat(partes[15]);
-                    	float alto = Float.parseFloat(partes[16]);
+                    	float resolucion = Float.parseFloat(partes[14]);
+                    	String tecnica = partes[15];
+                    	float ancho = Float.parseFloat(partes[16]);
+                    	float alto = Float.parseFloat(partes[17]);
                     	Pieza pieza= crearPiezaFotografia(fotografias,tipo, titulo,ano, lugarCreacion, autor, exhibida, permisoVenta,valorFijo, valorMinimoSubasta,
                     			loginPropietario, contrasenaPropietario, correo, numeroDeTelefono,resolucion, tecnica, ancho, alto);
                     	añadirPieza(pieza, piezas);
                     }else if (tipo.equals("Impresion")) {
-                    	float resolucion = Float.parseFloat(partes[13]);
-                    	String tecnica = partes[14];
-                    	float ancho = Float.parseFloat(partes[15]);
-                    	float alto = Float.parseFloat(partes[16]);
+                    	float resolucion = Float.parseFloat(partes[14]);
+                    	String tecnica = partes[15];
+                    	float ancho = Float.parseFloat(partes[16]);
+                    	float alto = Float.parseFloat(partes[17]);
                     	Pieza pieza= crearPiezaImpresion( impresiones,tipo, titulo,ano, lugarCreacion, autor, exhibida, permisoVenta,valorFijo, valorMinimoSubasta,
                     			loginPropietario, contrasenaPropietario, correo, numeroDeTelefono,resolucion, tecnica, ancho, alto);
                     	añadirPieza(pieza, piezas);

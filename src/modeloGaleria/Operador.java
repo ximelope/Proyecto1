@@ -15,6 +15,12 @@ public class Operador extends Usuario {
 	public Operador(String login, String contrasena) {
 		super(login, contrasena);
 	}
+	public String ganador(String id ) {
+		Subasta subasta = subastas.get(id);
+		Registro registro = subasta.getUltimoRegistro();
+		String nombre = registro.getCliente().getLogin();
+		return "El ganador de la subasta es: " + nombre;
+	}
 	public void cargarSubastas(File archivo,HashMap<String, Pieza> piezas,HashMap<String, Subasta> sub) {
 		System.out.println("Cargando subastas desde Archivo");
         try {
@@ -148,6 +154,7 @@ public class Operador extends Usuario {
 		
 			
 }
+	
 
 	private Comprador crearCliente(HashMap<String, Comprador> clientes,String login, String contraseña, String correo,int numero, int valorMax) {
 				Comprador cliente= new Comprador(login, contraseña, correo, numero, valorMax);

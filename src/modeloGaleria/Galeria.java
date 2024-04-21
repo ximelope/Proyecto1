@@ -16,6 +16,7 @@ public class Galeria {
 	public HashMap<String, Registro> registros = new HashMap<>();
 	public HashMap<String, String> usuarios = new HashMap<>();
 	public HashMap<String, Comprador> clientes = new HashMap<>();
+	public HashMap<String, Venta> ventas = new HashMap<>();
 	public Administrador administrador;
 	
 	 public void cargarInformacion() {
@@ -89,12 +90,13 @@ public class Galeria {
 	        int opcion;
 	        Operador operador = new Operador(usuario, contrasena);
 	        do {
-	            System.out.println("Opciones Cajero");
+	            System.out.println("Opciones Operador");
 	            System.out.println("1.) Cargar Subasta");
 	            System.out.println("2.) Crear Subasta");
 	            System.out.println("3.) Cargar Registros ");
 	            System.out.println("4.) Crear Registros ");
-	            System.out.println("5.) Cerrar Sesión ");
+	            System.out.println("5.) Cerrar Subasta (mostar el nuevo dueño) ");
+	            System.out.println("6.) Cerrar Sesión ");
 	            opcion = Integer.parseInt(input("\nSeleccione una opcion"));
 	            if (opcion == 1) {
 	                File archivoSubastas= new File(
@@ -110,24 +112,43 @@ public class Galeria {
 	            }else if (opcion == 4) {
 	                operador.crearRegistro_pedir(piezas, registros, clientes, administrador);
 	            }else if (opcion == 5) {
+	            	String id = input("Ingrese el id de la subasta a finalizar(00aa, 00bb)");
+	            	System.out.println(operador.ganador(id));
+	            }else if (opcion == 6) {
 	                almacenarRegistros();
 	                almacenarSubastas();
 	            } else {
 	                System.out.println("Opcion Inválida");
 	            }
-	        } while (opcion != 5);
+	        } while (opcion != 6);
 	    }
 	 public void infoCajero(String usuario, String contrasena) {
 	        int opcion;
 	        Cajero admin = new Cajero(usuario, contrasena);
 	        do {
 	            System.out.println("Opciones Cajero");
-	            System.out.println("1.) Cargar Piezas al inventario ");
-	            System.out.println("2.) Crear Pieza y añadir al inventario");
-	            System.out.println("3.) Cerrar Sesión ");
+	            System.out.println("1.) Crear Venta");
+	            System.out.println("2.) Cargar Venta");
+	            System.out.println("3.) Confirmar pago-Dar factura ");
+	            System.out.println("4.) Cerrar sesión ");
 	            opcion = Integer.parseInt(input("\nSeleccione una opcion"));
-	            
-	        } while (opcion != 3);
+	            if (opcion == 2) {
+	                File archivoCajero= new File(
+	                        "../proyecto/src/data/Ventas.txt");
+	                admin.cargarVenta(archivoCajero,piezas, clientes, ventas);
+	            } else if (opcion == 1) {
+	                admin.pedirVenta(piezas, clientes, ventas);
+	                
+	            } else if (opcion == 3) {
+	            	String titulo= input("Ingrese el titulo de la pieza: ");
+	                int factura = admin.darFactura(titulo,ventas);
+	                System.out.println("La factura es: " + factura);
+	            }else if (opcion == 4) {
+	                almacenarVentas();
+	            } else {
+	                System.out.println("Opcion Inválida");
+	            }
+	        } while (opcion != 4);
 	    }
 	 public String input (String mensaje) {
 	        try {
@@ -165,7 +186,7 @@ public class Galeria {
 	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
 	                		"../proyecto/src/data/Piezas.txt")))) {
 	            String textos = "";
-				for(Escultura pieza : this.esculturas.values()) {
+				for(Escultura pieza : esculturas.values()) {
 					String login =  (pieza.getPropietario()).getLogin() ;
 					String contrasena =  (pieza.getPropietario()).getContrasena() ;
 					String correo =  (pieza.getPropietario()).getCorreoElectronico() ;
@@ -269,7 +290,7 @@ public class Galeria {
 					
 					textos+= tipo + ";" + pieza.getTitulo() + ";" + pieza.getAno() + ";" + pieza.getLugarCreacion() + ";" + pieza.getAutor()+ ";" + pieza.isExhibida() + ";" 
 				+ pieza.isPermisoVenta() + ";" + pieza.getValorFijo() + ";" + pieza.getValorMinimoSubasta()  + ";" + login  + ";" + contrasena + ";" + correo  + ";" + numero  + ";" + pieza.getEstadoDePieza()+
-				"," + pieza.getDuracion() + ";" + pieza.getNecesidadElectricidad()  + "\n";
+				";" + pieza.getDuracion() + ";" + pieza.getNecesidadElectricidad()  + "\n";
 				}
 				bw.write(textos);
 	            bw.close();
@@ -286,8 +307,8 @@ public class Galeria {
 	            String textos = "";
 				for(Registro pieza : registros.values()) {
 	                Date fecha = pieza.getFecha();
-	                //SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy"); // Define el formato de fecha que deseas
-	                //String fechaString = sdf.format(fecha);
+	                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy"); // Define el formato de fecha que deseas
+	                String fechaString = sdf.format(fecha);
 	                float monto= pieza.getMonto();
 	                String login = pieza.getCliente().getLogin();
 	                String contrasena= pieza.getCliente().getContrasena();
@@ -298,7 +319,7 @@ public class Galeria {
 	                String idSubasta= pieza.getSubasta().getId();
 					
 	                
-					textos+= fecha +";"+ monto + ";"+ login+";"+ contrasena+";"+correo +";"+ numero+ ";"+valorMax+";"+titulo+";"+idSubasta+"\n";
+					textos+= fechaString +";"+ monto + ";"+ login+";"+ contrasena+";"+correo +";"+ numero+ ";"+valorMax+";"+titulo+";"+idSubasta+"\n";
 				}
 				bw.write(textos);
 	            bw.close();
@@ -308,6 +329,27 @@ public class Galeria {
 	        }
 
 	    }
+	 public void almacenarVentas() {
+		 try (
+	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
+	                		"../proyecto/src/data/Ventas.txt")))) {
+	            String textos = "";
+				for(Venta pieza : ventas.values()) {
+					String titulo= pieza.getPieza().getTitulo();
+	                String fecha=  pieza.getFechaVenta();
+	                String login= "Nicolas";
+					
+					textos+= titulo+ ";"+ fecha+";"+login+"\n";
+				}
+				bw.write(textos);
+	            bw.close();
+	        } catch (IOException e) {
+
+	            e.printStackTrace();
+	        }
+
+	    }
+		 
 	 public void almacenarSubastas() {
 		 try (
 	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
@@ -330,6 +372,6 @@ public class Galeria {
 
 	    }
 
-	
+
 
 }

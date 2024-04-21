@@ -34,21 +34,12 @@ public class Venta {
         this.pieza= pieza;
         this.fechaVenta= fechaVenta;
     }
-    public static boolean efectuarVenta (Pieza pieza, Comprador cliente, String fechaVentas){
+    public boolean efectuarVenta (Pieza pieza, Comprador cliente){
         if (pieza.isPermisoVenta() == true && pieza.getEstadoDePieza().equals("Disponible")){
-            pieza.estadoDePieza = "Vendida";  
-            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
-            Date ParsedFecha= null;
-            try {
-            	ParsedFecha = formatoFecha.parse(fechaVentas);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-            Registro registro = new Registro(ParsedFecha, pieza.getValorFijo(), cliente, pieza);
-            Cajero.confirmarPago(registro);
+            pieza.cambiarEstado("Vendida");  
             return true;
         }
 		return false;
     }
+   
 }

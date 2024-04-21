@@ -48,8 +48,11 @@ public abstract class Pieza {
 		return tipo;
 	}
 
-	public void setPropietario(Propietario propietario) {
+	public void cambiarPropietario(Propietario propietario) {
         this.propietario = propietario;
+    }
+	public void cambiarEstado(String estado) {
+        this.estadoDePieza = estado;
     }
 	
 	

@@ -35,7 +35,7 @@ public class Comprador extends Usuario{
     }
 
     public void comprarObra(Pieza pieza) {
-        Venta venta = new Venta();
+        Venta venta = new Venta(pieza,"22-04-2024");
         if (venta.efectuarVenta(pieza, this) == true) {
             this.infocompras.add(pieza);}
     }
