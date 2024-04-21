@@ -20,15 +20,18 @@ public abstract class Pieza {
 	public int getAno() {
 		return ano;
 	}
+	
 	public String getLugarCreacion() {
 		return lugarCreacion;
 	}
+	
 	public String getAutor() {
 		return autor;
 	}
 	public boolean isExhibida() {
 		return exhibida;
 	}
+	
 	public boolean isPermisoVenta() {
 		return permisoVenta;
 	}

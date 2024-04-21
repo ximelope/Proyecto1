@@ -10,6 +10,8 @@ public abstract class Usuario {
 	public String getContrasena() {
 		return contrasena;
 	}
+	
+	
 	public Usuario (String login, String contrasena) {
 		this.contrasena = contrasena;
 		this.login = login; 

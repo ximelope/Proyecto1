@@ -20,6 +20,7 @@ public class Comprador extends Usuario{
         return correoElectronico;
     }
 
+    
     public int getNumeroDeTelefono() {
         return numeroDeTelefono;
     }
@@ -34,6 +35,7 @@ public class Comprador extends Usuario{
     	this.estado= nuevoEstado;
     }
 
+    
     public void comprarObra(Pieza pieza) {
         Venta venta = new Venta(pieza,"22-04-2024");
         if (venta.efectuarVenta(pieza, this) == true) {

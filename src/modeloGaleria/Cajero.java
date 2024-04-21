@@ -48,6 +48,7 @@ public class Cajero extends Usuario{
         crearVenta(pieza,fecha,comprador, ventas);
 	}
 	
+	
 	public void  crearVenta(Pieza pieza, String fecha, Comprador comprador,HashMap<String, Venta> ventas) {
 		Venta venta = new Venta (pieza, fecha);
 		ventas.put(venta.getPieza().getTitulo() , venta);
@@ -63,6 +64,7 @@ public class Cajero extends Usuario{
             Registro registro = new Registro(ParsedFecha, pieza.getValorFijo(), comprador, pieza);
             confirmarPago(registro);
 			
+            
 		}
 	
 	}
@@ -70,6 +72,7 @@ public class Cajero extends Usuario{
 		Venta venta = ventas.get(titulo);
 		int factura = venta.getNumeroFactura();
 		return factura;
+		
 		
 	}
 	public String input (String mensaje) {
@@ -81,6 +84,7 @@ public class Cajero extends Usuario{
             return null;
         }
     }
+	
 	public void confirmarPago(Registro registro) {
 		String estado = registro.getCliente().getEstado();
 		Comprador cliente = (Comprador) registro.getCliente();

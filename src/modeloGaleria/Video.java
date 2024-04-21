@@ -12,6 +12,8 @@ public class Video extends Pieza{
 		return necesidadElectricidad;
 	}
 	
+	
+	
 	public Video(String tipo, String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoSubasta,
 			int valorFijo, int valorMinimoSubasta, Propietario propietario, float duracion, boolean necesidadElectricidad) {
 		

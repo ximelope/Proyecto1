@@ -15,10 +15,12 @@ public class Pintura extends Pieza {
 	public float getAncho() {
 		return ancho;
 	}
+	
 
 	public String getMaterialBase() {
 		return materialBase;
 	}
+	
 
 	public String getTipoPinturas() {
 		return tipoPinturas;

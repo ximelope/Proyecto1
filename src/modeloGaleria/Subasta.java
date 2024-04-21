@@ -24,6 +24,7 @@ public class Subasta {
 	public Date getFechaInicial() {
 		return fechaInicial;
 	}
+	
 	public Date getFechaFinal() {
 		return fechaFinal;
 	}
@@ -31,6 +32,7 @@ public class Subasta {
 		return pieza;
 	}
 
+	
 	public String getId() {
 		return id;
 	}

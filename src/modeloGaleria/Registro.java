@@ -19,11 +19,13 @@ public class Registro {
 	public Date getFecha() {
 		return fecha;
 	}
+	
 
 	public float getMonto() {
 		return monto;
 	}
 
+	
 	public Comprador getCliente() {
 		return cliente;
 	}

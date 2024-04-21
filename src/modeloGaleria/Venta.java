@@ -21,12 +21,15 @@ public class Venta {
         return this.fechaVenta;
     }
 
+    
     private int generarNumeroFactura() {
         Random rand = new Random();
         // Genera un número aleatorio entre 1000 y 9999.
         return 1000 + rand.nextInt(9000);
     }
 
+    
+    
     public Venta(Pieza pieza, String fechaVenta) {
         this.numeroFactura = generarNumeroFactura();
         this.pieza= pieza;

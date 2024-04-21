@@ -2,11 +2,13 @@ package modeloGaleria;
 import java.io.*;
 import java.util.HashMap;
 
+
 public class Administrador extends Usuario {
 	private Inventario inventario;
 	public Inventario getInventario() {
 		return inventario;
 	}
+	
 	
 	public Administrador (String login, String contraseña) {
 		super(login, contraseña);

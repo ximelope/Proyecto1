@@ -9,9 +9,11 @@ public class Propietario extends Usuario{
 		this.correoElectronico= correo;
 		this.numeroDeTelefono= numero;
 	}
+	
 	public String getCorreoElectronico() {
 		return correoElectronico;
 	}
+	
 	public int getNumeroDeTelefono() {
 		return numeroDeTelefono;
 	}

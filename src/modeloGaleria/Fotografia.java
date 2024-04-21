@@ -25,7 +25,9 @@ public class Fotografia extends Pieza {
 	public float getAncho() {
 		return ancho;
 	}
+	
 	public float getAlto() {
 		return alto;
+		
 	}
 }

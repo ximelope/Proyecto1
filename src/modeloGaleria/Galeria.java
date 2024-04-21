@@ -328,6 +328,8 @@ public class Galeria {
 	        }
 
 	    }
+	 
+	 
 	 public void almacenarVentas() {
 		 try (
 	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
@@ -349,6 +351,8 @@ public class Galeria {
 
 	    }
 		 
+	 
+	 
 	 public void almacenarSubastas() {
 		 try (
 	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(

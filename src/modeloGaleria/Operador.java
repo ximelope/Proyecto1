@@ -128,6 +128,7 @@ public class Operador extends Usuario {
 		return subasta;
 	}
 	
+	
 	private void registrarOferta(HashMap<String, Registro> registros,HashMap<String, Comprador> clientes,String fecha, float monto, String login, String contraseña, String correo,int numero, int valorMax, String idSubasta, Pieza pieza, Administrador administrador)  {
 		Comprador cliente = crearCliente(clientes, login, contraseña, correo, numero, valorMax);
 		int valorInicial = subastas.get(idSubasta).getPieza().getValorMinimoSubasta()*3/4;
@@ -153,6 +154,7 @@ public class Operador extends Usuario {
 				}
 		
 			
+				
 }
 	
 

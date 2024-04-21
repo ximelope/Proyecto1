@@ -20,9 +20,11 @@ public class Impresion extends Pieza {
 	public String getTecnica() {
 		return tecnica;
 	}
+	
 	public float getAncho() {
 		return ancho;
 	}
+	
 	public float getAlto() {
 		return alto;
 	}
