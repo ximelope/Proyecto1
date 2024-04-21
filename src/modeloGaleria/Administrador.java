@@ -219,21 +219,22 @@ public class Administrador extends Usuario {
 		piezas.put(pieza.getTitulo(), pieza);
 		
 	}
-	 public String input (String mensaje) {
-	        try {
-	            System.out.print(mensaje + ": ");
-	            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-	            return reader.readLine();
-	        } catch (IOException e) {
-	            return null;
-	        }
-	 }
-	 public boolean verificacionDeCliente (Comprador comprador) {
+	public String input (String mensaje) {
+        try {
+            System.out.print(mensaje + ": ");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            return reader.readLine();
+        } catch (IOException e) {
+            return null;
+        }
+    }
+	
+	public String verificacionDeCliente (Comprador comprador) {
 		int numero= comprador.getNumeroDeTelefono();
 		int digitos = String.valueOf(numero).length();
-		boolean devolver = false;
-		if (digitos==10) {
-			devolver = true;
+		String devolver = "Negado";
+		if (digitos==4) {
+			devolver = "Verificado";
 		}
 		return devolver;
 		

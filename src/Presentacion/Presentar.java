@@ -38,8 +38,8 @@ public class Presentar {
 	private void ejecutarOpcion1() {
 		String usuario = input("Ingresa usuario");
 		String contrasena = input("Ingresa contrasena");
-		String rol = input("Ingresa el rol que cumples (Administrador, Operador o Cajero");
-		galeria.login(usuario, contrasena,rol);
+		//3String rol = input("Ingresa el rol que cumples (Administrador, Operador o Cajero");
+		galeria.login(usuario, contrasena);
 	}
 
 	public String input(String mensaje) {

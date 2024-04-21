@@ -5,14 +5,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Galeria {
-	protected HashMap<String, Escultura> esculturas = new HashMap<>();
-	protected HashMap<String, Pintura> pinturas = new HashMap<>();
-	protected HashMap<String, Video> videos  = new HashMap<>();
-	protected HashMap<String, Fotografia> fotografias = new HashMap<>();
-	protected HashMap<String, Impresion> impresiones = new HashMap<>();
-	protected HashMap<String, Pieza> piezas = new HashMap<>();
-	protected HashMap<String, Subasta> subastas = new HashMap<>();
-	protected HashMap<String, String> usuarios = new HashMap<>();
+	public HashMap<String, Escultura> esculturas = new HashMap<>();
+	public HashMap<String, Pintura> pinturas = new HashMap<>();
+	public HashMap<String, Video> videos  = new HashMap<>();
+	public HashMap<String, Fotografia> fotografias = new HashMap<>();
+	public HashMap<String, Impresion> impresiones = new HashMap<>();
+	public HashMap<String, Pieza> piezas = new HashMap<>();
+	public HashMap<String, Subasta> subastas = new HashMap<>();
+	public HashMap<String, String> usuarios = new HashMap<>();
 	
 	 public void cargarInformacion() {
 	        try {
@@ -25,15 +25,19 @@ public class Galeria {
 
 	    }
 	
-	public void login(String usuario, String contrasena, String rol) {
+	public void login(String usuario, String contrasena) {
 
         System.out.println(usuarios.get(usuario));
         if (contrasena.equals(usuarios.get(usuario))) {
-            if (rol=="Administrador") {
+        	System.out.println("1) Propietario");
+        	System.out.println("2) Operador");
+        	System.out.println("3) Cajero");
+        	int rol = Integer.parseInt(input("\nSeleccione su rol"));
+            if (rol==1) {
                 infoAdmin(usuario, contrasena);
-            } else if (rol=="Operador") {
+            } else if (rol==2) {
                 infoOperador(usuario, contrasena);
-            } else {
+            } else if (rol== 3){
                 infoCajero(usuario, contrasena);
             }
         } else {
@@ -42,27 +46,28 @@ public class Galeria {
 
     }
 	 public void infoAdmin(String usuario, String contrasena) {
-	        String opcion;
+	        int opcion;
 	        Administrador admin = new Administrador(usuario, contrasena);
 	        do {
 	            System.out.println("Opciones Administrador");
 	            System.out.println("1.) Cargar Piezas al inventario ");
 	            System.out.println("2.) Crear Pieza y añadir al inventario");
 	            System.out.println("3.) Cerrar Sesión ");
-	            System.out.println("3.) Cerrar Sesión ");
-	            System.out.println("hiululg");
-	            opcion = input("\nSeleccione una opcion");
-	            if (opcion == "1") {
+	            opcion = Integer.parseInt(input("\nSeleccione una opcion"));
+	            if (opcion == 1) {
 	            	System.out.println(opcion);
 	                File archivoPiezas = new File(
 	                		"../proyecto/src/data/Piezas.txt");
 	                admin.cargarPieza(archivoPiezas,piezas,  esculturas,pinturas, fotografias, videos, impresiones );
 	                System.out.println(opcion);
-	            } else if (opcion == "2") {
-	            	System.out.println(opcion);
+	            } else if (opcion == 2) {
 	                admin.pedir_crearPieza(piezas,  esculturas,pinturas, fotografias, videos, impresiones);
+	                }
+	            else if (opcion == 3) {
+	            	System.out.println(piezas.keySet());
+	            	
 	                
-	            } else if (opcion == "3") {
+	            } else if (opcion == 3) {
 	                almacenarEsculturas();
 	                almacenarPinturas();
 	                almacenarFotografias();
@@ -72,11 +77,11 @@ public class Galeria {
 	            } else {
 	                System.out.println("Opcion Inválida");
 	            }
-	        } while (opcion != "3");
+	        } while (opcion != 3);
 	    }
 	 public void infoOperador(String usuario, String contrasena) {
 	        int opcion;
-	        Adelantando operador = new Adelantando(usuario, contrasena);
+	        Operador operador = new Operador(usuario, contrasena);
 	        do {
 	            System.out.println("Opciones Cajero");
 	            System.out.println("1.) Cargar Subasta");
@@ -157,7 +162,7 @@ public class Galeria {
 			+ pieza.isPermisoVenta() + "," + pieza.getValorFijo() + "," + pieza.getValorMinimoSubasta()  + "," + login  + "," + contrasena + "," + correo  + "," + numero  + "," + pieza.getEstadoDePieza()+
 			"," + pieza.getAlto() + "," + pieza.getAncho() + "," + pieza.getProfundidad() + "," + pieza.getMaterialEscultura() + "," + pieza.getPeso() + "," + pieza.getNecesidadElectricidad()+ "," + pieza.getDetallesInstalacion()+"\n");
 			}
-			almacenar("piezas.csv", textos);
+			almacenar("Piezas.txt", textos);
 		}
 	 public void almacenarPinturas() {
 			ArrayList<String> textos = new ArrayList<String>();
@@ -172,7 +177,7 @@ public class Galeria {
 			+ pieza.isPermisoVenta() + "," + pieza.getValorFijo() + "," + pieza.getValorMinimoSubasta()  + "," + login  + "," + contrasena + "," + correo  + "," + numero  + "," + pieza.getEstadoDePieza()+
 			"," + pieza.getAlto() + "," + pieza.getAncho() + "," + pieza.getMaterialBase() + "," + pieza.getTipoPinturas() +"\n");
 			}
-			almacenar("piezas.csv", textos);
+			almacenar("Piezas.txt", textos);
 		}
 	 public void almacenarFotografias() {
 			ArrayList<String> textos = new ArrayList<String>();
@@ -187,23 +192,34 @@ public class Galeria {
 			+ pieza.isPermisoVenta() + "," + pieza.getValorFijo() + "," + pieza.getValorMinimoSubasta()  + "," + login  + "," + contrasena + "," + correo  + "," + numero  + "," + pieza.getEstadoDePieza()+
 			"," + pieza.getResolucion() + "," + pieza.getTecnica() + "," + pieza.getAncho() + "," + pieza.getAlto() +"\n");
 			}
-			almacenar("piezas.csv", textos);
+			almacenar("Pieezas.txt", textos);
 		}
 	 public void almacenarImpresiones() {
-			ArrayList<String> textos = new ArrayList<String>();
-			for(Impresion pieza : this.impresiones.values()) {
-				String login =  (pieza.getPropietario()).getLogin() ;
-				String contrasena =  (pieza.getPropietario()).getContrasena() ;
-				String correo =  (pieza.getPropietario()).getCorreoElectronico() ;
-				int numero =  (pieza.getPropietario()).getNumeroDeTelefono() ;
-				String tipo = pieza.getTipo();
-				
-				textos.add(tipo + "," + pieza.getTitulo() + "," + pieza.getAno() + "," + pieza.getLugarCreacion() + "," + pieza.getAutor()+ "," + pieza.isExhibida() + "," 
-			+ pieza.isPermisoVenta() + "," + pieza.getValorFijo() + "," + pieza.getValorMinimoSubasta()  + "," + login  + "," + contrasena + "," + correo  + "," + numero  + "," + pieza.getEstadoDePieza()+
-			"," + pieza.getResolucion() + "," + pieza.getTecnica() + "," + pieza.getAncho() + "," + pieza.getAlto() +"\n");
-			}
-			almacenar("piezas.csv", textos);
-	 }
+		 try (
+	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
+	                		"../proyecto/src/data/Piezas.txt")))) {
+	            String textos = "";
+	            
+	            System.out.println(impresiones.values());
+				for(Impresion pieza : impresiones.values()) {
+					String login =  (pieza.getPropietario()).getLogin() ;
+					String contrasena =  (pieza.getPropietario()).getContrasena() ;
+					String correo =  (pieza.getPropietario()).getCorreoElectronico() ;
+					int numero =  (pieza.getPropietario()).getNumeroDeTelefono() ;
+					String tipo = pieza.getTipo();
+					textos += tipo + ";" + pieza.getTitulo() + ";" + pieza.getAno() + ";" + pieza.getLugarCreacion() + ";" + pieza.getAutor()+ ";" + pieza.isExhibida() + ";" + pieza.isPermisoVenta() + ";" + pieza.getValorFijo() + ";" + pieza.getValorMinimoSubasta()  + ";" + login  + ";" + contrasena + ";" + correo  + ";" + numero  + ";" + pieza.getEstadoDePieza()+ ";" + pieza.getResolucion() + ";" + pieza.getTecnica() + ";" + pieza.getAncho() + ";" + pieza.getAlto() +"\n";
+				 }
+				System.out.println(textos);
+				System.out.println("hola");
+	            bw.write(textos);
+	            bw.close();
+	        } catch (IOException e) {
+
+	            e.printStackTrace();
+	        }
+
+	    }
+
 	 public void almacenarVideos() {
 			ArrayList<String> textos = new ArrayList<String>();
 			for(Video pieza : this.videos.values()) {
@@ -213,11 +229,11 @@ public class Galeria {
 				int numero =  (pieza.getPropietario()).getNumeroDeTelefono() ;
 				String tipo = pieza.getTipo();
 				
-				textos.add(tipo + "," + pieza.getTitulo() + "," + pieza.getAno() + "," + pieza.getLugarCreacion() + "," + pieza.getAutor()+ "," + pieza.isExhibida() + "," 
-			+ pieza.isPermisoVenta() + "," + pieza.getValorFijo() + "," + pieza.getValorMinimoSubasta()  + "," + login  + "," + contrasena + "," + correo  + "," + numero  + "," + pieza.getEstadoDePieza()+
-			"," + pieza.getDuracion() + "," + pieza.getNecesidadElectricidad()  + "\n");
+				textos.add(tipo + ";" + pieza.getTitulo() + ";" + pieza.getAno() + ";" + pieza.getLugarCreacion() + ";" + pieza.getAutor()+ ";" + pieza.isExhibida() + ";" 
+			+ pieza.isPermisoVenta() + ";" + pieza.getValorFijo() + ";" + pieza.getValorMinimoSubasta()  + ";" + login  + "," + contrasena + "," + correo  + "," + numero  + "," + pieza.getEstadoDePieza()+
+			"," + pieza.getDuracion() + ";" + pieza.getNecesidadElectricidad()  + "\n");
 			}
-			almacenar("piezas.csv", textos);
+			almacenar("Piezas.txt", textos);
 	 }
 		
 	 public static void almacenar(String archivo, ArrayList<String> textos) {
