@@ -7,6 +7,15 @@ public class Registro {
 	private float monto;
 	private Comprador cliente;
 	private Pieza pieza;
+	private Subasta subasta;
+	public Subasta getSubasta() {
+		return subasta;
+	}
+
+	public void setSubasta(Subasta subasta) {
+		this.subasta = subasta;
+	}
+
 	public Date getFecha() {
 		return fecha;
 	}
@@ -23,11 +32,12 @@ public class Registro {
 		return pieza;
 	}
 	
-	public Registro (Date fecha, float monto, Comprador cliente, Pieza pieza) {
+	public Registro (Date fecha, float monto, Comprador cliente, Pieza pieza, Subasta subasta) {
 		this.fecha= fecha;
 		this.monto = monto;
 		this.cliente = cliente;
 		this.pieza= pieza;
+		this.subasta= subasta;
 	}
 	
 

@@ -12,7 +12,7 @@ public class Administrador extends Usuario {
 		super(login, contraseña);
 		this.inventario = new Inventario();
 	}
-	public void cargarPieza(File archivo,  HashMap<String, Pieza> piezas,HashMap<String, Escultura> esculturas, HashMap<String, Pintura> pinturas, HashMap<String, Fotografia> fotografias, HashMap<String, Video> videos, HashMap<String, Impresion> impresiones) {
+	public  void cargarPieza(File archivo,  HashMap<String, Pieza> piezas,HashMap<String, Escultura> esculturas, HashMap<String, Pintura> pinturas, HashMap<String, Fotografia> fotografias, HashMap<String, Video> videos, HashMap<String, Impresion> impresiones) {
         System.out.println("Cargando piezas desde Archivo");
         try {
             BufferedReader br = new BufferedReader(new FileReader(archivo));
@@ -35,7 +35,7 @@ public class Administrador extends Usuario {
                     String correo = partes[11];
                     int numeroDeTelefono= Integer.valueOf(partes[12]);
                     
-                    if (tipo == "Escultura") {
+                    if (tipo.equals("Escultura")) {
                     	float alto = Float.parseFloat(partes[13]);
                     	float ancho = Float.parseFloat(partes[14]);
                     	float profundidad = Float.parseFloat(partes[15]);
@@ -47,7 +47,7 @@ public class Administrador extends Usuario {
                     			loginPropietario, contrasenaPropietario, correo, numeroDeTelefono,alto,ancho, profundidad, materialEscultura, peso, necesidadElectricidad, detallesInstalacion);
                     	añadirPieza(pieza, piezas);
                     	
-                    } else if (tipo=="Pintura") {
+                    } else if (tipo.equals("Pintura")) {
                     	float alto = Float.parseFloat(partes[13]);
                     	float ancho = Float.parseFloat(partes[14]);
                     	String materialBase = partes[15];
@@ -55,14 +55,14 @@ public class Administrador extends Usuario {
                     	Pieza pieza = crearPiezaPintura(pinturas, tipo, titulo,ano, lugarCreacion, autor, exhibida, permisoVenta,valorFijo, valorMinimoSubasta,loginPropietario, contrasenaPropietario, correo, numeroDeTelefono,alto,ancho, materialBase, tipoPintura);
                     	añadirPieza(pieza, piezas);
 
-                    }else if (tipo=="Video") {
+                    }else if (tipo.equals("Video")) {
                     	float duracion = Float.parseFloat(partes[13]);
                     	boolean necesidadElectricidad = Boolean.valueOf(partes[14]);
                     	Pieza pieza = crearPiezaVideo(videos, tipo, titulo,ano, lugarCreacion, autor, exhibida, permisoVenta,valorFijo, valorMinimoSubasta,
                     			loginPropietario, contrasenaPropietario, correo, numeroDeTelefono,duracion,necesidadElectricidad);
                     	añadirPieza(pieza, piezas);
 
-                    }else if (tipo == "Fotografia") {
+                    }else if (tipo.equals("Fotografia")) {
                     	float resolucion = Float.parseFloat(partes[13]);
                     	String tecnica = partes[14];
                     	float ancho = Float.parseFloat(partes[15]);
@@ -70,7 +70,7 @@ public class Administrador extends Usuario {
                     	Pieza pieza= crearPiezaFotografia(fotografias,tipo, titulo,ano, lugarCreacion, autor, exhibida, permisoVenta,valorFijo, valorMinimoSubasta,
                     			loginPropietario, contrasenaPropietario, correo, numeroDeTelefono,resolucion, tecnica, ancho, alto);
                     	añadirPieza(pieza, piezas);
-                    }else if (tipo == "Impresion") {
+                    }else if (tipo.equals("Impresion")) {
                     	float resolucion = Float.parseFloat(partes[13]);
                     	String tecnica = partes[14];
                     	float ancho = Float.parseFloat(partes[15]);
@@ -87,10 +87,12 @@ public class Administrador extends Usuario {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
     }
-	protected void pedir_crearPieza(HashMap<String, Pieza> piezas,HashMap<String, Escultura> esculturas, HashMap<String, Pintura> pinturas, HashMap<String, Fotografia> fotografias, HashMap<String, Video> videos, HashMap<String, Impresion> impresiones) {
+	protected  void pedir_crearPieza(HashMap<String, Pieza> piezas,HashMap<String, Escultura> esculturas, HashMap<String, Pintura> pinturas, HashMap<String, Fotografia> fotografias, HashMap<String, Video> videos, HashMap<String, Impresion> impresiones) {
 		
         System.out.println("Crear Pieza, Digite la info necesaria");
+        
         String tipo = input("Ingrese el Tipo (Escultura, Fotografia, Impresion, Pintura o Video)");
         String titulo = input("Ingrese el nombre del titulo de la Pieza");
         int ano= Integer.parseInt(input("Ingrese el año en la que fue creada"));
@@ -105,7 +107,7 @@ public class Administrador extends Usuario {
         String correo = input("Ingrese el correo de el propietario ");
         int numeroDeTelefono= Integer.valueOf(input("Ingrese el número de telefono del propietario:  "));
         
-        if (tipo== "Escultura") {
+        if (tipo.equals("Escultura")) {
         	float alto = Float.parseFloat(input("Ingrese la altura de la estatua"));
         	float ancho = Float.parseFloat(input("Ingrese el ancho de la estatua"));
         	float profundidad = Float.parseFloat(input("Ingrese la profundidad de la estatua"));
@@ -117,7 +119,7 @@ public class Administrador extends Usuario {
         			loginPropietario, contrasenaPropietario, correo, numeroDeTelefono,alto,ancho, profundidad, materialEscultura, peso, necesidadElectricidad, detallesInstalacion);
         	añadirPieza(pieza, piezas);
         	
-        } else if (tipo=="Pintura") {
+        } else if (tipo.equals("Pintura")) {
         	float alto = Float.parseFloat(input("Ingrese la altura de la pintura: "));
         	float ancho = Float.parseFloat(input("Ingrese el ancho de la pintura "));
         	String materialBase = input("Ingrese el material de la base de la pintura: ");
@@ -125,14 +127,14 @@ public class Administrador extends Usuario {
         	Pieza pieza = crearPiezaPintura(pinturas, tipo, titulo,ano, lugarCreacion, autor, exhibida, permisoVenta,valorFijo, valorMinimoSubasta,loginPropietario, contrasenaPropietario, correo, numeroDeTelefono,alto,ancho, materialBase, tipoPintura);
         	añadirPieza(pieza, piezas);
 
-        }else if (tipo=="Video") {
+        }else if (tipo.equals("Video")) {
         	float duracion = Float.parseFloat(input("Ingrese la duración del video: "));
         	boolean necesidadElectricidad = Boolean.valueOf(input ("Ingrese si necesita de electricidad (true o false) : "));
         	Pieza pieza = crearPiezaVideo(videos, tipo, titulo,ano, lugarCreacion, autor, exhibida, permisoVenta,valorFijo, valorMinimoSubasta,
         			loginPropietario, contrasenaPropietario, correo, numeroDeTelefono,duracion,necesidadElectricidad);
         	añadirPieza(pieza, piezas);
 
-        }else if (tipo == "Fotografia") {
+        }else if (tipo.equals("Fotografia")) {
         	float resolucion = Float.parseFloat(input("Ingrese la resolucion de la imagen: "));
         	String tecnica = input("Ingrese la técnica usada para la fotografia: ");
         	float ancho = Float.parseFloat(input("Ingrese e ancho de la fotografia :  "));
@@ -140,17 +142,16 @@ public class Administrador extends Usuario {
         	Pieza pieza= crearPiezaFotografia(fotografias,tipo, titulo,ano, lugarCreacion, autor, exhibida, permisoVenta,valorFijo, valorMinimoSubasta,
         			loginPropietario, contrasenaPropietario, correo, numeroDeTelefono,resolucion, tecnica, ancho, alto);
         	añadirPieza(pieza, piezas);
-        }else if (tipo == "Impresion") {
+        }else if (tipo.equals("Impresion")) {
         	float resolucion = Float.parseFloat(input("Ingrese la resolucion de la impresión: "));
         	String tecnica = input("Ingrese la técnica usada para la impresión: ");
-        	float ancho = Float.parseFloat("Ingrese el ancho de la impresion: ");
-        	float alto = Float.parseFloat("Ingrese el alto de la impresión: ");
+        	float ancho = Float.parseFloat(input("Ingrese el ancho de la impresion: "));
+        	float alto = Float.parseFloat(input("Ingrese el alto de la impresión: "));
         	Pieza pieza= crearPiezaImpresion( impresiones,tipo, titulo,ano, lugarCreacion, autor, exhibida, permisoVenta,valorFijo, valorMinimoSubasta,
         			loginPropietario, contrasenaPropietario, correo, numeroDeTelefono,resolucion, tecnica, ancho, alto);
         	añadirPieza(pieza, piezas);
         }
-        
-        
+       
 	}
 	protected Pieza crearPiezaEscultura(HashMap<String, Escultura> esculturas, String tipo,String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoVenta,
 			int valorFijo, int valorMinimoSubasta, String loginPropietario, String contraseñaPropietario,

@@ -27,19 +27,19 @@ public class Subasta {
 	public Date getFechaFinal() {
 		return fechaFinal;
 	}
-		public Pieza getPieza() {
+	public Pieza getPieza() {
 			return pieza;
-		}
+	}
 
-		public String getId() {
+	public String getId() {
 			return id;
-		}
+	}
 
-		public Registro getUltimoRegistro() {
-			if (!registros.isEmpty()) {
-				return registros.get(registros.size() - 1);
-			} else {
-				return null; // O lanzar una excepción.
-			}
+	public Registro getUltimoRegistro() {
+		if (!registros.isEmpty()) {
+			return registros.get(registros.size() - 1);
+		} else {
+			return null; // O lanzar una excepción.
+		}
 	}
 }

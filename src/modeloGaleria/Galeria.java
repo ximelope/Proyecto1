@@ -1,6 +1,7 @@
 package modeloGaleria;
 import java.io.*;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,7 +13,10 @@ public class Galeria {
 	public HashMap<String, Impresion> impresiones = new HashMap<>();
 	public HashMap<String, Pieza> piezas = new HashMap<>();
 	public HashMap<String, Subasta> subastas = new HashMap<>();
+	public HashMap<String, Registro> registros = new HashMap<>();
 	public HashMap<String, String> usuarios = new HashMap<>();
+	public HashMap<String, Comprador> clientes = new HashMap<>();
+	public Administrador administrador;
 	
 	 public void cargarInformacion() {
 	        try {
@@ -48,11 +52,13 @@ public class Galeria {
 	 public void infoAdmin(String usuario, String contrasena) {
 	        int opcion;
 	        Administrador admin = new Administrador(usuario, contrasena);
+	        this.administrador= admin;
 	        do {
 	            System.out.println("Opciones Administrador");
 	            System.out.println("1.) Cargar Piezas al inventario ");
 	            System.out.println("2.) Crear Pieza y añadir al inventario");
-	            System.out.println("3.) Cerrar Sesión ");
+	            System.out.println("3.) Mostrar los titulos que se encuentran en el inventario");
+	            System.out.println("4.) Cerrar Sesión ");
 	            opcion = Integer.parseInt(input("\nSeleccione una opcion"));
 	            if (opcion == 1) {
 	            	System.out.println(opcion);
@@ -67,7 +73,7 @@ public class Galeria {
 	            	System.out.println(piezas.keySet());
 	            	
 	                
-	            } else if (opcion == 3) {
+	            } else if (opcion == 4) {
 	                almacenarEsculturas();
 	                almacenarPinturas();
 	                almacenarFotografias();
@@ -77,7 +83,7 @@ public class Galeria {
 	            } else {
 	                System.out.println("Opcion Inválida");
 	            }
-	        } while (opcion != 3);
+	        } while (opcion != 4);
 	    }
 	 public void infoOperador(String usuario, String contrasena) {
 	        int opcion;
@@ -100,7 +106,11 @@ public class Galeria {
 	            } else if (opcion == 3) {
 	            	File archivoRegistros= new File(
 	                        "../proyecto/src/data/Registros.txt");
-	                operador.cargarSubastas(archivoRegistros,piezas, subastas);
+	                operador.cargarRegistros(archivoRegistros,piezas, registros,clientes, administrador);
+	            }else if (opcion == 4) {
+	                operador.crearRegistro_pedir(piezas, registros, clientes, administrador);
+	            }else if (opcion == 5) {
+	                operador.crearRegistro_pedir(piezas, registros, clientes, administrador);
 	            } else {
 	                System.out.println("Opcion Inválida");
 	            }
@@ -150,57 +160,83 @@ public class Galeria {
 	        }
 	    }
 	 public void almacenarEsculturas() {
-			ArrayList<String> textos = new ArrayList<String>();
-			for(Escultura pieza : this.esculturas.values()) {
-				String login =  (pieza.getPropietario()).getLogin() ;
-				String contrasena =  (pieza.getPropietario()).getContrasena() ;
-				String correo =  (pieza.getPropietario()).getCorreoElectronico() ;
-				int numero =  (pieza.getPropietario()).getNumeroDeTelefono() ;
-				String tipo = pieza.getTipo();
-				
-				textos.add(tipo + "," + pieza.getTitulo() + "," + pieza.getAno() + "," + pieza.getLugarCreacion() + "," + pieza.getAutor()+ "," + pieza.isExhibida() + "," 
-			+ pieza.isPermisoVenta() + "," + pieza.getValorFijo() + "," + pieza.getValorMinimoSubasta()  + "," + login  + "," + contrasena + "," + correo  + "," + numero  + "," + pieza.getEstadoDePieza()+
-			"," + pieza.getAlto() + "," + pieza.getAncho() + "," + pieza.getProfundidad() + "," + pieza.getMaterialEscultura() + "," + pieza.getPeso() + "," + pieza.getNecesidadElectricidad()+ "," + pieza.getDetallesInstalacion()+"\n");
+		 try (
+	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
+	                		"../proyecto/src/data/Piezas.txt")))) {
+	            String textos = "";
+				for(Escultura pieza : this.esculturas.values()) {
+					String login =  (pieza.getPropietario()).getLogin() ;
+					String contrasena =  (pieza.getPropietario()).getContrasena() ;
+					String correo =  (pieza.getPropietario()).getCorreoElectronico() ;
+					int numero =  (pieza.getPropietario()).getNumeroDeTelefono() ;
+					String tipo = pieza.getTipo();
+					
+					textos+=tipo + ";" + pieza.getTitulo() + ";" + pieza.getAno() + ";" + pieza.getLugarCreacion() + ";" + pieza.getAutor()+ ";" + pieza.isExhibida() + ";" 
+					+ pieza.isPermisoVenta() + ";" + pieza.getValorFijo() + ";" + pieza.getValorMinimoSubasta()  + ";" + login  + ";" + contrasena + ";" + correo  + ";" + numero  + ";" + pieza.getEstadoDePieza()+
+					";" + pieza.getAlto() + ";" + pieza.getAncho() + ";" + pieza.getProfundidad() + ";" + pieza.getMaterialEscultura() + ";" + pieza.getPeso() + ";" + pieza.getNecesidadElectricidad()+ ";" + pieza.getDetallesInstalacion()+"\n";
 			}
-			almacenar("Piezas.txt", textos);
-		}
+			bw.write(textos);
+            bw.close();
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
+
+    }
 	 public void almacenarPinturas() {
-			ArrayList<String> textos = new ArrayList<String>();
-			for(Pintura pieza : this.pinturas.values()) {
-				String login =  (pieza.getPropietario()).getLogin() ;
-				String contrasena =  (pieza.getPropietario()).getContrasena() ;
-				String correo =  (pieza.getPropietario()).getCorreoElectronico() ;
-				int numero =  (pieza.getPropietario()).getNumeroDeTelefono() ;
-				String tipo = pieza.getTipo();
-				
-				textos.add(tipo + "," + pieza.getTitulo() + "," + pieza.getAno() + "," + pieza.getLugarCreacion() + "," + pieza.getAutor()+ "," + pieza.isExhibida() + "," 
-			+ pieza.isPermisoVenta() + "," + pieza.getValorFijo() + "," + pieza.getValorMinimoSubasta()  + "," + login  + "," + contrasena + "," + correo  + "," + numero  + "," + pieza.getEstadoDePieza()+
-			"," + pieza.getAlto() + "," + pieza.getAncho() + "," + pieza.getMaterialBase() + "," + pieza.getTipoPinturas() +"\n");
-			}
-			almacenar("Piezas.txt", textos);
-		}
+		 try (
+	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
+	                		"../proyecto/src/data/Piezas.txt")))) {
+	            String textos = "";
+				for(Pintura pieza : pinturas.values()) {
+					String login =  (pieza.getPropietario()).getLogin() ;
+					String contrasena =  (pieza.getPropietario()).getContrasena() ;
+					String correo =  (pieza.getPropietario()).getCorreoElectronico() ;
+					int numero =  (pieza.getPropietario()).getNumeroDeTelefono() ;
+					String tipo = pieza.getTipo();
+					
+					textos+= tipo + ";" + pieza.getTitulo() + ";" + pieza.getAno() + ";" + pieza.getLugarCreacion() + ";" + pieza.getAutor()+ ";" + pieza.isExhibida() + ";" 
+					+ pieza.isPermisoVenta() + ";" + pieza.getValorFijo() + ";" + pieza.getValorMinimoSubasta()  + ";" + login  + ";" + contrasena + ";" + correo  + ";" + numero  + ";" + pieza.getEstadoDePieza()+
+					";" + pieza.getAlto() + ";" + pieza.getAncho() + ";" + pieza.getMaterialBase() + ";" + pieza.getTipoPinturas() +"\n";
+				}
+				bw.write(textos);
+	            bw.close();
+	        } catch (IOException e) {
+
+	            e.printStackTrace();
+	        }
+
+	    }
 	 public void almacenarFotografias() {
-			ArrayList<String> textos = new ArrayList<String>();
-			for(Fotografia pieza : this.fotografias.values()) {
-				String login =  (pieza.getPropietario()).getLogin() ;
-				String contrasena =  (pieza.getPropietario()).getContrasena() ;
-				String correo =  (pieza.getPropietario()).getCorreoElectronico() ;
-				int numero =  (pieza.getPropietario()).getNumeroDeTelefono() ;
-				String tipo = pieza.getTipo();
-				
-				textos.add(tipo + "," + pieza.getTitulo() + "," + pieza.getAno() + "," + pieza.getLugarCreacion() + "," + pieza.getAutor()+ "," + pieza.isExhibida() + "," 
-			+ pieza.isPermisoVenta() + "," + pieza.getValorFijo() + "," + pieza.getValorMinimoSubasta()  + "," + login  + "," + contrasena + "," + correo  + "," + numero  + "," + pieza.getEstadoDePieza()+
-			"," + pieza.getResolucion() + "," + pieza.getTecnica() + "," + pieza.getAncho() + "," + pieza.getAlto() +"\n");
-			}
-			almacenar("Pieezas.txt", textos);
-		}
+		 try (
+	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
+	                		"../proyecto/src/data/Piezas.txt")))) {
+	            String textos = "";
+				for(Fotografia pieza : fotografias.values()) {
+					String login =  (pieza.getPropietario()).getLogin() ;
+					String contrasena =  (pieza.getPropietario()).getContrasena() ;
+					String correo =  (pieza.getPropietario()).getCorreoElectronico() ;
+					int numero =  (pieza.getPropietario()).getNumeroDeTelefono() ;
+					String tipo = pieza.getTipo();
+					
+					textos+= tipo + ";" + pieza.getTitulo() + ";" + pieza.getAno() + ";" + pieza.getLugarCreacion() + ";" + pieza.getAutor()+ ";" + pieza.isExhibida() + ";" 
+					+ pieza.isPermisoVenta() + ";" + pieza.getValorFijo() + ";" + pieza.getValorMinimoSubasta()  + ";" + login  + ";" + contrasena + ";" + correo  + ";" + numero  + ";" + pieza.getEstadoDePieza()+
+					";" + pieza.getResolucion() + ";" + pieza.getTecnica() + ";" + pieza.getAncho() + ";" + pieza.getAlto() +"\n";
+				}
+				bw.write(textos);
+	            bw.close();
+	        } catch (IOException e) {
+
+	            e.printStackTrace();
+	        }
+
+	    }
 	 public void almacenarImpresiones() {
 		 try (
 	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
 	                		"../proyecto/src/data/Piezas.txt")))) {
 	            String textos = "";
-	            
-	            System.out.println(impresiones.values());
+
 				for(Impresion pieza : impresiones.values()) {
 					String login =  (pieza.getPropietario()).getLogin() ;
 					String contrasena =  (pieza.getPropietario()).getContrasena() ;
@@ -209,8 +245,6 @@ public class Galeria {
 					String tipo = pieza.getTipo();
 					textos += tipo + ";" + pieza.getTitulo() + ";" + pieza.getAno() + ";" + pieza.getLugarCreacion() + ";" + pieza.getAutor()+ ";" + pieza.isExhibida() + ";" + pieza.isPermisoVenta() + ";" + pieza.getValorFijo() + ";" + pieza.getValorMinimoSubasta()  + ";" + login  + ";" + contrasena + ";" + correo  + ";" + numero  + ";" + pieza.getEstadoDePieza()+ ";" + pieza.getResolucion() + ";" + pieza.getTecnica() + ";" + pieza.getAncho() + ";" + pieza.getAlto() +"\n";
 				 }
-				System.out.println(textos);
-				System.out.println("hola");
 	            bw.write(textos);
 	            bw.close();
 	        } catch (IOException e) {
@@ -221,32 +255,79 @@ public class Galeria {
 	    }
 
 	 public void almacenarVideos() {
-			ArrayList<String> textos = new ArrayList<String>();
-			for(Video pieza : this.videos.values()) {
-				String login =  (pieza.getPropietario()).getLogin() ;
-				String contrasena =  (pieza.getPropietario()).getContrasena() ;
-				String correo =  (pieza.getPropietario()).getCorreoElectronico() ;
-				int numero =  (pieza.getPropietario()).getNumeroDeTelefono() ;
-				String tipo = pieza.getTipo();
-				
-				textos.add(tipo + ";" + pieza.getTitulo() + ";" + pieza.getAno() + ";" + pieza.getLugarCreacion() + ";" + pieza.getAutor()+ ";" + pieza.isExhibida() + ";" 
-			+ pieza.isPermisoVenta() + ";" + pieza.getValorFijo() + ";" + pieza.getValorMinimoSubasta()  + ";" + login  + "," + contrasena + "," + correo  + "," + numero  + "," + pieza.getEstadoDePieza()+
-			"," + pieza.getDuracion() + ";" + pieza.getNecesidadElectricidad()  + "\n");
-			}
-			almacenar("Piezas.txt", textos);
-	 }
-		
-	 public static void almacenar(String archivo, ArrayList<String> textos) {
-			try {
-				BufferedWriter bw = new BufferedWriter(new FileWriter(new File(archivo)));
-				for(String texto : textos) {
-					bw.write(texto);
+		 try (
+	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
+	                		"../proyecto/src/data/Piezas.txt")))) {
+	            String textos = "";
+				for(Video pieza : this.videos.values()) {
+					String login =  (pieza.getPropietario()).getLogin() ;
+					String contrasena =  (pieza.getPropietario()).getContrasena() ;
+					String correo =  (pieza.getPropietario()).getCorreoElectronico() ;
+					int numero =  (pieza.getPropietario()).getNumeroDeTelefono() ;
+					String tipo = pieza.getTipo();
+					
+					textos+= tipo + ";" + pieza.getTitulo() + ";" + pieza.getAno() + ";" + pieza.getLugarCreacion() + ";" + pieza.getAutor()+ ";" + pieza.isExhibida() + ";" 
+				+ pieza.isPermisoVenta() + ";" + pieza.getValorFijo() + ";" + pieza.getValorMinimoSubasta()  + ";" + login  + ";" + contrasena + ";" + correo  + ";" + numero  + ";" + pieza.getEstadoDePieza()+
+				"," + pieza.getDuracion() + ";" + pieza.getNecesidadElectricidad()  + "\n";
 				}
-				bw.close();			
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+				bw.write(textos);
+	            bw.close();
+	        } catch (IOException e) {
+
+	            e.printStackTrace();
+	        }
+
+	    }
+	 public void almacenarRegistros() {
+		 try (
+	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
+	                		"../proyecto/src/data/Registros.txt")))) {
+	            String textos = "";
+				for(Registro pieza : registros.values()) {
+	                Date fecha = pieza.getFecha();
+	                //SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy"); // Define el formato de fecha que deseas
+	                //String fechaString = sdf.format(fecha);
+	                float monto= pieza.getMonto();
+	                String login = pieza.getCliente().getLogin();
+	                String contrasena= pieza.getCliente().getContrasena();
+	                String correo= pieza.getCliente().getCorreoElectronico();
+	                int numero= pieza.getCliente().getNumeroDeTelefono();
+	                int valorMax = pieza.getCliente().getValorMax();
+	                String titulo= pieza.getPieza().getTitulo();
+	                String idSubasta= pieza.getSubasta().getId();
+					
+	                
+					textos+= fecha +";"+ monto + ";"+ login+";"+ contrasena+";"+correo +";"+ numero+ ";"+valorMax+";"+titulo+";"+idSubasta+"\n";
+				}
+				bw.write(textos);
+	            bw.close();
+	        } catch (IOException e) {
+
+	            e.printStackTrace();
+	        }
+
+	    }
+	 public void almacenarSubastas() {
+		 try (
+	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
+	                		"../proyecto/src/data/Subastas.txt")))) {
+	            String textos = "";
+				for(Subasta pieza : subastas.values()) {
+					String id = pieza.getId();
+	                Date fechaInicial= pieza.getFechaInicial();
+	                Date fechaFinal = pieza.getFechaFinal();
+	                String titulo= pieza.getPieza().getTitulo();
+					
+					textos+= id + ";"+ fechaInicial+";"+fechaFinal+";"+ titulo +"\n";
+				}
+				bw.write(textos);
+	            bw.close();
+	        } catch (IOException e) {
+
+	            e.printStackTrace();
+	        }
+
+	    }
 
 	
 
