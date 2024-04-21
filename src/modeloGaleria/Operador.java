@@ -27,16 +27,17 @@ public class Operador extends Usuario {
 		Date fechaInicial = subastas.get(idSubasta).getFechaInicial();
 		Date fechaFinal = subastas.get(idSubasta).getFechaFinal();
 		SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
-			Date parsedFecha = formatoFecha.parse(fecha);
-				if (monto >= valorInicial) {
-					if (parsedFecha.compareTo(fechaFinal) <= 0 || parsedFecha.compareTo(fechaInicial) >= 0) {
-						if (Administrador.verificacionDeCliente(cliente) == true) {
-							Registro registro = new Registro(parsedFecha, monto, cliente, pieza);
-							Subasta subasta = subastas.get(idSubasta);
-							(subasta.getRegistros()).add(registro);
-						}
-					}
+		Date parsedFecha = formatoFecha.parse(fecha);
+		if (monto >= valorInicial) {
+			if (parsedFecha.compareTo(fechaFinal) <= 0 || parsedFecha.compareTo(fechaInicial) >= 0) {
+				Administrador.verificacionDeCliente(cliente);
+				if ("Verificado".equals(cliente.getEstado())) {
+					Registro registro = new Registro(parsedFecha, monto, cliente, pieza);
+					Subasta subasta = subastas.get(idSubasta);
+					(subasta.getRegistros()).add(registro);
 				}
+			}
+		}
 			}
 
 	private Comprador crearCliente(HashMap<String, Comprador> clientes,String login, String contraseña, String correo,int numero, int valorMax) {

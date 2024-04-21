@@ -228,13 +228,17 @@ public class Administrador extends Usuario {
 	            return null;
 	        }
 	    }
-	public static boolean verificacionDeCliente (Comprador comprador) {
+	public static void verificacionDeCliente (Comprador comprador) {
 		int numero= comprador.getNumeroDeTelefono();
 		int digitos = String.valueOf(numero).length();
 		if (digitos==10) {
-			return true;
+			comprador.cambiarEstado("Verificado");
 		}
-		return false;
+		if (comprador.getEstado()== "Verificado") {
+			comprador.cambiarEstado("Verificado");
+		}		else {
+			comprador.cambiarEstado("Bloqueado");
+		}
 		
 	}
 }

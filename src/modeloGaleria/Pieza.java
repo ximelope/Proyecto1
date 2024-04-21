@@ -48,6 +48,9 @@ public abstract class Pieza {
 		return tipo;
 	}
 
+	public void setPropietario(Propietario propietario) {
+        this.propietario = propietario;
+    }
 	
 	
 	// Constructor
