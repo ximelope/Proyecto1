@@ -8,16 +8,10 @@ public class Venta {
 
     private Pieza pieza;
     private int numeroFactura;
-    private Date fechaVenta;
+    private String fechaVenta;
 
-    public Venta(String fechaVentaString) {
+    public Venta() {
         this.numeroFactura = generarNumeroFactura();
-        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
-			try {
-				this.fechaVenta = formatoFecha.parse(fechaVentaString);
-			} catch (ParseException e) {
-				e.printStackTrace();
-			};   
     }
     
     public Pieza getPieza() {
@@ -28,7 +22,7 @@ public class Venta {
         return numeroFactura;
     }
 
-    public Date getFechaVenta() {
+    public String getFechaVenta() {
         return this.fechaVenta;
     }
 
@@ -41,9 +35,15 @@ public class Venta {
     public boolean efectuarVenta (Pieza pieza, Comprador cliente){
         if (pieza.isPermisoVenta() == true && pieza.getEstadoDePieza().equals("Disponible")){
             pieza.estadoDePieza = "Vendida";  
-            Registro registro = new Registro(fechaVenta, pieza.getValorFijo(), cliente, pieza);
-            Cajero.confirmarPago(registro);
-            return true; 
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
+			try {
+                final Date ParsedFecha = formatoFecha.parse(fechaVenta);
+                Registro registro = new Registro(ParsedFecha, pieza.getValorFijo(), cliente, pieza);
+                Cajero.confirmarPago(registro);
+                return true; 
+			} catch (ParseException e) {
+				e.printStackTrace();
+			};
         }
         return false;
     }
