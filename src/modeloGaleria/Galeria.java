@@ -3,7 +3,6 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
 
 public class Galeria {
 	public HashMap<String, Escultura> esculturas = new HashMap<>();
