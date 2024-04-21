@@ -3,7 +3,7 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-
+//Supuestos cambios en todo
 public class Galeria {
 	public HashMap<String, Escultura> esculturas = new HashMap<>();
 	public HashMap<String, Pintura> pinturas = new HashMap<>();

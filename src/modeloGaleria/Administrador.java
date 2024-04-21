@@ -227,17 +227,14 @@ public class Administrador extends Usuario {
         }
     }
 	
-	public String verificacionDeCliente (Comprador comprador) {
+	public void verificacionDeCliente (Comprador comprador) {
 		int numero= comprador.getNumeroDeTelefono();
 		int digitos = String.valueOf(numero).length();
 		String devolver = "Negado";
-		if (digitos==4) {
-			devolver = "Verificado";
+		if (digitos==8) {
+			devolver ="Verificado";
 		}
-		return devolver;
+		comprador.cambiarEstado(devolver);
 		
 	}
 }
-
-
-

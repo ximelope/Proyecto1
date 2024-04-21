@@ -62,7 +62,7 @@ public class Operador extends Usuario {
         String login= input("Ingrese el login del comprador");
         String contrasena = input("Ingrese la contraseña del comprador: ");
         String correo = input("Ingrese el correo del comprador: ");
-        int numero= Integer.parseInt(input("Ingrese el numero de telefono del comprador"));
+        int numero= Integer.parseInt(input("Ingrese el numero de telefono del comprador(8 digitos)"));
         int valorMax= Integer.parseInt(input("Ingrese el valorMaximo del comprador"));
         String titulo= input("Ingresr el titulo");
         String idSubasta = input("Ingrese el id de la oferta (00aa,00bb,00cc");
@@ -131,6 +131,7 @@ public class Operador extends Usuario {
 	
 	private void registrarOferta(HashMap<String, Registro> registros,HashMap<String, Comprador> clientes,String fecha, float monto, String login, String contraseña, String correo,int numero, int valorMax, String idSubasta, Pieza pieza, Administrador administrador)  {
 		Comprador cliente = crearCliente(clientes, login, contraseña, correo, numero, valorMax);
+		administrador.verificacionDeCliente(cliente);
 		int valorInicial = subastas.get(idSubasta).getPieza().getValorMinimoSubasta()*3/4;
 		Date fechaInicial = subastas.get(idSubasta).getFechaInicial();
 		Date fechaFinal = subastas.get(idSubasta).getFechaFinal();
@@ -142,25 +143,26 @@ public class Operador extends Usuario {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-				if (monto >= valorInicial) {
-					if (parsedFecha.compareTo(fechaFinal) <= 0 || parsedFecha.compareTo(fechaInicial) >= 0) {
-						if ("Verificado".equals(cliente.getEstado())) {
-							Registro registro = new Registro(parsedFecha, monto, cliente, pieza,subastas.get(idSubasta));
-							registros.put(String.valueOf(registro.getMonto()), registro);
-							Subasta subasta = subastas.get(idSubasta);
-							(subasta.getRegistros()).add(registro);
-						}
-					}
+		if (monto >= valorInicial) {
+			if (parsedFecha.after(fechaInicial) && parsedFecha.before(fechaFinal)) {
+				if ("Verificado".equals(cliente.getEstado())) {
+					Registro registro = new Registro(parsedFecha, monto, cliente, pieza,subastas.get(idSubasta));
+					registros.put(String.valueOf(registro.getMonto()), registro);
+					Subasta subasta = subastas.get(idSubasta);
+					(subasta.getRegistros()).add(registro);
 				}
+			}
+		}
 		
+	}
 			
 				
-}
+
 	
 
 	private Comprador crearCliente(HashMap<String, Comprador> clientes,String login, String contraseña, String correo,int numero, int valorMax) {
 				Comprador cliente= new Comprador(login, contraseña, correo, numero, valorMax);
 				clientes.put(cliente.getLogin(), cliente);
 				return cliente;
-			}
-		}
+	}
+}
