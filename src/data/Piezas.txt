@@ -1,0 +1,2 @@
+Escultura;Jugando;2000;Bogotá;Camilo;true;true;2000;2000;Santiago;123;a@gmail.com;3112018882;2;2;2;Yeso;20;true;Ninguno
+Escultura;Limpio;2004;Cartagena;Luna;true;false;4000;2000;Jorge;123;a@gmail.com;3312018882;2;2;2;Ceramica;2;true;Ninguno

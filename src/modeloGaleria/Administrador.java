@@ -227,14 +227,15 @@ public class Administrador extends Usuario {
 	        } catch (IOException e) {
 	            return null;
 	        }
-	    }
-	public boolean verificacionDeCliente (Comprador comprador) {
+	 }
+	 public boolean verificacionDeCliente (Comprador comprador) {
 		int numero= comprador.getNumeroDeTelefono();
 		int digitos = String.valueOf(numero).length();
+		boolean devolver = false;
 		if (digitos==10) {
-			return true;
+			devolver = true;
 		}
-		return false;
+		return devolver;
 		
 	}
 }

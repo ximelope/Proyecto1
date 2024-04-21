@@ -5,22 +5,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Galeria {
-	private HashMap<String, Escultura> esculturas = new HashMap<>();
-	private HashMap<String, Pintura> pinturas = new HashMap<>();
-	private HashMap<String, Video> videos  = new HashMap<>();
-	private HashMap<String, Fotografia> fotografias = new HashMap<>();
-	private HashMap<String, Impresion> impresiones = new HashMap<>();
-	private HashMap<String, Pieza> piezas = new HashMap<>();
-	private Administrador administrador;
-	public HashMap<String, String> usuarios = new HashMap<>();
+	protected HashMap<String, Escultura> esculturas = new HashMap<>();
+	protected HashMap<String, Pintura> pinturas = new HashMap<>();
+	protected HashMap<String, Video> videos  = new HashMap<>();
+	protected HashMap<String, Fotografia> fotografias = new HashMap<>();
+	protected HashMap<String, Impresion> impresiones = new HashMap<>();
+	protected HashMap<String, Pieza> piezas = new HashMap<>();
+	protected HashMap<String, Subasta> subastas = new HashMap<>();
+	protected HashMap<String, String> usuarios = new HashMap<>();
 	
 	 public void cargarInformacion() {
 	        try {
 
 	            cargarUsuarios();
-
-	            //cargarClientes(new File(
-	                    //"../proyecto1/entrega3/proyecto1_hotel/data/tarifa.txt"), tarifasEstandar);
 
 	        } catch (Exception e) {
 	            e.printStackTrace();
@@ -44,23 +41,28 @@ public class Galeria {
         }
 
     }
-	 private void infoAdmin(String usuario, String contrasena) {
-	        int opcion;
+	 public void infoAdmin(String usuario, String contrasena) {
+	        String opcion;
 	        Administrador admin = new Administrador(usuario, contrasena);
 	        do {
 	            System.out.println("Opciones Administrador");
 	            System.out.println("1.) Cargar Piezas al inventario ");
 	            System.out.println("2.) Crear Pieza y añadir al inventario");
 	            System.out.println("3.) Cerrar Sesión ");
-	            opcion = Integer.parseInt(input("\nSeleccione una opcion"));
-	            if (opcion == 1) {
+	            System.out.println("3.) Cerrar Sesión ");
+	            System.out.println("hiululg");
+	            opcion = input("\nSeleccione una opcion");
+	            if (opcion == "1") {
+	            	System.out.println(opcion);
 	                File archivoPiezas = new File(
-	                        "../proyecto1/entrega3/proyecto1_hotel/data/habitaciones2.txt");
+	                		"../proyecto/src/data/Piezas.txt");
 	                admin.cargarPieza(archivoPiezas,piezas,  esculturas,pinturas, fotografias, videos, impresiones );
-	            } else if (opcion == 2) {
+	                System.out.println(opcion);
+	            } else if (opcion == "2") {
+	            	System.out.println(opcion);
 	                admin.pedir_crearPieza(piezas,  esculturas,pinturas, fotografias, videos, impresiones);
 	                
-	            } else if (opcion == 3) {
+	            } else if (opcion == "3") {
 	                almacenarEsculturas();
 	                almacenarPinturas();
 	                almacenarFotografias();
@@ -70,52 +72,45 @@ public class Galeria {
 	            } else {
 	                System.out.println("Opcion Inválida");
 	            }
-	        } while (opcion != 3);
+	        } while (opcion != "3");
 	    }
-	 private void infoOperador(String usuario, String contrasena) {
+	 public void infoOperador(String usuario, String contrasena) {
 	        int opcion;
-	        Operador operador = new Operador(usuario, contrasena);
+	        Adelantando operador = new Adelantando(usuario, contrasena);
 	        do {
 	            System.out.println("Opciones Cajero");
-	            System.out.println("1.) Cargar Registros de subasta");
-	            System.out.println("2.) Crear Registros de subasta");
-	            System.out.println("3.) Cerrar Sesión ");
+	            System.out.println("1.) Cargar Subasta");
+	            System.out.println("2.) Crear Subasta");
+	            System.out.println("3.) Cargar Registros ");
+	            System.out.println("4.) Crear Registros ");
+	            System.out.println("5.) Cerrar Sesión ");
 	            opcion = Integer.parseInt(input("\nSeleccione una opcion"));
 	            if (opcion == 1) {
-	                File archivoRegistros = new File(
-	                        "../proyecto1/entrega3/proyecto1_hotel/data/habitaciones2.txt");
-	                admin.cargarPieza(archivoPiezas);
+	                File archivoSubastas= new File(
+	                        "../proyecto/src/data/Subastas.txt");
+	                operador.cargarSubastas(archivoSubastas,piezas, subastas);
 	            } else if (opcion == 2) {
-	                admin.pedir_crearPieza();
+	                operador.crearSubasta_pedir(piezas, subastas);
 	                
 	            } else if (opcion == 3) {
-	                logOut();
+	            	File archivoRegistros= new File(
+	                        "../proyecto/src/data/Registros.txt");
+	                operador.cargarSubastas(archivoRegistros,piezas, subastas);
 	            } else {
 	                System.out.println("Opcion Inválida");
 	            }
-	        } while (opcion != 3);
+	        } while (opcion != 5);
 	    }
-	 private void infoCajero(String usuario, String contrasena) {
+	 public void infoCajero(String usuario, String contrasena) {
 	        int opcion;
-	        Cajero admin = new Cajero(usuario, contrasena);
+	        //Cajero admin = new Cajero(usuario, contrasena);
 	        do {
 	            System.out.println("Opciones Administrador");
 	            System.out.println("1.) Cargar Piezas al inventario ");
 	            System.out.println("2.) Crear Pieza y añadir al inventario");
 	            System.out.println("3.) Cerrar Sesión ");
 	            opcion = Integer.parseInt(input("\nSeleccione una opcion"));
-	            if (opcion == 1) {
-	                File archivoPiezas = new File(
-	                        "../proyecto1/entrega3/proyecto1_hotel/data/habitaciones2.txt");
-	                admin.cargarPieza(archivoPiezas);
-	            } else if (opcion == 2) {
-	                admin.pedir_crearPieza();
-	                
-	            } else if (opcion == 3) {
-	                logOut();
-	            } else {
-	                System.out.println("Opcion Inválida");
-	            }
+	            
 	        } while (opcion != 3);
 	    }
 	 public String input (String mensaje) {
