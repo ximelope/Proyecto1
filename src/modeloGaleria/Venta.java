@@ -1,8 +1,6 @@
 package modeloGaleria;
 import java.util.Random;
-import java.util.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+
 
 public class Venta {
 
