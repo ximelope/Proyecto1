@@ -4,7 +4,7 @@ import java.util.Collection;
 public class Comprador extends Usuario{
     private String correoElectronico;
     private int numeroDeTelefono;
-    private String estado;// Vrificado, Bloqueado, NoAplica
+    private String estado;// Verificado, Bloqueado, NoAplica
     private int valorMax;
     protected Collection<Pieza> infocompras;
 	
@@ -34,9 +34,9 @@ public class Comprador extends Usuario{
     	this.estado= nuevoEstado;
     }
 
-    public void comprarObra(Pieza pieza, int numeroDeTelefono) {
+    public void comprarObra(Pieza pieza) {
         Venta venta = new Venta();
-        if (venta.efectuarVenta(pieza) == true) {
+        if (venta.efectuarVenta(pieza, this) == true) {
             this.infocompras.add(pieza);}
     }
 

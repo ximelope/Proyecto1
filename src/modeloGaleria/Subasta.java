@@ -27,19 +27,25 @@ public class Subasta {
 	public Date getFechaFinal() {
 		return fechaFinal;
 	}
-		public Pieza getPieza() {
-			return pieza;
-		}
+	public Pieza getPieza() {
+		return pieza;
+	}
 
-		public String getId() {
-			return id;
-		}
+	public String getId() {
+		return id;
+	}
 
-		public Registro getUltimoRegistro() {
-			if (!registros.isEmpty()) {
+	public Registro getUltimoRegistro() {
+		if (!registros.isEmpty()) {
 				return registros.get(registros.size() - 1);
 			} else {
 				return null; // O lanzar una excepción.
 			}
+	}
+
+	public void confirmarPagoCajero (Registro registro) {
+		if (getUltimoRegistro()!= null){
+			Cajero.confirmarPago(getUltimoRegistro());
+		}
 	}
 }
