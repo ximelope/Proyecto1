@@ -100,14 +100,14 @@ public class Galeria {
 	            opcion = Integer.parseInt(input("\nSeleccione una opcion"));
 	            if (opcion == 1) {
 	                File archivoSubastas= new File(
-	                        "../proyecto/src/data/Subastas.txt");
+	                        "./src/data/Subastas.txt");
 	                operador.cargarSubastas(archivoSubastas,piezas, subastas);
 	            } else if (opcion == 2) {
 	                operador.crearSubasta_pedir(piezas, subastas);
 	                
 	            } else if (opcion == 3) {
 	            	File archivoRegistros= new File(
-	                        "../proyecto/src/data/Registros.txt");
+	                        "./src/data/Registros.txt");
 	                operador.cargarRegistros(archivoRegistros,piezas, registros,clientes, administrador);
 	            }else if (opcion == 4) {
 	                operador.crearRegistro_pedir(piezas, registros, clientes, administrador);
@@ -134,7 +134,7 @@ public class Galeria {
 	            opcion = Integer.parseInt(input("\nSeleccione una opcion"));
 	            if (opcion == 2) {
 	                File archivoCajero= new File(
-	                        "../proyecto/src/data/Ventas.txt");
+	                        "./src/data/Ventas.txt");
 	                admin.cargarVenta(archivoCajero,piezas, clientes, ventas);
 	            } else if (opcion == 1) {
 	                admin.pedirVenta(piezas, clientes, ventas);
@@ -163,7 +163,7 @@ public class Galeria {
 	        System.out.println("Cargando base de datos de Usuarios");
 	        try {
 	            BufferedReader br = new BufferedReader(new FileReader(new File(
-	                    "../proyecto/src/data/Usuarios.txt")));
+	                    "./src/data/Usuarios.txt")));
 	            String linea;
 	            linea = br.readLine();
 	            while (linea != null) {
@@ -184,7 +184,7 @@ public class Galeria {
 	 public void almacenarEsculturas() {
 		 try (
 	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-	                		"../proyecto/src/data/Piezas.txt")))) {
+	                		"./src/data/Piezas.txt")))) {
 	            String textos = "";
 				for(Escultura pieza : esculturas.values()) {
 					String login =  (pieza.getPropietario()).getLogin() ;
@@ -208,7 +208,7 @@ public class Galeria {
 	 public void almacenarPinturas() {
 		 try (
 	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-	                		"../proyecto/src/data/Piezas.txt")))) {
+	                		"./src/data/Piezas.txt")))) {
 	            String textos = "";
 				for(Pintura pieza : pinturas.values()) {
 					String login =  (pieza.getPropietario()).getLogin() ;
@@ -232,7 +232,7 @@ public class Galeria {
 	 public void almacenarFotografias() {
 		 try (
 	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-	                		"../proyecto/src/data/Piezas.txt")))) {
+	                		"./src/data/Piezas.txt")))) {
 	            String textos = "";
 				for(Fotografia pieza : fotografias.values()) {
 					String login =  (pieza.getPropietario()).getLogin() ;
@@ -256,7 +256,7 @@ public class Galeria {
 	 public void almacenarImpresiones() {
 		 try (
 	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-	                		"../proyecto/src/data/Piezas.txt")))) {
+	                		"./src/data/Piezas.txt")))) {
 	            String textos = "";
 
 				for(Impresion pieza : impresiones.values()) {
@@ -279,7 +279,7 @@ public class Galeria {
 	 public void almacenarVideos() {
 		 try (
 	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-	                		"../proyecto/src/data/Piezas.txt")))) {
+	                		"./src/data/Piezas.txt")))) {
 	            String textos = "";
 				for(Video pieza : this.videos.values()) {
 					String login =  (pieza.getPropietario()).getLogin() ;
@@ -303,7 +303,7 @@ public class Galeria {
 	 public void almacenarRegistros() {
 		 try (
 	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-	                		"../proyecto/src/data/Registros.txt")))) {
+	                		"./src/data/Registros.txt")))) {
 	            String textos = "";
 				for(Registro pieza : registros.values()) {
 	                Date fecha = pieza.getFecha();
@@ -334,7 +334,7 @@ public class Galeria {
 	 public void almacenarVentas() {
 		 try (
 	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-	                		"../proyecto/src/data/Ventas.txt")))) {
+	                		"./src/data/Ventas.txt")))) {
 	            String textos = "";
 				for(Venta pieza : ventas.values()) {
 					String titulo= pieza.getPieza().getTitulo();
@@ -357,7 +357,7 @@ public class Galeria {
 	 public void almacenarSubastas() {
 		 try (
 	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-	                		"../proyecto/src/data/Subastas.txt")))) {
+	                		"./src/data/Subastas.txt")))) {
 	            String textos = "";
 				for(Subasta pieza : subastas.values()) {
 					String id = pieza.getId();
