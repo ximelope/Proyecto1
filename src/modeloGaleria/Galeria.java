@@ -60,7 +60,8 @@ public class Galeria {
 	            System.out.println("3.) Mostrar los titulos que se encuentran en el inventario");
 	            System.out.println("4.) Cerrar Sesión ");
 	            opcion = Integer.parseInt(input("\nSeleccione una opcion"));
-	            if (opcion == 1) {
+	            if (opcion == 1)
+	            {
 	            	System.out.println(opcion);
 	                File archivoPiezas = new File(
 	                		"../proyecto/src/data/Piezas.txt");
