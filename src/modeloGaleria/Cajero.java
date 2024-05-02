@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+//hola prueba
 public class Cajero extends Usuario{
 	static HashMap<String, List<Registro>> pagos = new HashMap<>();
 
