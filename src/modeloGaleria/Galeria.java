@@ -67,6 +67,7 @@ public class Galeria {
 	            cargarUsuarios();
 	            cargarPieza();
 	            cargarPropietario();
+	            cargarComprador();
 
 	        } catch (Exception e) {
 	            e.printStackTrace();
@@ -89,6 +90,32 @@ public class Galeria {
 	                int numeroDeTelefono= Integer.valueOf(partes[3]);
 	                Propietario propietario = crearPropietario(login,contrasena,correo, numeroDeTelefono);
 	                propietarios.put(login,propietario);
+	            }
+
+                linea = br.readLine();
+            br.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
+	 public void cargarComprador() {
+		 File archivo = new File(
+	         		"../proyecto/src/data/Comprador.txt");
+		 System.out.println("Cargando compradores desde Archivo");
+		 try {
+	            BufferedReader br = new BufferedReader(new FileReader(archivo));
+	            String linea;
+	            linea = br.readLine();
+	            while (linea != null) {
+	                String[] partes = linea.split(";");
+	                String login = partes[0];
+	                String contrasena = partes[1];
+	                String correo = partes[2];
+	                int numeroDeTelefono= Integer.valueOf(partes[3]);
+	                int valorMax = Integer.valueOf(partes[4]);
+	                Comprador comprador = crearComprador(login,contrasena,correo, numeroDeTelefono, valorMax);
+	                clientes.put(login,comprador);
 	            }
 
                 linea = br.readLine();
@@ -242,6 +269,11 @@ public class Galeria {
 			Propietario propietario = new Propietario(loginPropietario, contraseñaPropietario, correo, numeroDeTelefono);
 			return propietario;
 		}
+		private Comprador crearComprador (String loginPropietario, String contraseñaPropietario, String correo, int numeroDeTelefono, int valorMax) {
+			Comprador comprador = new Comprador(loginPropietario, contraseñaPropietario, correo, numeroDeTelefono, valorMax);
+			return comprador;
+		}
+		
 		private void añadirPieza (Pieza pieza,HashMap<String, Pieza> piezas) {
 			piezas.put(pieza.getTitulo(), pieza);
 			
