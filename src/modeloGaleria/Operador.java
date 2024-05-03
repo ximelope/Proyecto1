@@ -58,7 +58,7 @@ public class Operador extends Usuario {
 	public void crearRegistro_pedir(HashMap<String, Pieza> piezas, HashMap<String, Registro> registros,HashMap<String, Comprador> clientes, Administrador administrador) {
 		System.out.println("Crear Registro, Digite la info necesaria");
         String fecha = input("Ingrese la fecha del registro ");
-        float monto= Float.parseFloat(input("Ingrese el monto ofrecido"));
+        int monto= Integer.parseInt(input("Ingrese el monto ofrecido"));
         String login= input("Ingrese el login del comprador");
         String contrasena = input("Ingrese la contraseña del comprador: ");
         String correo = input("Ingrese el correo del comprador: ");
@@ -78,7 +78,7 @@ public class Operador extends Usuario {
             while (linea != null) {
                 String[] partes = linea.split(";");
                 String fecha = partes[0];
-                float monto= Float.parseFloat(partes[1]);
+                int monto= Integer.parseInt(partes[1]);
                 String login = partes[2];
                 String contrasena= partes[3];
                 String correo= partes[4];
@@ -129,10 +129,10 @@ public class Operador extends Usuario {
 	}
 	
 	
-	private void registrarOferta(HashMap<String, Registro> registros,HashMap<String, Comprador> clientes,String fecha, float monto, String login, String contraseña, String correo,int numero, int valorMax, String idSubasta, Pieza pieza, Administrador administrador)  {
+	private void registrarOferta(HashMap<String, Registro> registros,HashMap<String, Comprador> clientes,String fecha, int monto, String login, String contraseña, String correo,int numero, int valorMax, String idSubasta, Pieza pieza, Administrador administrador)  {
 		Comprador cliente = crearCliente(clientes, login, contraseña, correo, numero, valorMax);
 		administrador.verificacionDeCliente(cliente);
-		int valorInicial = subastas.get(idSubasta).getPieza().getValorMinimoSubasta()*3/4;
+		int valorInicial = subastas.get(idSubasta).getMonto();
 		Date fechaInicial = subastas.get(idSubasta).getFechaInicial();
 		Date fechaFinal = subastas.get(idSubasta).getFechaFinal();
 		SimpleDateFormat formatoFecha = new SimpleDateFormat("dd-MM-yyyy");
@@ -149,6 +149,7 @@ public class Operador extends Usuario {
 					Registro registro = new Registro(parsedFecha, monto, cliente, pieza,subastas.get(idSubasta));
 					registros.put(String.valueOf(registro.getMonto()), registro);
 					Subasta subasta = subastas.get(idSubasta);
+					subasta.cambiarMonto(monto);
 					(subasta.getRegistros()).add(registro);
 				}
 			}

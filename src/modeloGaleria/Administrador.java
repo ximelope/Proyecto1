@@ -86,7 +86,7 @@ public class Administrador extends Usuario {
         }
         
     }
-	protected  void pedir_crearPieza(HashMap<String, Pieza> piezas,HashMap<String, Escultura> esculturas, HashMap<String, Pintura> pinturas, HashMap<String, Fotografia> fotografias, HashMap<String, Video> videos, HashMap<String, Impresion> impresiones) {
+	public  void pedir_crearPieza(HashMap<String, Pieza> piezas,HashMap<String, Escultura> esculturas, HashMap<String, Pintura> pinturas, HashMap<String, Fotografia> fotografias, HashMap<String, Video> videos, HashMap<String, Impresion> impresiones) {
 		
         System.out.println("Crear Pieza, Digite la info necesaria");
         

@@ -10,12 +10,15 @@ public class Subasta {
 	private Pieza pieza;
 	private List<Registro> registros;
 	private String id;
+	private int monto;
 
 	public Subasta(String id, Date fechaInicial, Date fechaFinal, Pieza pieza) {
+		
         this.fechaInicial = fechaInicial;
         this.fechaFinal = fechaFinal;
         this.pieza = pieza;
         this.id  = id;
+        this.monto= pieza.getValorMinimoSubasta()*3/4;;
         registros = new LinkedList<Registro>( );
     }
 	public Collection<Registro> getRegistros (){
@@ -31,8 +34,9 @@ public class Subasta {
 	public Pieza getPieza() {
 		return pieza;
 	}
-
-	
+	public int getMonto() {
+		return monto;
+	}
 	public String getId() {
 		return id;
 	}
@@ -49,5 +53,8 @@ public class Subasta {
 		if (getUltimoRegistro()!= null){
 			cajero.confirmarPago(getUltimoRegistro());
 		}
+	}
+	public void cambiarMonto(int nuevo) {
+		this.monto= nuevo;
 	}
 }

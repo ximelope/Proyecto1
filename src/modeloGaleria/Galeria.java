@@ -5,87 +5,259 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class Galeria {
-	public HashMap<String, Escultura> esculturas = new HashMap<>();
-	public HashMap<String, Pintura> pinturas = new HashMap<>();
-	public HashMap<String, Video> videos  = new HashMap<>();
-	public HashMap<String, Fotografia> fotografias = new HashMap<>();
-	public HashMap<String, Impresion> impresiones = new HashMap<>();
-	public HashMap<String, Pieza> piezas = new HashMap<>();
-	public HashMap<String, Subasta> subastas = new HashMap<>();
-	public HashMap<String, Registro> registros = new HashMap<>();
-	public HashMap<String, String> usuarios = new HashMap<>();
-	public HashMap<String, Comprador> clientes = new HashMap<>();
-	public HashMap<String, Venta> ventas = new HashMap<>();
-	public Administrador administrador;
+	private HashMap<String, Escultura> esculturas = new HashMap<>();
+	private HashMap<String, Pintura> pinturas = new HashMap<>();
+	private HashMap<String, Video> videos  = new HashMap<>();
+	private HashMap<String, Fotografia> fotografias = new HashMap<>();
+	private HashMap<String, Impresion> impresiones = new HashMap<>();
+	private HashMap<String, Pieza> piezas = new HashMap<>();
+	private HashMap<String, Subasta> subastas = new HashMap<>();
+	private HashMap<String, Registro> registros = new HashMap<>();
+	private HashMap<String, String> usuarios = new HashMap<>();
+	private HashMap<String, Comprador> clientes = new HashMap<>();
+	private HashMap<String, Venta> ventas = new HashMap<>();
+	private HashMap<String, Propietario> propietarios = new HashMap<>();
+	private  Administrador administrador;
+	public HashMap<String, Escultura> getEsculturas() {
+		return esculturas;
+	}
+	public HashMap<String, Pintura> getPinturas() {
+		return pinturas;
+	}
+	public HashMap<String, Video> getVideos() {
+		return videos;
+	}
+	public HashMap<String, Fotografia> getFotografias() {
+		return fotografias;
+	}
+	public HashMap<String, Impresion> getImpresiones() {
+		return impresiones;
+	}
+	public HashMap<String, Pieza> getPiezas() {
+		return piezas;
+	}
+	public HashMap<String, Subasta> getSubastas() {
+		return subastas;
+	}
+	public HashMap<String, Registro> getRegistros() {
+		return registros;
+	}
+	public HashMap<String, String> getUsuarios() {
+		return usuarios;
+	}
+	public HashMap<String, Comprador> getClientes() {
+		return clientes;
+	}
+	public HashMap<String, Venta> getVentas() {
+		return ventas;
+	}
+	public HashMap<String, Propietario> getPropietarios() {
+		return propietarios;
+	}
+	public Administrador getAdministrador() {
+		return administrador;
+	}
+	public void setAdministrador(Administrador administrador) {
+		this.administrador= administrador;
+	}
 	
 	 public void cargarInformacion() {
 	        try {
 
 	            cargarUsuarios();
+	            cargarPieza();
+	            cargarPropietario();
 
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	        }
 
 	    }
-	
-	public void login(String usuario, String contrasena) {
+	 public void cargarPropietario() {
+		 File archivo = new File(
+	         		"../proyecto/src/data/Propietario.txt");
+		 System.out.println("Cargando propietarios desde Archivo");
+		 try {
+	            BufferedReader br = new BufferedReader(new FileReader(archivo));
+	            String linea;
+	            linea = br.readLine();
+	            while (linea != null) {
+	                String[] partes = linea.split(";");
+	                String login = partes[0];
+	                String contrasena = partes[1];
+	                String correo = partes[2];
+	                int numeroDeTelefono= Integer.valueOf(partes[3]);
+	                Propietario propietario = crearPropietario(login,contrasena,correo, numeroDeTelefono);
+	                propietarios.put(login,propietario);
+	            }
 
-        System.out.println(usuarios.get(usuario));
+                linea = br.readLine();
+            br.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
+		 
+	 public  void cargarPieza() {
+		    File archivo = new File(
+         		"../proyecto/src/data/Piezas.txt");
+	        System.out.println("Cargando piezas desde Archivo");
+	        try {
+	            BufferedReader br = new BufferedReader(new FileReader(archivo));
+	            String linea;
+	            linea = br.readLine();
+	            while (linea != null) {
+	                String[] partes = linea.split(";");
+	                String tipo = partes[0];
+	                String titulo = partes[1];
+	                if (piezas.get(titulo)== null) {
+	                	int ano= Integer.valueOf(partes[2]);
+	                    String lugarCreacion = partes[3];
+	                    String autor = partes[4];
+	                    boolean exhibida = Boolean.valueOf(partes[5]);
+	                    boolean permisoVenta = Boolean.valueOf(partes[6]);
+	                    int valorFijo= Integer.valueOf(partes[7]);
+	                    int valorMinimoSubasta = Integer.valueOf(partes[8]);
+	                    String loginPropietario= partes[9];
+	                    String contrasenaPropietario = partes[10];
+	                    String correo = partes[11];
+	                    int numeroDeTelefono= Integer.valueOf(partes[12]);
+	                    
+	                    if (tipo.equals("Escultura")) {
+	                    	float alto = Float.parseFloat(partes[14]);
+	                    	float ancho = Float.parseFloat(partes[15]);
+	                    	float profundidad = Float.parseFloat(partes[16]);
+	                    	String materialEscultura = partes[17];
+	                    	float peso = Float.parseFloat(partes[18]);
+	                    	boolean necesidadElectricidad = Boolean.valueOf(partes[19]);
+	                    	String detallesInstalacion = partes [20];
+	                    	Pieza pieza= crearPiezaEscultura(esculturas, tipo, titulo,ano, lugarCreacion, autor, exhibida, permisoVenta,valorFijo, valorMinimoSubasta,
+	                    			loginPropietario, contrasenaPropietario, correo, numeroDeTelefono,alto,ancho, profundidad, materialEscultura, peso, necesidadElectricidad, detallesInstalacion);
+	                    	añadirPieza(pieza, piezas);
+	                    	
+	                    } else if (tipo.equals("Pintura")) {
+	                    	float alto = Float.parseFloat(partes[14]);
+	                    	float ancho = Float.parseFloat(partes[15]);
+	                    	String materialBase = partes[16];
+	                    	String tipoPintura = partes[17];
+	                    	Pieza pieza = crearPiezaPintura(pinturas, tipo, titulo,ano, lugarCreacion, autor, exhibida, permisoVenta,valorFijo, valorMinimoSubasta,loginPropietario, contrasenaPropietario, correo, numeroDeTelefono,alto,ancho, materialBase, tipoPintura);
+	                    	añadirPieza(pieza, piezas);
+
+	                    }else if (tipo.equals("Video")) {
+	                    	float duracion = Float.parseFloat(partes[14]);
+	                    	boolean necesidadElectricidad = Boolean.valueOf(partes[15]);
+	                    	Pieza pieza = crearPiezaVideo(videos, tipo, titulo,ano, lugarCreacion, autor, exhibida, permisoVenta,valorFijo, valorMinimoSubasta,
+	                    			loginPropietario, contrasenaPropietario, correo, numeroDeTelefono,duracion,necesidadElectricidad);
+	                    	añadirPieza(pieza, piezas);
+
+	                    }else if (tipo.equals("Fotografia")) {
+	                    	float resolucion = Float.parseFloat(partes[14]);
+	                    	String tecnica = partes[15];
+	                    	float ancho = Float.parseFloat(partes[16]);
+	                    	float alto = Float.parseFloat(partes[17]);
+	                    	Pieza pieza= crearPiezaFotografia(fotografias,tipo, titulo,ano, lugarCreacion, autor, exhibida, permisoVenta,valorFijo, valorMinimoSubasta,
+	                    			loginPropietario, contrasenaPropietario, correo, numeroDeTelefono,resolucion, tecnica, ancho, alto);
+	                    	añadirPieza(pieza, piezas);
+	                    }else if (tipo.equals("Impresion")) {
+	                    	float resolucion = Float.parseFloat(partes[14]);
+	                    	String tecnica = partes[15];
+	                    	float ancho = Float.parseFloat(partes[16]);
+	                    	float alto = Float.parseFloat(partes[17]);
+	                    	Pieza pieza= crearPiezaImpresion( impresiones,tipo, titulo,ano, lugarCreacion, autor, exhibida, permisoVenta,valorFijo, valorMinimoSubasta,
+	                    			loginPropietario, contrasenaPropietario, correo, numeroDeTelefono,resolucion, tecnica, ancho, alto);
+	                    	añadirPieza(pieza, piezas);
+	                    }
+	                }
+
+	                linea = br.readLine();
+	            }
+	            br.close();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+	        
+	    }
+	 
+	 protected Pieza crearPiezaEscultura(HashMap<String, Escultura> esculturas, String tipo,String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoVenta,
+				int valorFijo, int valorMinimoSubasta, String loginPropietario, String contraseñaPropietario,
+				String correo, int numeroDeTelefono, float alto, float ancho, float profundidad, String material, float peso, boolean electricidad, 
+				String otros) {
+			Propietario propietario = crearPropietario(loginPropietario, contraseñaPropietario, correo, numeroDeTelefono);
+			Pieza pieza= new Escultura(tipo,titulo, ano, lugarCreacion, autor, exhibida, permisoVenta,
+					valorFijo, valorMinimoSubasta, propietario,  alto, ancho, profundidad, material, peso, electricidad, otros);
+			Escultura pie= new Escultura(tipo,titulo, ano, lugarCreacion, autor, exhibida, permisoVenta,
+					valorFijo, valorMinimoSubasta, propietario,  alto, ancho, profundidad, material, peso, electricidad, otros);
+			
+			
+			esculturas.put(pie.getTitulo(), pie);
+			return(pieza);
+			}
+			
+		protected Pieza crearPiezaPintura(HashMap<String, Pintura> pinturas,String tipo,String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoVenta,
+				int  valorFijo, int valorMinimoSubasta, String loginPropietario, String contraseñaPropietario,
+				String correo, int numeroDeTelefono, float alto, float ancho, String materialBase, String tipoPinturas) {
+			Propietario propietario = crearPropietario(loginPropietario, contraseñaPropietario, correo, numeroDeTelefono);
+			Pieza pieza = new Pintura(tipo, titulo, ano, lugarCreacion, autor, exhibida, permisoVenta,valorFijo, valorMinimoSubasta, propietario, alto, ancho, materialBase,
+					tipoPinturas);
+			Pintura pintura = new Pintura(tipo, titulo, ano, lugarCreacion, autor, exhibida, permisoVenta,valorFijo, valorMinimoSubasta, propietario,alto, ancho, materialBase,
+					tipoPinturas);
+			pinturas.put(pintura.getTitulo(), pintura);
+			return pieza;
+			
+		}
+		protected Pieza crearPiezaVideo(HashMap<String, Video> videos,String tipo,String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoVenta,
+				int valorFijo, int valorMinimoSubasta, String loginPropietario, String contraseñaPropietario,
+				String correo, int numeroDeTelefono, float duracion, boolean necesidadElectricidad) {
+			Propietario propietario = crearPropietario(loginPropietario, contraseñaPropietario, correo, numeroDeTelefono);
+			Pieza pieza = new Video(tipo,titulo, ano, lugarCreacion, autor, exhibida, permisoVenta,valorFijo, valorMinimoSubasta, propietario, duracion, necesidadElectricidad);
+			Video pie = new Video(tipo,titulo, ano, lugarCreacion, autor, exhibida, permisoVenta,valorFijo, valorMinimoSubasta, propietario, duracion, necesidadElectricidad);
+			videos.put(pie.getTitulo(), pie);
+			return pieza;
+			
+		}
+		protected Pieza crearPiezaFotografia(HashMap<String, Fotografia> fotografias,String tipo, String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoVenta,
+				int valorFijo, int valorMinimoSubasta, String loginPropietario, String contraseñaPropietario,
+				String correo, int numeroDeTelefono, float resolucion,String metodo, float ancho, float alto) {
+			Propietario propietario = crearPropietario(loginPropietario, contraseñaPropietario, correo, numeroDeTelefono);
+			Pieza pieza = new Fotografia(tipo, titulo, ano, lugarCreacion, autor, exhibida, permisoVenta,valorFijo, valorMinimoSubasta, propietario, resolucion, metodo, ancho,alto);
+			Fotografia pie = new Fotografia(tipo, titulo, ano, lugarCreacion, autor, exhibida, permisoVenta,valorFijo, valorMinimoSubasta, propietario, resolucion, metodo, ancho,alto);
+			fotografias.put(pie.getTitulo(), pie);
+			return pieza;
+
+			
+		}
+		protected Pieza crearPiezaImpresion(HashMap<String, Impresion> impresiones,String tipo, String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoVenta,
+				int valorFijo, int valorMinimoSubasta, String loginPropietario, String contraseñaPropietario,
+				String correo, int numeroDeTelefono, float resolucion,String metodo, float ancho, float alto) {
+			Propietario propietario = crearPropietario(loginPropietario, contraseñaPropietario, correo, numeroDeTelefono);
+			Pieza pieza = new Impresion(tipo, titulo, ano, lugarCreacion, autor, exhibida, permisoVenta,valorFijo, valorMinimoSubasta, propietario, resolucion, metodo, ancho,alto);
+			Impresion pie = new Impresion(tipo, titulo, ano, lugarCreacion, autor, exhibida, permisoVenta,valorFijo, valorMinimoSubasta, propietario, resolucion, metodo, ancho,alto);
+			impresiones.put(pie.getTitulo(), pie);
+			return pieza;
+		}
+				
+		private Propietario crearPropietario(String loginPropietario, String contraseñaPropietario,
+				String correo, int numeroDeTelefono) {
+			Propietario propietario = new Propietario(loginPropietario, contraseñaPropietario, correo, numeroDeTelefono);
+			return propietario;
+		}
+		private void añadirPieza (Pieza pieza,HashMap<String, Pieza> piezas) {
+			piezas.put(pieza.getTitulo(), pieza);
+			
+		}
+
+	public boolean login(String usuario, String contrasena) {
+
         if (contrasena.equals(usuarios.get(usuario))) {
-        	System.out.println("1) Propietario");
-        	System.out.println("2) Operador");
-        	System.out.println("3) Cajero");
-        	int rol = Integer.parseInt(input("\nSeleccione su rol"));
-            if (rol==1) {
-                infoAdmin(usuario, contrasena);
-            } else if (rol==2) {
-                infoOperador(usuario, contrasena);
-            } else if (rol== 3){
-                infoCajero(usuario, contrasena);
-            }
+            return true;
         } else {
             System.out.println("Usuario o contraseña incorrecta");
+            return false;
         }
 
     }
-	 public void infoAdmin(String usuario, String contrasena) {
-	        int opcion;
-	        Administrador admin = new Administrador(usuario, contrasena);
-	        this.administrador= admin;
-	        do {
-	            System.out.println("Opciones Administrador");
-	            System.out.println("1.) Cargar Piezas al inventario ");
-	            System.out.println("2.) Crear Pieza y añadir al inventario");
-	            System.out.println("3.) Mostrar los titulos que se encuentran en el inventario");
-	            System.out.println("4.) Cerrar Sesión ");
-	            opcion = Integer.parseInt(input("\nSeleccione una opcion"));
-	            if (opcion == 1)
-	            {
-	            	System.out.println(opcion);
-	                File archivoPiezas = new File(
-	                		"../proyecto/src/data/Piezas.txt");
-	                admin.cargarPieza(archivoPiezas,piezas,  esculturas,pinturas, fotografias, videos, impresiones );
-	                System.out.println(opcion);
-	            } else if (opcion == 2) {
-	                admin.pedir_crearPieza(piezas,  esculturas,pinturas, fotografias, videos, impresiones);
-	                }
-	            else if (opcion == 3) {
-	            	System.out.println(piezas.keySet());
-	            	
-	                
-	            } else if (opcion == 4) {
-	                almacenarEsculturas();
-	                almacenarPinturas();
-	                almacenarFotografias();
-	                almacenarImpresiones();
-	                almacenarVideos();
-	                
-	            } else {
-	                System.out.println("Opcion Inválida");
-	            }
-	        } while (opcion != 4);
-	    }
+	 
 	 public void infoOperador(String usuario, String contrasena) {
 	        int opcion;
 	        Operador operador = new Operador(usuario, contrasena);
@@ -181,125 +353,7 @@ public class Galeria {
 	            e.printStackTrace();
 	        }
 	    }
-	 public void almacenarEsculturas() {
-		 try (
-	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-	                		"./src/data/Piezas.txt")))) {
-	            String textos = "";
-				for(Escultura pieza : esculturas.values()) {
-					String login =  (pieza.getPropietario()).getLogin() ;
-					String contrasena =  (pieza.getPropietario()).getContrasena() ;
-					String correo =  (pieza.getPropietario()).getCorreoElectronico() ;
-					int numero =  (pieza.getPropietario()).getNumeroDeTelefono() ;
-					String tipo = pieza.getTipo();
-					
-					textos+=tipo + ";" + pieza.getTitulo() + ";" + pieza.getAno() + ";" + pieza.getLugarCreacion() + ";" + pieza.getAutor()+ ";" + pieza.isExhibida() + ";" 
-					+ pieza.isPermisoVenta() + ";" + pieza.getValorFijo() + ";" + pieza.getValorMinimoSubasta()  + ";" + login  + ";" + contrasena + ";" + correo  + ";" + numero  + ";" + pieza.getEstadoDePieza()+
-					";" + pieza.getAlto() + ";" + pieza.getAncho() + ";" + pieza.getProfundidad() + ";" + pieza.getMaterialEscultura() + ";" + pieza.getPeso() + ";" + pieza.getNecesidadElectricidad()+ ";" + pieza.getDetallesInstalacion()+"\n";
-			}
-			bw.write(textos);
-            bw.close();
-        } catch (IOException e) {
-
-            e.printStackTrace();
-        }
-
-    }
-	 public void almacenarPinturas() {
-		 try (
-	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-	                		"./src/data/Piezas.txt")))) {
-	            String textos = "";
-				for(Pintura pieza : pinturas.values()) {
-					String login =  (pieza.getPropietario()).getLogin() ;
-					String contrasena =  (pieza.getPropietario()).getContrasena() ;
-					String correo =  (pieza.getPropietario()).getCorreoElectronico() ;
-					int numero =  (pieza.getPropietario()).getNumeroDeTelefono() ;
-					String tipo = pieza.getTipo();
-					
-					textos+= tipo + ";" + pieza.getTitulo() + ";" + pieza.getAno() + ";" + pieza.getLugarCreacion() + ";" + pieza.getAutor()+ ";" + pieza.isExhibida() + ";" 
-					+ pieza.isPermisoVenta() + ";" + pieza.getValorFijo() + ";" + pieza.getValorMinimoSubasta()  + ";" + login  + ";" + contrasena + ";" + correo  + ";" + numero  + ";" + pieza.getEstadoDePieza()+
-					";" + pieza.getAlto() + ";" + pieza.getAncho() + ";" + pieza.getMaterialBase() + ";" + pieza.getTipoPinturas() +"\n";
-				}
-				bw.write(textos);
-	            bw.close();
-	        } catch (IOException e) {
-
-	            e.printStackTrace();
-	        }
-
-	    }
-	 public void almacenarFotografias() {
-		 try (
-	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-	                		"./src/data/Piezas.txt")))) {
-	            String textos = "";
-				for(Fotografia pieza : fotografias.values()) {
-					String login =  (pieza.getPropietario()).getLogin() ;
-					String contrasena =  (pieza.getPropietario()).getContrasena() ;
-					String correo =  (pieza.getPropietario()).getCorreoElectronico() ;
-					int numero =  (pieza.getPropietario()).getNumeroDeTelefono() ;
-					String tipo = pieza.getTipo();
-					
-					textos+= tipo + ";" + pieza.getTitulo() + ";" + pieza.getAno() + ";" + pieza.getLugarCreacion() + ";" + pieza.getAutor()+ ";" + pieza.isExhibida() + ";" 
-					+ pieza.isPermisoVenta() + ";" + pieza.getValorFijo() + ";" + pieza.getValorMinimoSubasta()  + ";" + login  + ";" + contrasena + ";" + correo  + ";" + numero  + ";" + pieza.getEstadoDePieza()+
-					";" + pieza.getResolucion() + ";" + pieza.getTecnica() + ";" + pieza.getAncho() + ";" + pieza.getAlto() +"\n";
-				}
-				bw.write(textos);
-	            bw.close();
-	        } catch (IOException e) {
-
-	            e.printStackTrace();
-	        }
-
-	    }
-	 public void almacenarImpresiones() {
-		 try (
-	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-	                		"./src/data/Piezas.txt")))) {
-	            String textos = "";
-
-				for(Impresion pieza : impresiones.values()) {
-					String login =  (pieza.getPropietario()).getLogin() ;
-					String contrasena =  (pieza.getPropietario()).getContrasena() ;
-					String correo =  (pieza.getPropietario()).getCorreoElectronico() ;
-					int numero =  (pieza.getPropietario()).getNumeroDeTelefono() ;
-					String tipo = pieza.getTipo();
-					textos += tipo + ";" + pieza.getTitulo() + ";" + pieza.getAno() + ";" + pieza.getLugarCreacion() + ";" + pieza.getAutor()+ ";" + pieza.isExhibida() + ";" + pieza.isPermisoVenta() + ";" + pieza.getValorFijo() + ";" + pieza.getValorMinimoSubasta()  + ";" + login  + ";" + contrasena + ";" + correo  + ";" + numero  + ";" + pieza.getEstadoDePieza()+ ";" + pieza.getResolucion() + ";" + pieza.getTecnica() + ";" + pieza.getAncho() + ";" + pieza.getAlto() +"\n";
-				 }
-	            bw.write(textos);
-	            bw.close();
-	        } catch (IOException e) {
-
-	            e.printStackTrace();
-	        }
-
-	    }
-
-	 public void almacenarVideos() {
-		 try (
-	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-	                		"./src/data/Piezas.txt")))) {
-	            String textos = "";
-				for(Video pieza : this.videos.values()) {
-					String login =  (pieza.getPropietario()).getLogin() ;
-					String contrasena =  (pieza.getPropietario()).getContrasena() ;
-					String correo =  (pieza.getPropietario()).getCorreoElectronico() ;
-					int numero =  (pieza.getPropietario()).getNumeroDeTelefono() ;
-					String tipo = pieza.getTipo();
-					
-					textos+= tipo + ";" + pieza.getTitulo() + ";" + pieza.getAno() + ";" + pieza.getLugarCreacion() + ";" + pieza.getAutor()+ ";" + pieza.isExhibida() + ";" 
-				+ pieza.isPermisoVenta() + ";" + pieza.getValorFijo() + ";" + pieza.getValorMinimoSubasta()  + ";" + login  + ";" + contrasena + ";" + correo  + ";" + numero  + ";" + pieza.getEstadoDePieza()+
-				";" + pieza.getDuracion() + ";" + pieza.getNecesidadElectricidad()  + "\n";
-				}
-				bw.write(textos);
-	            bw.close();
-	        } catch (IOException e) {
-
-	            e.printStackTrace();
-	        }
-
-	    }
+	 
 	 public void almacenarRegistros() {
 		 try (
 	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
@@ -351,6 +405,27 @@ public class Galeria {
 	        }
 
 	    }
+	 public void almacenarPropietarios() {
+		 try (
+	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
+	                		"./src/data/Propietarios.txt")))) {
+	            String textos = "";
+				for(Propietario propietario : propietarios.values()) {
+					String login= propietario.getLogin();
+	                String contrasena=  propietario.getContrasena();
+	                String correo = propietario.getCorreoElectronico();
+	                int numero= propietario.getNumeroDeTelefono();
+					
+					textos+= login+ ";"+ contrasena+";"+correo+";"+ numero+"\n";
+				}
+				bw.write(textos);
+	            bw.close();
+	        } catch (IOException e) {
+
+	            e.printStackTrace();
+	        }
+		 
+	 }
 		 
 	 
 	 
