@@ -60,6 +60,9 @@ public class Galeria {
 	public Administrador getAdministrador() {
 		return administrador;
 	}
+	public HashMap<String, Artista> getArtistas() {
+		return artistas;
+	}
 	public void setAdministrador(Administrador administrador) {
 		this.administrador= administrador;
 	}
