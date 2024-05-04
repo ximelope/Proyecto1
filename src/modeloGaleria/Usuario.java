@@ -17,6 +17,7 @@ public abstract class Usuario {
 		this.login = login; 
 	}
 	public void historiaDePieza(Pieza pieza) {
+		
 		String propie= pieza.getPropietarios();
 		String[] partes = propie.split("-");
 		

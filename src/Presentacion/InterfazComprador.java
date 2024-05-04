@@ -14,6 +14,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 
 import modeloGaleria.Administrador;
+import modeloGaleria.Comprador;
 import modeloGaleria.Escultura;
 import modeloGaleria.Fotografia;
 
@@ -59,8 +60,7 @@ public class InterfazComprador {
 	public void infoComprador(String usuario, String contraseña) {
 		int opcion;
 		Comprador comprador = galeria.getClientes().get(usuario);
-		galeria.setCliente(comprador);
-		HashMap<String, Comprador> comprador = galeria.getClientes();
+		HashMap<String, Comprador> clientes = galeria.getClientes();
 		do {
 	            System.out.println("Opciones Comprador");
 	            System.out.println("1.) Mostrar la historia de una pieza");
