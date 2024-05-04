@@ -10,14 +10,16 @@ public class Galeria {
 	private HashMap<String, Video> videos  = new HashMap<>();
 	private HashMap<String, Fotografia> fotografias = new HashMap<>();
 	private HashMap<String, Impresion> impresiones = new HashMap<>();
-	private HashMap<String, Pieza> piezas = new HashMap<>();
+	private static HashMap<String, Pieza> piezas = new HashMap<>();
 	private HashMap<String, Subasta> subastas = new HashMap<>();
 	private HashMap<String, Registro> registros = new HashMap<>();
 	private HashMap<String, String> usuarios = new HashMap<>();
 	private HashMap<String, Comprador> clientes = new HashMap<>();
 	private HashMap<String, Venta> ventas = new HashMap<>();
+	private HashMap<String, Artista> artistas = new HashMap<>();
 	private HashMap<String, Propietario> propietarios = new HashMap<>();
 	private  Administrador administrador;
+	
 	public HashMap<String, Escultura> getEsculturas() {
 		return esculturas;
 	}
@@ -33,7 +35,7 @@ public class Galeria {
 	public HashMap<String, Impresion> getImpresiones() {
 		return impresiones;
 	}
-	public HashMap<String, Pieza> getPiezas() {
+	public static HashMap<String, Pieza> getPiezas() {
 		return piezas;
 	}
 	public HashMap<String, Subasta> getSubastas() {
@@ -60,6 +62,9 @@ public class Galeria {
 	public void setAdministrador(Administrador administrador) {
 		this.administrador= administrador;
 	}
+	public HashMap<String, Artista> getArtistas() {
+		return artistas;
+	}
 	
 	 public void cargarInformacion() {
 	        try {
@@ -68,6 +73,7 @@ public class Galeria {
 	            cargarPieza();
 	            cargarPropietario();
 	            cargarComprador();
+	            cargarArtista();
 
 	        } catch (Exception e) {
 	            e.printStackTrace();
@@ -116,6 +122,30 @@ public class Galeria {
 	                int valorMax = Integer.valueOf(partes[4]);
 	                Comprador comprador = crearComprador(login,contrasena,correo, numeroDeTelefono, valorMax);
 	                clientes.put(login,comprador);
+	            }
+
+                linea = br.readLine();
+            br.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
+	 
+	 public void cargarArtista() {
+		 File archivo = new File(
+	         		"../proyecto/src/data/Artista.txt");
+		 System.out.println("Cargando artistas desde Archivo");
+		 try {
+	            BufferedReader br = new BufferedReader(new FileReader(archivo));
+	            String linea;
+	            linea = br.readLine();
+	            while (linea != null) {
+	                String[] partes = linea.split(";");
+	                String nombre = partes[0];
+	                String piezas = partes[1];
+	                Artista artista = crearArtista(nombre, piezas);
+	                artistas.put(nombre,artista);
 	            }
 
                 linea = br.readLine();
@@ -272,6 +302,11 @@ public class Galeria {
 		private Comprador crearComprador (String loginPropietario, String contraseñaPropietario, String correo, int numeroDeTelefono, int valorMax) {
 			Comprador comprador = new Comprador(loginPropietario, contraseñaPropietario, correo, numeroDeTelefono, valorMax);
 			return comprador;
+		}
+		
+		private Artista crearArtista (String nombre, String piezas) {
+			Artista artista = new Artista(nombre, piezas);
+			return artista;
 		}
 		
 		private void añadirPieza (Pieza pieza,HashMap<String, Pieza> piezas) {
