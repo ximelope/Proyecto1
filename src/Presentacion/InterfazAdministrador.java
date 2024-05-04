@@ -100,9 +100,13 @@ public class InterfazAdministrador {
             		for (Pieza pieza: artista.getPiezasLista()) {
             			System.out.println("Pieza: " + pieza.getTitulo());
             			System.out.println("Año: " + pieza.getAno());
-            			System.out.println("Valor de pieza: " + pieza.getValorFijo());
-            			
-            		}
+            			System.out.println("Valor de pieza: " );
+						System.out.println("Fecha de venta: ");
+						String [] fechas = pieza.getFechasVendidas().split("-");
+						for (String fecha: fechas) {
+							System.out.println(fecha);
+							}
+						}
             	}
             	else {
             		System.out.println("Este artista no se encuentra en la base de datos");
