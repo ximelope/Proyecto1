@@ -29,10 +29,10 @@ public class Pintura extends Pieza {
 	
 	//Constructor
 	public Pintura(String tipo, String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoSubasta,
-			int valorFijo, int valorMinimoSubasta, Propietario propietario, float alto, float ancho, String materialBase,
+			int valorFijo, int valorMinimoSubasta, Propietario propietario, String propietarios, String fechas, float alto, float ancho, String materialBase,
 			String tipoPinturas) 
 	{
-		super(tipo, titulo, ano, lugarCreacion, autor, exhibida, permisoSubasta, valorFijo, valorMinimoSubasta, propietario);
+		super(tipo, titulo, ano, lugarCreacion, autor, exhibida, permisoSubasta, valorFijo, valorMinimoSubasta, propietario, propietarios, fechas);
 		this.alto =alto;
 		this.ancho= ancho;
 		this.materialBase= materialBase;

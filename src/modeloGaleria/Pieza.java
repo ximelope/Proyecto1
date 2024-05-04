@@ -12,6 +12,8 @@ public abstract class Pieza {
 	protected int valorFijo;
 	protected int valorMinimoSubasta;
 	protected Propietario propietario;
+	protected String propietarios;
+	protected String fechasVendidas;
 	protected String estadoDePieza;
 	
 	public String getTitulo() {
@@ -44,11 +46,17 @@ public abstract class Pieza {
 	public Propietario getPropietario() {
 		return propietario;
 	}
+	public String getFechasVendidas() {
+		return fechasVendidas;
+	}
 	public String getEstadoDePieza() {
 		return estadoDePieza;
 	}
 	public String getTipo() {
 		return tipo;
+	}
+	public String getPropietarios() {
+		return propietarios;
 	}
 
 	public void cambiarPropietario(Propietario propietario) {
@@ -59,9 +67,10 @@ public abstract class Pieza {
     }
 	
 	
+	
 	// Constructor
 	public Pieza(String tipo,String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoVenta,
-			int valorFijo, int valorMinimoSubasta, Propietario propietario) {
+			int valorFijo, int valorMinimoSubasta, Propietario propietario, String propietarios, String fechas) {
 		this.tipo= tipo;
 		this.titulo = titulo;
 		this.ano = ano;
@@ -73,6 +82,8 @@ public abstract class Pieza {
 		this.valorMinimoSubasta = valorMinimoSubasta;
 		this.propietario = propietario;
 		this.estadoDePieza= "Disponible";
+		this.propietarios= propietarios;
+		this.fechasVendidas= fechas;
 	}
 	
 }
