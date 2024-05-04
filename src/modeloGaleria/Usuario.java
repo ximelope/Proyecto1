@@ -16,5 +16,9 @@ public abstract class Usuario {
 		this.contrasena = contrasena;
 		this.login = login; 
 	}
+	public void historiaDePieza(Pieza pieza) {
+		
+		
+	}
 	
 }

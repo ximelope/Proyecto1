@@ -15,6 +15,7 @@ public abstract class Pieza {
 	protected String propietarios;
 	protected String fechasVendidas;
 	protected String estadoDePieza;
+	protected String precios;
 	
 	public String getTitulo() {
 		return titulo;
@@ -58,6 +59,9 @@ public abstract class Pieza {
 	public String getPropietarios() {
 		return propietarios;
 	}
+	public String getPrecios() {
+		return precios;
+	}
 
 	public void cambiarPropietario(Propietario propietario) {
         this.propietario = propietario;
@@ -70,7 +74,7 @@ public abstract class Pieza {
 	
 	// Constructor
 	public Pieza(String tipo,String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoVenta,
-			int valorFijo, int valorMinimoSubasta, Propietario propietario, String propietarios, String fechas) {
+			int valorFijo, int valorMinimoSubasta, Propietario propietario, String propietarios, String fechas, String precios) {
 		this.tipo= tipo;
 		this.titulo = titulo;
 		this.ano = ano;
@@ -84,6 +88,7 @@ public abstract class Pieza {
 		this.estadoDePieza= "Disponible";
 		this.propietarios= propietarios;
 		this.fechasVendidas= fechas;
+		this.precios = precios;
 	}
 	
 }
