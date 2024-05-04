@@ -55,7 +55,7 @@ public class InterfazAdministrador {
 			System.out.flush();
 		}
 	}
-	public void infoAdmin(String usuario, String contrasena) {
+	public void infoAdmin(String usuario, String contrasena) { 
         int opcion;
         Administrador admin = new Administrador(usuario, contrasena);
         galeria.setAdministrador(admin);
