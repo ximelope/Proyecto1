@@ -101,6 +101,10 @@ public class InterfazAdministrador {
             			System.out.println("Pieza: " + pieza.getTitulo());
             			System.out.println("Año: " + pieza.getAno());
             			System.out.println("Valor de pieza: " );
+						String [] precios = pieza.getPrecios().split("-");
+						for (String precio: precios) {
+							System.out.println(precio);
+							}
 						System.out.println("Fecha de venta: ");
 						String [] fechas = pieza.getFechasVendidas().split("-");
 						for (String fecha: fechas) {
