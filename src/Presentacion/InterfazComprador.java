@@ -56,7 +56,7 @@ public class InterfazComprador {
 		}
 	}
 	
-	public void infoComprador(String usuario, String contraseña, String correo, int numero, int valorMax) {
+	public void infoComprador(String usuario, String contraseña) {
 		int opcion;
 		Comprador comprador = galeria.getClientes().get(usuario);
 		galeria.setCliente(comprador);
@@ -70,12 +70,12 @@ public class InterfazComprador {
 	            opcion = Integer.parseInt(input("\nSeleccione una opcion"));
 	            if (opcion == 2)
 	            {
-	            	System.out.println(piezas.keySet());
+	            	//System.out.println(piezas.keySet());
 	            } else if (opcion == 1) {
 	                //admin.pedir_crearPieza(piezas,  esculturas,pinturas, fotografias, videos, impresiones); // invocar metodos de comprador 
 	                }
 	            else if (opcion == 3) {
-	            	System.out.println(piezas.keySet());
+	            	//System.out.println(piezas.keySet());
 	            	
 	                
 	            } else if (opcion == 4) {
@@ -90,6 +90,16 @@ public class InterfazComprador {
 	            }
 	        } while (opcion != 4);
 	    }
+	public String input(String mensaje) {
+		try {
+			System.out.print(mensaje + ": ");
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			return reader.readLine();
+		} catch (IOException e) {
+			return null;
+		}
+	}
+
 		}
 
 
