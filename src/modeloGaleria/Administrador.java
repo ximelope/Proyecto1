@@ -155,6 +155,22 @@ public class Administrador extends Usuario {
 		comprador.cambiarEstado(devolver);
 		
 	}
+	private void historiaCliente(Comprador comprador,HashMap<String, Propietario> propietarios ) {
+		String piezasHistorial = comprador.getPiezas();
+		String[] partes = piezasHistorial.split("-");
+		System.out.println("Las piezas que ha comprado: ");
+		for (String parte : partes) {
+		    System.out.println(parte);
+		}
+		//implementas con get fechas
+		String nombre = comprador.getLogin();
+		//haces get en propietarios y si esta es porque es propietario de algo
+		//Sacas el valor de la llave que es de tipo propietario
+		//le haces un getPiezas
+		
+		
+		
+	}
 }
 
 

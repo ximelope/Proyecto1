@@ -8,6 +8,7 @@ public class Comprador extends Usuario{
     private int valorMax;
     protected Collection<Pieza> infocompras;
     private String piezas;
+    private String fechas;
 	
     public Comprador (String login, String contraseña, String correo, int numero, int valorMax, String piezas) {
         super(login,contraseña);
