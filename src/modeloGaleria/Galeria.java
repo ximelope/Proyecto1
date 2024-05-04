@@ -1,6 +1,8 @@
 package modeloGaleria;
 import java.io.*;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -10,7 +12,7 @@ public class Galeria {
 	private HashMap<String, Video> videos  = new HashMap<>();
 	private HashMap<String, Fotografia> fotografias = new HashMap<>();
 	private HashMap<String, Impresion> impresiones = new HashMap<>();
-	private static HashMap<String, Pieza> piezas = new HashMap<>();
+	private HashMap<String, Pieza> piezas = new HashMap<>();
 	private HashMap<String, Subasta> subastas = new HashMap<>();
 	private HashMap<String, Registro> registros = new HashMap<>();
 	private HashMap<String, String> usuarios = new HashMap<>();
@@ -35,7 +37,7 @@ public class Galeria {
 	public HashMap<String, Impresion> getImpresiones() {
 		return impresiones;
 	}
-	public static HashMap<String, Pieza> getPiezas() {
+	public HashMap<String, Pieza> getPiezas() {
 		return piezas;
 	}
 	public HashMap<String, Subasta> getSubastas() {
@@ -143,8 +145,26 @@ public class Galeria {
 	            while (linea != null) {
 	                String[] partes = linea.split(";");
 	                String nombre = partes[0];
-	                String piezas = partes[1];
-	                Artista artista = crearArtista(nombre, piezas);
+	                String piezasString = partes[1];
+	                String[] piezasList = piezasString.split("-");
+	                Collection<Pieza> piezasCollection= new ArrayList<>();
+	                if (piezasList.length == 1) {
+			    		boolean piezakey = piezas.containsKey(piezasList[0]);
+			    		if (piezakey == true) {
+			    			Pieza piezaObj = piezas.get(piezasList[0]);
+			    			piezasCollection.add(piezaObj);
+			    		}
+			    	}
+			        if (partes.length != 1 && partes.length != 0) {
+			        	for (String parte: partes) {
+			        		boolean piezakey = piezas.containsKey(parte);
+			        		if (piezakey == true) {
+			        			Pieza piezaObj = piezas.get(parte);
+			        			piezasCollection.add(piezaObj);
+			        		}
+			        	}
+			        }
+	                Artista artista = crearArtista(nombre, piezasCollection);
 	                artistas.put(nombre,artista);
 	            }
 
@@ -153,7 +173,6 @@ public class Galeria {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
     }
 		 
 	 public  void cargarPieza() {
@@ -304,8 +323,8 @@ public class Galeria {
 			return comprador;
 		}
 		
-		private Artista crearArtista (String nombre, String piezas) {
-			Artista artista = new Artista(nombre, piezas);
+		private Artista crearArtista (String nombre, Collection<Pieza> piezasLista) {
+			Artista artista = new Artista(nombre, piezasLista);
 			return artista;
 		}
 		
