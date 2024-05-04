@@ -16,5 +16,15 @@ public abstract class Usuario {
 		this.contrasena = contrasena;
 		this.login = login; 
 	}
+	public void historiaDePieza(Pieza pieza) {
+		String propie= pieza.getPropietarios();
+		String[] partes = propie.split("-");
+		
+
+		for (String parte : partes) {
+		    System.out.println(parte);
+		}
+		
+	}
 	
 }
