@@ -112,6 +112,9 @@ public class InterfazEmpleado {
             	String id = input("Ingrese el id de la subasta a finalizar(00aa, 00bb)");
             	System.out.println(operador.ganador(id));
             }else if (opcion == 4) {
+            	String nombre = input("Ingrese el nombre de la pieza de la que quiere saber la historia: ");
+            	Pieza pieza= piezas.get(nombre);
+            	operador.historiaDePieza(pieza);
      
             }else if (opcion == 5) {
             	
