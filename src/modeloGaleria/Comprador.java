@@ -7,13 +7,15 @@ public class Comprador extends Usuario{
     private String estado;// Verificado, Bloqueado, NoAplica
     private int valorMax;
     protected Collection<Pieza> infocompras;
+    private String piezas;
 	
-    public Comprador (String login, String contraseña, String correo, int numero, int valorMax) {
+    public Comprador (String login, String contraseña, String correo, int numero, int valorMax, String piezas) {
         super(login,contraseña);
         this.correoElectronico= correo;
         this.numeroDeTelefono= numero;
         this.valorMax = valorMax;
         this.estado = "NoAplica";
+        this.piezas= piezas;
     }
 
     public String getCorreoElectronico() {
@@ -30,6 +32,9 @@ public class Comprador extends Usuario{
     }
     public String getEstado() {
         return estado;
+    }
+    public String getPiezas() {
+        return piezas;
     }
     public void cambiarEstado( String nuevoEstado) {
     	this.estado= nuevoEstado;

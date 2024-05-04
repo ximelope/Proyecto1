@@ -97,7 +97,8 @@ public class Galeria {
 	                String contrasena = partes[1];
 	                String correo = partes[2];
 	                int numeroDeTelefono= Integer.valueOf(partes[3]);
-	                Propietario propietario = crearPropietario(login,contrasena,correo, numeroDeTelefono);
+	                String piezas= partes[4];
+	                Propietario propietario = crearPropietario(login,contrasena,correo, numeroDeTelefono, piezas);
 	                propietarios.put(login,propietario);
 	            }
 
@@ -123,7 +124,8 @@ public class Galeria {
 	                String correo = partes[2];
 	                int numeroDeTelefono= Integer.valueOf(partes[3]);
 	                int valorMax = Integer.valueOf(partes[4]);
-	                Comprador comprador = crearComprador(login,contrasena,correo, numeroDeTelefono, valorMax);
+	                String piezas= partes[5];
+	                Comprador comprador = crearComprador(login,contrasena,correo, numeroDeTelefono, valorMax, piezas);
 	                clientes.put(login,comprador);
 	            }
 
@@ -316,13 +318,13 @@ public class Galeria {
 		}
 				
 		private Propietario crearPropietario(String loginPropietario, String contraseñaPropietario,
-				String correo, int numeroDeTelefono) {
-			Propietario propietario = new Propietario(loginPropietario, contraseñaPropietario, correo, numeroDeTelefono);
+				String correo, int numeroDeTelefono, String piezas) {
+			Propietario propietario = new Propietario(loginPropietario, contraseñaPropietario, correo, numeroDeTelefono, piezas);
 			return propietario;
 		}
 
-		private Comprador crearComprador (String loginPropietario, String contraseñaPropietario, String correo, int numeroDeTelefono, int valorMax) {
-			Comprador comprador = new Comprador(loginPropietario, contraseñaPropietario, correo, numeroDeTelefono, valorMax);
+		private Comprador crearComprador (String loginPropietario, String contraseñaPropietario, String correo, int numeroDeTelefono, int valorMax, String piezas) {
+			Comprador comprador = new Comprador(loginPropietario, contraseñaPropietario, correo, numeroDeTelefono, valorMax, piezas);
 			return comprador;
 		}
 		

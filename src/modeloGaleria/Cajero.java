@@ -89,7 +89,7 @@ public class Cajero extends Usuario{
 		String estado = registro.getCliente().getEstado();
 		Comprador cliente = registro.getCliente();
 		if (estado.equals("Verificado")) {
-			Propietario propietario = new Propietario(cliente.getLogin(), cliente.getContrasena(), cliente.getCorreoElectronico(), cliente.getNumeroDeTelefono());
+			Propietario propietario = new Propietario(cliente.getLogin(), cliente.getContrasena(), cliente.getCorreoElectronico(), cliente.getNumeroDeTelefono(), cliente.getPiezas());
 			registro.getPieza().cambiarPropietario(propietario);
 			if (pagos.containsKey(cliente.getLogin())) {
 				pagos.get(cliente.getLogin()).add(registro);
