@@ -15,6 +15,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 
 import modeloGaleria.Administrador;
+import modeloGaleria.Artista;
 import modeloGaleria.Escultura;
 import modeloGaleria.Fotografia;
 
@@ -67,6 +68,7 @@ public class InterfazAdministrador {
         HashMap<String, Fotografia> fotografias = galeria.getFotografias();
         HashMap<String, Video> videos = galeria.getVideos();
         HashMap<String, Impresion> impresiones = galeria.getImpresiones();
+        HashMap<String, Artista> artistas = galeria.getArtistas();
         
         do {
             System.out.println("Opciones Administrador");
@@ -87,7 +89,27 @@ public class InterfazAdministrador {
             	System.out.println(piezas.keySet());
             	
                 
-            } else if (opcion == 6) {
+            } 
+            else if (opcion == 4) {
+            	String nombre = input("Ingrese el nombre del artista");
+            	Boolean verificarNombre = artistas.containsKey(nombre);
+            	if (verificarNombre == true) {
+            		Artista artista = artistas.get(nombre);
+            		System.out.println("Artista: " + artista.getNombre());
+            		System.out.println("Obras del artista: " + artista.getPiezasLista().size());
+            		for (Pieza pieza: artista.getPiezasLista()) {
+            			System.out.println("Pieza: " + pieza.getTitulo());
+            			System.out.println("Año: " + pieza.getAno());
+            			System.out.println("Valor de pieza: " + pieza.getValorFijo());
+            			
+            		}
+            	}
+            	else {
+            		System.out.println("Este artista no se encuentra en la base de datos");
+            	}
+                
+            }
+            else if (opcion == 6) {
                 almacenarEsculturas(esculturas);
                 almacenarPinturas(pinturas);
                 almacenarFotografias(fotografias);
