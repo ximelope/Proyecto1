@@ -6,8 +6,8 @@ public class Impresion extends Pieza {
 	private float ancho;
 	private float alto;
 	public Impresion(String tipo, String titulo, int ano, String lugarCreacion, String autor, boolean exhibida,
-			boolean permisoVenta, int  valorFijo, int valorMinimoSubasta, Propietario propietario, String propietarios, float resolucion, String tecnica, float ancho, float alto) {
-		super(tipo, titulo, ano, lugarCreacion, autor, exhibida, permisoVenta, valorFijo, valorMinimoSubasta, propietario, propietarios );
+			boolean permisoVenta, int  valorFijo, int valorMinimoSubasta, Propietario propietario, String propietarios, String fechas, float resolucion, String tecnica, float ancho, float alto) {
+		super(tipo, titulo, ano, lugarCreacion, autor, exhibida, permisoVenta, valorFijo, valorMinimoSubasta, propietario, propietarios , fechas);
 		this.resolucion= resolucion;
 		this.tecnica= tecnica; 
 		this.ancho= ancho;
