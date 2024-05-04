@@ -16,6 +16,7 @@ import java.util.HashMap;
 
 import modeloGaleria.Administrador;
 import modeloGaleria.Artista;
+import modeloGaleria.Comprador;
 import modeloGaleria.Escultura;
 import modeloGaleria.Fotografia;
 
@@ -69,6 +70,7 @@ public class InterfazAdministrador {
         HashMap<String, Video> videos = galeria.getVideos();
         HashMap<String, Impresion> impresiones = galeria.getImpresiones();
         HashMap<String, Artista> artistas = galeria.getArtistas();
+        HashMap<String, Comprador> clientes = galeria.getClientes();
         
         do {
             System.out.println("Opciones Administrador");
@@ -86,9 +88,13 @@ public class InterfazAdministrador {
                 admin.pedir_crearPieza(propietarios, piezas,  esculturas,pinturas, fotografias, videos, impresiones);
                 }
             else if (opcion == 3) {
-            	System.out.println(piezas.keySet());
-            	
-                
+            	String nombre = input("Ingrese el nombre de la pieza de la que quiere saber la historia: ");
+            	Pieza pieza= piezas.get(nombre);
+            	if (pieza != null) {
+            		admin.historiaDePieza(pieza);	
+            	}else {
+            		System.out.println("La pieza no está dentro del inventario");
+            	}
             } 
             else if (opcion == 4) {
             	String nombre = input("Ingrese el nombre del artista");
@@ -112,6 +118,14 @@ public class InterfazAdministrador {
             		System.out.println("Este artista no se encuentra en la base de datos");
             	}
                 
+            }else if (opcion == 5) {
+            	String nombre = input("Ingrese el nombre de el cliente del que quiere saber la historia: ");
+            	Comprador cliente = clientes.get(nombre);
+            	if (cliente != null) {
+            		admin.historiaCliente(cliente, propietarios, piezas);	
+            	}else {
+            		System.out.println("La pieza no está dentro del inventario");
+            	}
             }
             else if (opcion == 6) {
                 almacenarEsculturas(esculturas);

@@ -75,8 +75,9 @@ public class Galeria {
 	        try {
 
 	            cargarUsuarios();
-	            cargarPieza();
 	            cargarPropietario();
+	            cargarComprador();
+	            cargarPieza();
 
 	        } catch (Exception e) {
 	            e.printStackTrace();
@@ -84,8 +85,7 @@ public class Galeria {
 
 	    }
 	 public void cargarPropietario() {
-		 File archivo = new File(
-	         		"../proyecto/src/data/Propietario.txt");
+		 File archivo = new File("../proyecto/src/data/Propietario.txt");
 		 System.out.println("Cargando propietarios desde Archivo");
 		 try {
 	            BufferedReader br = new BufferedReader(new FileReader(archivo));
@@ -100,9 +100,9 @@ public class Galeria {
 	                String piezas= partes[4];
 	                Propietario propietario = crearPropietario(login,contrasena,correo, numeroDeTelefono, piezas);
 	                propietarios.put(login,propietario);
+	                linea = br.readLine();
 	            }
 
-                linea = br.readLine();
             br.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -125,11 +125,12 @@ public class Galeria {
 	                int numeroDeTelefono= Integer.valueOf(partes[3]);
 	                int valorMax = Integer.valueOf(partes[4]);
 	                String piezas= partes[5];
-	                Comprador comprador = crearComprador(login,contrasena,correo, numeroDeTelefono, valorMax, piezas);
+	                String fechas= partes[6];
+	                Comprador comprador = crearComprador(login,contrasena,correo, numeroDeTelefono, valorMax, piezas, fechas);
 	                clientes.put(login,comprador);
+	                linea = br.readLine();
 	            }
 
-                linea = br.readLine();
             br.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -169,9 +170,9 @@ public class Galeria {
 			        }
 	                Artista artista = crearArtista(nombre, piezasCollection);
 	                artistas.put(nombre,artista);
+	                linea = br.readLine();
 	            }
 
-                linea = br.readLine();
             br.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -323,8 +324,8 @@ public class Galeria {
 			return propietario;
 		}
 
-		private Comprador crearComprador (String loginPropietario, String contraseñaPropietario, String correo, int numeroDeTelefono, int valorMax, String piezas) {
-			Comprador comprador = new Comprador(loginPropietario, contraseñaPropietario, correo, numeroDeTelefono, valorMax, piezas);
+		private Comprador crearComprador (String loginPropietario, String contraseñaPropietario, String correo, int numeroDeTelefono, int valorMax, String piezas, String fechas) {
+			Comprador comprador = new Comprador(loginPropietario, contraseñaPropietario, correo, numeroDeTelefono, valorMax, piezas, fechas);
 			return comprador;
 		}
 		
