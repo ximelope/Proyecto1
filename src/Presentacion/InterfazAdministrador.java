@@ -3,6 +3,7 @@ import modeloGaleria.Galeria;
 import modeloGaleria.Impresion;
 import modeloGaleria.Pieza;
 import modeloGaleria.Pintura;
+import modeloGaleria.Propietario;
 import modeloGaleria.Video;
 
 import java.io.BufferedReader;
@@ -59,6 +60,7 @@ public class InterfazAdministrador {
         int opcion;
         Administrador admin = new Administrador(usuario, contrasena);
         galeria.setAdministrador(admin);
+        HashMap<String, Propietario> propietarios= galeria.getPropietarios();
         HashMap<String, Pieza> piezas = galeria.getPiezas();
         HashMap<String, Escultura> esculturas = galeria.getEsculturas();
         HashMap<String, Pintura> pinturas= galeria.getPinturas();
@@ -79,7 +81,7 @@ public class InterfazAdministrador {
             {
             	System.out.println(piezas.keySet());
             } else if (opcion == 1) {
-                admin.pedir_crearPieza(piezas,  esculturas,pinturas, fotografias, videos, impresiones);
+                admin.pedir_crearPieza(propietarios, piezas,  esculturas,pinturas, fotografias, videos, impresiones);
                 }
             else if (opcion == 3) {
             	System.out.println(piezas.keySet());

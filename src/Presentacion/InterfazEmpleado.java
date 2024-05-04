@@ -8,10 +8,14 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 
+import modeloGaleria.Administrador;
 import modeloGaleria.Cajero;
+import modeloGaleria.Comprador;
 import modeloGaleria.Galeria;
 import modeloGaleria.Operador;
+import modeloGaleria.Pieza;
 import modeloGaleria.Registro;
 import modeloGaleria.Subasta;
 import modeloGaleria.Venta;
@@ -84,68 +88,80 @@ public class InterfazEmpleado {
 	public void infoOperador(String usuario, String contrasena) {
         int opcion;
         Operador operador = new Operador(usuario, contrasena);
+        HashMap<String, Pieza> piezas = galeria.getPiezas();
+        HashMap<String, Subasta> subastas = galeria.getSubastas();
+        HashMap<String, Registro> registros  = galeria.getRegistros();
+        HashMap<String, Comprador> clientes = galeria.getClientes();
+        Administrador administrador = galeria.getAdministrador();
         do {
             System.out.println("Opciones Operador");
-            System.out.println("1.) Cargar Subasta");
-            System.out.println("2.) Crear Subasta");
-            System.out.println("3.) Cargar Registros ");
-            System.out.println("4.) Crear Registros ");
-            System.out.println("5.) Cerrar Subasta (mostar el nuevo dueño) ");
-            System.out.println("6.) Cerrar Sesión ");
+            System.out.println("1.) Crear Subasta");
+            System.out.println("2.) Crear Registros ");
+            System.out.println("3.) Cerrar Subasta (mostar el nuevo dueño) ");
+            System.out.println("4.) Mostrar la historia de una pieza");
+            System.out.println("5.) Mostrar la historia de un artista");
+            System.out.println("6.) Mostrar la historia de un comprador");
+            System.out.println("7.) Cerrar Sesión ");
             opcion = Integer.parseInt(input("\nSeleccione una opcion"));
             if (opcion == 1) {
-                File archivoSubastas= new File(
-                        "./src/data/Subastas.txt");
-                operador.cargarSubastas(archivoSubastas,piezas, subastas);
+            	operador.crearSubasta_pedir(piezas, subastas);
             } else if (opcion == 2) {
-                operador.crearSubasta_pedir(piezas, subastas);
+            	operador.crearRegistro_pedir(piezas, registros, clientes, administrador);
                 
             } else if (opcion == 3) {
-            	File archivoRegistros= new File(
-                        "./src/data/Registros.txt");
-                operador.cargarRegistros(archivoRegistros,piezas, registros,clientes, administrador);
-            }else if (opcion == 4) {
-                operador.crearRegistro_pedir(piezas, registros, clientes, administrador);
-            }else if (opcion == 5) {
             	String id = input("Ingrese el id de la subasta a finalizar(00aa, 00bb)");
             	System.out.println(operador.ganador(id));
+            }else if (opcion == 4) {
+     
+            }else if (opcion == 5) {
+            	
             }else if (opcion == 6) {
+            	
+            }else if (opcion == 7) {
                 almacenarRegistros();
                 almacenarSubastas();
             } else {
                 System.out.println("Opcion Inválida");
             }
-        } while (opcion != 6);
+        } while (opcion != 7);
     }
  public void infoCajero(String usuario, String contrasena) {
         int opcion;
         Cajero admin = new Cajero(usuario, contrasena);
+        HashMap<String, Comprador> clientes = galeria.getClientes();
+        HashMap<String, Venta> ventas = galeria.getVentas();
+        HashMap<String, Pieza> piezas = galeria.getPiezas();
         do {
             System.out.println("Opciones Cajero");
             System.out.println("1.) Crear Venta");
-            System.out.println("2.) Cargar Venta");
-            System.out.println("3.) Confirmar pago-Dar factura ");
-            System.out.println("4.) Cerrar sesión ");
+            System.out.println("2.) Confirmar pago-Dar factura ");
+            System.out.println("3.) Mostrar la historia de una pieza");
+            System.out.println("4.) Mostrar la historia de un artista");
+            System.out.println("5.) Mostrar la historia de un comprador");
+            System.out.println("6.) Cerrar sesión ");
             opcion = Integer.parseInt(input("\nSeleccione una opcion"));
-            if (opcion == 2) {
-                File archivoCajero= new File(
-                        "./src/data/Ventas.txt");
-                admin.cargarVenta(archivoCajero,piezas, clientes, ventas);
-            } else if (opcion == 1) {
-                admin.pedirVenta(piezas, clientes, ventas);
-                
-            } else if (opcion == 3) {
+            if (opcion == 1) {
+            	admin.pedirVenta(piezas, clientes, ventas);
+            } else if (opcion == 2) {
             	String titulo= input("Ingrese el titulo de la pieza: ");
                 int factura = admin.darFactura(titulo,ventas);
                 System.out.println("La factura es: " + factura);
-            }else if (opcion == 4) {
+                
+            } else if (opcion == 3) {
+            
+            } else if (opcion == 4) {
+            	
+            } else if (opcion == 5) {
+            	
+            }else if (opcion == 6) {
                 almacenarVentas();
             } else {
                 System.out.println("Opcion Inválida");
             }
-        } while (opcion != 4);
+        } while (opcion != 6);
     }
  public void almacenarSubastas() {
+	 HashMap<String, Subasta> subastas = galeria.getSubastas();
 	 try (
                 BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
                 		"./src/data/Subastas.txt")))) {
@@ -171,6 +187,7 @@ public class InterfazEmpleado {
 
     }
  public void almacenarRegistros() {
+	 HashMap<String, Registro> registros  = galeria.getRegistros();
 	 try (
                 BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
                 		"./src/data/Registros.txt")))) {
@@ -202,6 +219,7 @@ public class InterfazEmpleado {
  
  
  public void almacenarVentas() {
+	 HashMap<String, Venta> ventas = galeria.getVentas();
 	 try (
                 BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
                 		"./src/data/Ventas.txt")))) {

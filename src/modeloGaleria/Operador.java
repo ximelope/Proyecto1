@@ -130,7 +130,7 @@ public class Operador extends Usuario {
 	
 	
 	private void registrarOferta(HashMap<String, Registro> registros,HashMap<String, Comprador> clientes,String fecha, int monto, String login, String contraseña, String correo,int numero, int valorMax, String idSubasta, Pieza pieza, Administrador administrador)  {
-		Comprador cliente = crearCliente(clientes, login, contraseña, correo, numero, valorMax);
+		Comprador cliente = clientes.get(login);
 		administrador.verificacionDeCliente(cliente);
 		int valorInicial = subastas.get(idSubasta).getMonto();
 		Date fechaInicial = subastas.get(idSubasta).getFechaInicial();
@@ -155,16 +155,6 @@ public class Operador extends Usuario {
 			}
 		}
 		
-	}
-			
-				
-
-	
-
-	private Comprador crearCliente(HashMap<String, Comprador> clientes,String login, String contraseña, String correo,int numero, int valorMax) {
-				Comprador cliente= new Comprador(login, contraseña, correo, numero, valorMax);
-				clientes.put(cliente.getLogin(), cliente);
-				return cliente;
 	}
 }
 

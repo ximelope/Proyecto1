@@ -63,6 +63,10 @@ public class Galeria {
 	public void setAdministrador(Administrador administrador) {
 		this.administrador= administrador;
 	}
+	public Galeria() {
+		Administrador administrador = new Administrador("Sofia","123");
+		this.administrador= administrador;
+	}
 	
 	 public void cargarInformacion() {
 	        try {
