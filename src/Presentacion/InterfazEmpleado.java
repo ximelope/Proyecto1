@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 import modeloGaleria.Administrador;
+import modeloGaleria.Artista;
 import modeloGaleria.Cajero;
 import modeloGaleria.Comprador;
 import modeloGaleria.Galeria;
@@ -134,6 +135,7 @@ public class InterfazEmpleado {
         HashMap<String, Comprador> clientes = galeria.getClientes();
         HashMap<String, Venta> ventas = galeria.getVentas();
         HashMap<String, Pieza> piezas = galeria.getPiezas();
+        HashMap<String, Artista> artistas = galeria.getArtistas();
         do {
             System.out.println("Opciones Cajero");
             System.out.println("1.) Crear Venta");
@@ -153,7 +155,31 @@ public class InterfazEmpleado {
             } else if (opcion == 3) {
             
             } else if (opcion == 4) {
-            	
+            	String nombre = input("Ingrese el nombre del artista");
+            	Boolean verificarNombre = artistas.containsKey(nombre);
+            	if (verificarNombre == true) {
+            		Artista artista = artistas.get(nombre);
+            		System.out.println("Artista: " + artista.getNombre());
+            		System.out.println("Obras del artista: " + artista.getPiezasLista().size());
+            		for (Pieza pieza: artista.getPiezasLista()) {
+            			System.out.println("Pieza: " + pieza.getTitulo());
+            			System.out.println("Año: " + pieza.getAno());
+            			System.out.println("Valor de pieza: " );
+						String [] precios = pieza.getPrecios().split("-");
+						for (String precio: precios) {
+							System.out.println(precio);
+							}
+						System.out.println("Fecha de venta: ");
+						String [] fechas = pieza.getFechasVendidas().split("-");
+						for (String fecha: fechas) {
+							System.out.println(fecha);
+							}
+						}
+            	}
+            	else {
+            		System.out.println("Este artista no se encuentra en la base de datos");
+            	}
+                
             } else if (opcion == 5) {
             	
             }else if (opcion == 6) {

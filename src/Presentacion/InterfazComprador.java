@@ -14,6 +14,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 
 import modeloGaleria.Administrador;
+import modeloGaleria.Artista;
 import modeloGaleria.Comprador;
 import modeloGaleria.Escultura;
 import modeloGaleria.Fotografia;
@@ -61,34 +62,48 @@ public class InterfazComprador {
 		int opcion;
 		Comprador comprador = galeria.getClientes().get(usuario);
 		HashMap<String, Comprador> clientes = galeria.getClientes();
+		HashMap<String, Artista> artistas = galeria.getArtistas();
+		HashMap<String, Pieza> piezas = galeria.getPiezas();
 		do {
 	            System.out.println("Opciones Comprador");
 	            System.out.println("1.) Mostrar la historia de una pieza");
 	            System.out.println("2.) Mostrar la historia de un artista");
-	            System.out.println("3.) Mostrar la historia de un comprador");
-	            System.out.println("4.) Cerrar Sesión");
+	            System.out.println("3.) Cerrar Sesión");
 	            opcion = Integer.parseInt(input("\nSeleccione una opcion"));
-	            if (opcion == 2)
+	            if (opcion == 1)
 	            {
-	            	//System.out.println(piezas.keySet());
-	            } else if (opcion == 1) {
-	                //admin.pedir_crearPieza(piezas,  esculturas,pinturas, fotografias, videos, impresiones); // invocar metodos de comprador 
-	                }
-	            else if (opcion == 3) {
-	            	//System.out.println(piezas.keySet());
 	            	
-	                
-	            } else if (opcion == 4) {
-	                //almacenarEsculturas(esculturas);
-	                //almacenarPinturas(pinturas);
-	                //almacenarFotografias(fotografias);
-	                //almacenarImpresiones(impresiones);
-	                //almacenarVideos(videos);
-	                
-	            } else {
+	            } else if (opcion == 2) {
+	            	String nombre = input("Ingrese el nombre del artista");
+	            	Boolean verificarNombre = artistas.containsKey(nombre);
+	            	if (verificarNombre == true) {
+	            		Artista artista = artistas.get(nombre);
+	            		System.out.println("Artista: " + artista.getNombre());
+	            		System.out.println("Obras del artista: " + artista.getPiezasLista().size());
+	            		for (Pieza pieza: artista.getPiezasLista()) {
+	            			System.out.println("Pieza: " + pieza.getTitulo());
+	            			System.out.println("Año: " + pieza.getAno());
+	            			System.out.println("Valor de pieza: " );
+							String [] precios = pieza.getPrecios().split("-");
+							for (String precio: precios) {
+								System.out.println(precio);
+								}
+							System.out.println("Fecha de venta: ");
+							String [] fechas = pieza.getFechasVendidas().split("-");
+							for (String fecha: fechas) {
+								System.out.println(fecha);
+								}
+							}
+	            	}
+	            	else {
+	            		System.out.println("Este artista no se encuentra en la base de datos");
+	            	}
+	                            	
+	            }
+	             else {
 	                System.out.println("Opcion Inválida");
 	            }
-	        } while (opcion != 4);
+	        } while (opcion != 3);
 	    }
 	public String input(String mensaje) {
 		try {

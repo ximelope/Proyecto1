@@ -43,8 +43,10 @@ public class Venta {
         if (pieza.isPermisoVenta() == true && pieza.getEstadoDePieza().equals("Disponible")){
             pieza.cambiarEstado("Vendida");  
             return true;
+        } else if (pieza.isPermisoVenta() == false || !pieza.getEstadoDePieza().equals("Disponible")) {
+            pieza.cambiarEstado("No disponible");
         }
-		return false;
+        return false;
     }
    
 }
