@@ -122,8 +122,8 @@ public class InterfazEmpleado {
             }else if (opcion == 6) {
             	
             }else if (opcion == 7) {
-                almacenarRegistros();
-                almacenarSubastas();
+                operador.almacenarRegistros(registros);
+                operador.almacenarSubastas(subastas);
             } else {
                 System.out.println("Opcion Inválida");
             }
@@ -183,89 +183,11 @@ public class InterfazEmpleado {
             } else if (opcion == 5) {
             	
             }else if (opcion == 6) {
-                almacenarVentas();
+                admin.almacenarVentas(ventas);
             } else {
                 System.out.println("Opcion Inválida");
             }
         } while (opcion != 6);
     }
- public void almacenarSubastas() {
-	 HashMap<String, Subasta> subastas = galeria.getSubastas();
-	 try (
-                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-                		"./src/data/Subastas.txt")))) {
-            String textos = "";
-			for(Subasta pieza : subastas.values()) {
-				String id = pieza.getId();
-                Date fechaInicial= pieza.getFechaInicial();
-                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-                String fecha= sdf.format(fechaInicial);
-      
-                Date fechaFinal = pieza.getFechaFinal();
-                String fechaF= sdf.format(fechaFinal);
-                String titulo= pieza.getPieza().getTitulo();
-				
-				textos+= id + ";"+ fecha+";"+fechaF+";"+ titulo +"\n";
-			}
-			bw.write(textos);
-            bw.close();
-        } catch (IOException e) {
-
-            e.printStackTrace();
-        }
-
-    }
- public void almacenarRegistros() {
-	 HashMap<String, Registro> registros  = galeria.getRegistros();
-	 try (
-                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-                		"./src/data/Registros.txt")))) {
-            String textos = "";
-			for(Registro pieza : registros.values()) {
-                Date fecha = pieza.getFecha();
-                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy"); // Define el formato de fecha que deseas
-                String fechaString = sdf.format(fecha);
-                float monto= pieza.getMonto();
-                String login = pieza.getCliente().getLogin();
-                String contrasena= pieza.getCliente().getContrasena();
-                String correo= pieza.getCliente().getCorreoElectronico();
-                int numero= pieza.getCliente().getNumeroDeTelefono();
-                int valorMax = pieza.getCliente().getValorMax();
-                String titulo= pieza.getPieza().getTitulo();
-                String idSubasta= pieza.getSubasta().getId();
-				
-                
-				textos+= fechaString +";"+ monto + ";"+ login+";"+ contrasena+";"+correo +";"+ numero+ ";"+valorMax+";"+titulo+";"+idSubasta+"\n";
-			}
-			bw.write(textos);
-            bw.close();
-        } catch (IOException e) {
-
-            e.printStackTrace();
-        }
-
-    }
- 
- 
- public void almacenarVentas() {
-	 HashMap<String, Venta> ventas = galeria.getVentas();
-	 try (
-                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-                		"./src/data/Ventas.txt")))) {
-            String textos = "";
-			for(Venta pieza : ventas.values()) {
-				String titulo= pieza.getPieza().getTitulo();
-                String fecha=  pieza.getFechaVenta();
-                String login= "Nicolas";
-				
-				textos+= titulo+ ";"+ fecha+";"+login+"\n";
-			}
-			bw.write(textos);
-            bw.close();
-        } catch (IOException e) {
-
-            e.printStackTrace();
-        }
-
-    }
 }
+

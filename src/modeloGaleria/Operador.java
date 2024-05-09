@@ -1,8 +1,10 @@
 package modeloGaleria;
 import java.text.SimpleDateFormat;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.ParseException;
@@ -155,6 +157,61 @@ public class Operador extends Usuario {
 			}
 		}
 		
+		
 	}
+	 public void almacenarSubastas(HashMap<String, Subasta> subastas) {
+		 try (
+	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
+	                		"./src/data/Subastas.txt")))) {
+	            String textos = "";
+				for(Subasta pieza : subastas.values()) {
+					String id = pieza.getId();
+	                Date fechaInicial= pieza.getFechaInicial();
+	                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+	                String fecha= sdf.format(fechaInicial);
+	      
+	                Date fechaFinal = pieza.getFechaFinal();
+	                String fechaF= sdf.format(fechaFinal);
+	                String titulo= pieza.getPieza().getTitulo();
+					
+					textos+= id + ";"+ fecha+";"+fechaF+";"+ titulo +"\n";
+				}
+				bw.write(textos);
+	            bw.close();
+	        } catch (IOException e) {
+
+	            e.printStackTrace();
+	        }
+
+	    }
+	 public void almacenarRegistros(HashMap<String, Registro> registros) {
+		 try (
+	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
+	                		"./src/data/Registros.txt")))) {
+	            String textos = "";
+				for(Registro pieza : registros.values()) {
+	                Date fecha = pieza.getFecha();
+	                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy"); // Define el formato de fecha que deseas
+	                String fechaString = sdf.format(fecha);
+	                float monto= pieza.getMonto();
+	                String login = pieza.getCliente().getLogin();
+	                String contrasena= pieza.getCliente().getContrasena();
+	                String correo= pieza.getCliente().getCorreoElectronico();
+	                int numero= pieza.getCliente().getNumeroDeTelefono();
+	                int valorMax = pieza.getCliente().getValorMax();
+	                String titulo= pieza.getPieza().getTitulo();
+	                String idSubasta= pieza.getSubasta().getId();
+					
+	                
+					textos+= fechaString +";"+ monto + ";"+ login+";"+ contrasena+";"+correo +";"+ numero+ ";"+valorMax+";"+titulo+";"+idSubasta+"\n";
+				}
+				bw.write(textos);
+	            bw.close();
+	        } catch (IOException e) {
+
+	            e.printStackTrace();
+	        }
+
+	    }
 }
 

@@ -75,8 +75,10 @@ public class Galeria {
 	        try {
 
 	            cargarUsuarios();
-	            cargarPieza();
 	            cargarPropietario();
+	            cargarPieza();
+	            cargarComprador();
+	            cargarArtista();
 
 	        } catch (Exception e) {
 	            e.printStackTrace();
@@ -100,9 +102,9 @@ public class Galeria {
 	                String piezas= partes[4];
 	                Propietario propietario = crearPropietario(login,contrasena,correo, numeroDeTelefono, piezas);
 	                propietarios.put(login,propietario);
+	                linea = br.readLine();
 	            }
 
-                linea = br.readLine();
             br.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -127,9 +129,9 @@ public class Galeria {
 	                String piezas= partes[5];
 	                Comprador comprador = crearComprador(login,contrasena,correo, numeroDeTelefono, valorMax, piezas);
 	                clientes.put(login,comprador);
+	                linea = br.readLine();
 	            }
 
-                linea = br.readLine();
             br.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -169,9 +171,9 @@ public class Galeria {
 			        }
 	                Artista artista = crearArtista(nombre, piezasCollection);
 	                artistas.put(nombre,artista);
+	                linea = br.readLine();
 	            }
 
-                linea = br.readLine();
             br.close();
         } catch (Exception e) {
             e.printStackTrace();

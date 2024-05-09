@@ -1,7 +1,9 @@
 package modeloGaleria;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.ParseException;
@@ -101,6 +103,27 @@ public class Cajero extends Usuario{
 		}
 		
 	}
+	 public void almacenarVentas(HashMap<String, Venta> ventas) {
+		 try (
+	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
+	                		"./src/data/Ventas.txt")))) {
+	            String textos = "";
+				for(Venta pieza : ventas.values()) {
+					String titulo= pieza.getPieza().getTitulo();
+	                String fecha=  pieza.getFechaVenta();
+	                String login= "Nicolas";
+					
+					textos+= titulo+ ";"+ fecha+";"+login+"\n";
+				}
+				bw.write(textos);
+	            bw.close();
+	        } catch (IOException e) {
+
+	            e.printStackTrace();
+	        }
+
+	    }
+	
 	
 	
 }

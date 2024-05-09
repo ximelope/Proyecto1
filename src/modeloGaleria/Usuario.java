@@ -34,7 +34,7 @@ public abstract class Usuario {
 		}
 		System.out.println("Esta pieza ha sido vendida en estas fechas : ");
 		String fechas= pieza.getFechasVendidas();
-		String[] pre = fechas.split("-");
+		String[] pre = fechas.split(",");
 		for (String par : pre) {
 		    System.out.println(par);
 		}
