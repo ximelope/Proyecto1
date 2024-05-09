@@ -10,14 +10,13 @@ public class Comprador extends Usuario{
     private String piezas;
     private String fechas;
 	
-    public Comprador (String login, String contraseña, String correo, int numero, int valorMax, String piezas, String fechas) {
+    public Comprador (String login, String contraseña, String correo, int numero, int valorMax, String piezas) {
         super(login,contraseña);
         this.correoElectronico= correo;
         this.numeroDeTelefono= numero;
         this.valorMax = valorMax;
         this.estado = "NoAplica";
         this.piezas= piezas;
-        this.fechas= fechas;
     }
 
     public String getCorreoElectronico() {
@@ -37,9 +36,6 @@ public class Comprador extends Usuario{
     }
     public String getPiezas() {
         return piezas;
-    }
-    public String getFechas() {
-        return fechas;
     }
     public void cambiarEstado( String nuevoEstado) {
     	this.estado= nuevoEstado;

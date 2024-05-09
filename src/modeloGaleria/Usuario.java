@@ -18,7 +18,7 @@ public abstract class Usuario {
 	}
 	public void historiaDePieza(Pieza pieza) {
 		System.out.println("Los datos básicos de la pieza son: ");
-		System.out.println("Tipo: "+ pieza.getTipo()+"\n"+"Nombre: "+ pieza.getTitulo()+ "\n"+"Autor: " + pieza.getAutor()+ "\n"+"Año de creación: "+pieza.getAno()+ "\n"+"Lugar de creación: "+ pieza.getLugarCreacion()+ "\n"+"Propietario actual: " + pieza.getPropietario().getLogin()) ;
+		System.out.println("Tipo: "+ pieza.getTipo()+", Nombre: "+ pieza.getTitulo()+ ", Autor: " + pieza.getAutor()+ ", Año de creación: "+pieza.getAno()+ ", Lugar de creación: "+ pieza.getLugarCreacion()+ ", Propietario actual: " + pieza.getPropietario()) ;
 		
 		String propie= pieza.getPropietarios();
 		String[] partes = propie.split("-");
@@ -34,7 +34,7 @@ public abstract class Usuario {
 		}
 		System.out.println("Esta pieza ha sido vendida en estas fechas : ");
 		String fechas= pieza.getFechasVendidas();
-		String[] pre = fechas.split(",");
+		String[] pre = fechas.split("-");
 		for (String par : pre) {
 		    System.out.println(par);
 		}

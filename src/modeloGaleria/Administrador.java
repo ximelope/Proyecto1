@@ -155,39 +155,22 @@ public class Administrador extends Usuario {
 		comprador.cambiarEstado(devolver);
 		
 	}
-	@SuppressWarnings("unlikely-arg-type")
-	public void historiaCliente(Comprador comprador,HashMap<String, Propietario> propietarios,HashMap<String, Pieza> piezas ) {
+	private void historiaCliente(Comprador comprador,HashMap<String, Propietario> propietarios ) {
 		String piezasHistorial = comprador.getPiezas();
 		String[] partes = piezasHistorial.split("-");
 		System.out.println("Las piezas que ha comprado: ");
 		for (String parte : partes) {
 		    System.out.println(parte);
 		}
-		String fechasHistorial = comprador.getFechas();
-		String [] dates = fechasHistorial.split(",");
-		System.out.println("Las fechas de las piezas que ha comprado: ");
-		for (String parte : dates) {
-		    System.out.println(parte);
-		}
+		//implementas con get fechas
 		String nombre = comprador.getLogin();
-		int total= 0;
-		if(propietarios.containsKey(nombre)){
-			Propietario encontrados = propietarios.get(nombre);
-			String pieza = encontrados.getPiezas();
-			String[] piezass = pieza.split("-");
-			System.out.println("Las piezas que tiene ahorita son: ");
-			for (String pedazo : piezass) {
-				total+= piezas.get(piezass).getValorFijo();
-			    System.out.println(pedazo);
-			}
-		}else {
-			System.out.println("El comprador no es propietario de nada: ");
-		}
-		System.out.println("El precio total de su colección es de: ");
-		System.out.println(total);
+		//haces get en propietarios y si esta es porque es propietario de algo
+		//Sacas el valor de la llave que es de tipo propietario
+		//le haces un getPiezas
+		
+		
 		
 	}
-	
 }
 
 
