@@ -86,7 +86,9 @@ public class InterfazAdministrador {
                 admin.pedir_crearPieza(propietarios, piezas,  esculturas,pinturas, fotografias, videos, impresiones);
                 }
             else if (opcion == 3) {
-            	System.out.println(piezas.keySet());
+            	String nombre = input("Ingrese el titulo de la obra");
+            	Pieza pieza = piezas.get(nombre);
+            	admin.historiaDePieza(pieza);
             	
                 
             } 

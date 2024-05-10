@@ -1,23 +1,12 @@
 package Presentacion;
 import modeloGaleria.Galeria;
-import modeloGaleria.Impresion;
 import modeloGaleria.Pieza;
-import modeloGaleria.Pintura;
-import modeloGaleria.Video;
-
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
-
-import modeloGaleria.Administrador;
 import modeloGaleria.Artista;
 import modeloGaleria.Comprador;
-import modeloGaleria.Escultura;
-import modeloGaleria.Fotografia;
 
 public class InterfazComprador {
 	Galeria galeria = new Galeria();

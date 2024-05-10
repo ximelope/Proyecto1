@@ -87,7 +87,7 @@ public class Galeria {
 	    }
 	 public void cargarPropietario() {
 		 File archivo = new File(
-	         		"../proyecto/src/data/Propietario.txt");
+	         		"./src/data/Propietario.txt");
 		 System.out.println("Cargando propietarios desde Archivo");
 		 try {
 	            BufferedReader br = new BufferedReader(new FileReader(archivo));
@@ -113,7 +113,7 @@ public class Galeria {
     }
 	 public void cargarComprador() {
 		 File archivo = new File(
-	         		"../proyecto/src/data/Comprador.txt");
+	         		"./src/data/Comprador.txt");
 		 System.out.println("Cargando compradores desde Archivo");
 		 try {
 	            BufferedReader br = new BufferedReader(new FileReader(archivo));
@@ -142,7 +142,7 @@ public class Galeria {
 	 
 	 public void cargarArtista() {
 		 File archivo = new File(
-	         		"../proyecto/src/data/Artista.txt");
+	         		"./src/data/Artista.txt");
 		 System.out.println("Cargando artistas desde Archivo");
 		 try {
 	            BufferedReader br = new BufferedReader(new FileReader(archivo));
@@ -183,7 +183,7 @@ public class Galeria {
 		 
 	 public  void cargarPieza() {
 		    File archivo = new File(
-         		"../proyecto/src/data/Piezas.txt");
+         		"./src/data/Piezas.txt");
 	        System.out.println("Cargando piezas desde Archivo");
 	        try {
 	            BufferedReader br = new BufferedReader(new FileReader(archivo));
