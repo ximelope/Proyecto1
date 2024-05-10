@@ -21,7 +21,7 @@ class administradorTest {
 	}
 
 	@Test
-	void test() {
+	void testAñadirPieza() {
 		HashMap<String, Pieza> piezas = new HashMap<>();
 		Propietario propietario = new Propietario("jujujuli","123", "lauraj@gmail.com", 1234567890, "Ayuda" );
 		String name = propietario.getLogin();
@@ -29,5 +29,7 @@ class administradorTest {
 		admin.añadirPieza(fotografia,piezas);
 		assertTrue(piezas.containsKey(fotografia.getTitulo()));
 	}
+	
+	
 
 }
