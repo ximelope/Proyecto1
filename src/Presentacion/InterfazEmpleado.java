@@ -153,6 +153,30 @@ public class InterfazEmpleado {
                 System.out.println("La factura es: " + factura);
                 
             } else if (opcion == 3) {
+            	//Ver si funciona
+            	String nombre = input("Ingrese el titulo de la obra");
+            	Pieza pieza = piezas.get(nombre);
+            	System.out.println("Los datos básicos de la pieza son: ");
+        		System.out.println("Tipo: "+ pieza.getTipo()+", Nombre: "+ pieza.getTitulo()+ ", Autor: " + pieza.getAutor()+ ", Año de creación: "+pieza.getAno()+ ", Lugar de creación: "+ pieza.getLugarCreacion()+ ", Propietario actual: " + pieza.getPropietario().getLogin()) ;
+        		
+        		String propie= pieza.getPropietarios();
+        		String[] partes = propie.split("-");
+        		System.out.println("Los dueños de esta pieza han sido: ");
+        		for (String parte : partes) {
+        		    System.out.println(parte);
+        		}
+        		System.out.println("Esta pieza ha sido vendida por : ");
+        		String precios= pieza.getPrecios();
+        		String[] precio = precios.split("-");
+        		for (String par : precio) {
+        		    System.out.println(par+ " pesos ");
+        		}
+        		System.out.println("Esta pieza ha sido vendida en estas fechas : ");
+        		String fechas= pieza.getFechasVendidas();
+        		String[] pre = fechas.split(",");
+        		for (String par : pre) {
+        		    System.out.println(par);
+        		}
             
             } else if (opcion == 4) {
             	String nombre = input("Ingrese el nombre del artista");

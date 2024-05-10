@@ -8,7 +8,7 @@ public class Artista{
 	
     public Artista (String nombre, Collection<Pieza> piezasLista) {
         this.nombre = nombre;
-        this.piezasLista = new ArrayList<>();
+        this.piezasLista = piezasLista; // Asigna la colección pasada al constructor a piezasLista
     }
 
     public String getNombre() {

@@ -89,14 +89,13 @@ public class InterfazAdministrador {
             	String nombre = input("Ingrese el titulo de la obra");
             	Pieza pieza = piezas.get(nombre);
             	admin.historiaDePieza(pieza);
-            	
                 
             } 
             else if (opcion == 4) {
             	String nombre = input("Ingrese el nombre del artista");
             	Boolean verificarNombre = artistas.containsKey(nombre);
             	if (verificarNombre == true) {
-            		Artista artista = artistas.get(nombre);
+            		Artista artista = artistas.get(nombre);            	
             		System.out.println("Artista: " + artista.getNombre());
             		System.out.println("Obras del artista: " + artista.getPiezasLista().size());
             		for (Pieza pieza: artista.getPiezasLista()) {
