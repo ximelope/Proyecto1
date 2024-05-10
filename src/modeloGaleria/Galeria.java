@@ -154,15 +154,13 @@ public class Galeria {
 	                String piezasString = partes[1];
 	                String[] piezasList = piezasString.split("-");
 	                Collection<Pieza> piezasCollection= new ArrayList<>();
-	                
 	                for (String parte: piezasList) {
 		        		boolean piezakey = piezas.containsKey(parte);
 		        		if (piezakey == true) {
 		        			Pieza piezaObj = piezas.get(parte);
 		        			piezasCollection.add(piezaObj);
 		        		}
-		        	
-			        }
+		        	}
 	                Artista artista = crearArtista(nombre, piezasCollection);
 	                artistas.put(nombre,artista);
 	                linea = br.readLine();
