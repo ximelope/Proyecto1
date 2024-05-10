@@ -131,7 +131,9 @@ public class Administrador extends Usuario {
 			Impresion pie = new Impresion(tipo, titulo, ano, lugarCreacion, autor, exhibida, permisoVenta,valorFijo, valorMinimoSubasta, propietario,propie, fechasVendidas,precios,  resolucion, metodo, ancho,alto);
 			impresiones.put(pie.getTitulo(), pie);
 			return pieza;
-		}	private void añadirPieza (Pieza pieza,HashMap<String, Pieza> piezas) {
+			
+			
+		}	public void añadirPieza (Pieza pieza,HashMap<String, Pieza> piezas) {
 		piezas.put(pieza.getTitulo(), pieza);
 		
 	}
@@ -274,20 +276,34 @@ public class Administrador extends Usuario {
 	        }
 
 	 }
-	private void historiaCliente(Comprador comprador,HashMap<String, Propietario> propietarios ) {
+	public void historiaCliente(Comprador comprador,HashMap<String, Propietario> propietarios, HashMap<String, Pieza> coleccionPiezas) {
+		int total = 0;
 		String piezasHistorial = comprador.getPiezas();
 		String[] partes = piezasHistorial.split("-");
 		System.out.println("Las piezas que ha comprado: ");
 		for (String parte : partes) {
 		    System.out.println(parte);
 		}
-		//implementas con get fechas
+		String fechasHistorial = comprador.getFechas();
+		String[] primero = fechasHistorial.split(",");
+		System.out.println("Las fechas en las que ha comprado las piezas son : ");
+		for (String pedazo : primero) {
+		    System.out.println(pedazo);
+		}
 		String nombre = comprador.getLogin();
-		//haces get en propietarios y si esta es porque es propietario de algo
-		//Sacas el valor de la llave que es de tipo propietario
-		//le haces un getPiezas
-		
-		
+		Propietario propietario = propietarios.get(nombre);
+		if (propietario!= null) {
+			String piezas = propietario.getPiezas();
+			String[] coleccion = piezas.split("-");
+			System.out.println("Las piezas de las que es propietario son : ");
+			for (String pieza : coleccion) {
+			    System.out.println(pieza);
+			    total+= coleccionPiezas.get(pieza).getValorFijo();
+			}
+			
+		}
+		System.out.println("El valor de su coleccion es: ");
+		System.out.println(total);
 		
 	}
 }

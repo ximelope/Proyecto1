@@ -18,7 +18,7 @@ public abstract class Usuario {
 	}
 	public void historiaDePieza(Pieza pieza) {
 		System.out.println("Los datos básicos de la pieza son: ");
-		System.out.println("Tipo: "+ pieza.getTipo()+", Nombre: "+ pieza.getTitulo()+ ", Autor: " + pieza.getAutor()+ ", Año de creación: "+pieza.getAno()+ ", Lugar de creación: "+ pieza.getLugarCreacion()+ ", Propietario actual: " + pieza.getPropietario()) ;
+		System.out.println("Tipo: "+ pieza.getTipo()+", Nombre: "+ pieza.getTitulo()+ ", Autor: " + pieza.getAutor()+ ", Año de creación: "+pieza.getAno()+ ", Lugar de creación: "+ pieza.getLugarCreacion()+ ", Propietario actual: " + pieza.getPropietario().getLogin()) ;
 		
 		String propie= pieza.getPropietarios();
 		String[] partes = propie.split("-");
@@ -38,8 +38,6 @@ public abstract class Usuario {
 		for (String par : pre) {
 		    System.out.println(par);
 		}
-		
 	}
-	
-	
+
 }

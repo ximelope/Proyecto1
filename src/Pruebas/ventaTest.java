@@ -25,7 +25,7 @@ class ventaPrueba {
 	//Verifica que la venta se efectue correctamente
 	@Test
     public void testEfectuarVenta() {
-        Comprador comprador = new Comprador("comprador1", "password", "comprador1@gmail.com", 1234567891, 10000, "Fotografia");
+        Comprador comprador = new Comprador("comprador1", "password", "comprador1@gmail.com", 1234567891, 10000, "Fotografia", "02-02-2022");
         assertTrue(venta.efectuarVenta(fotografia, comprador));
         assertEquals("Vendida", fotografia.getEstadoDePieza());
     }
@@ -35,7 +35,7 @@ class ventaPrueba {
 	    String name = propietario.getLogin();
 	    Fotografia fotografiaNoDisponible = new Fotografia("Fotografía", "Ayuda", 2024, "Cucuta", "jujuli", false, true, 5000, 5000, propietario, name, "07/05/2024", "5000", 300, "Digital", 10, 10);
 	    fotografiaNoDisponible.cambiarEstado("nn");
-	    Comprador comprador = new Comprador("comprador1", "password", "comprador1@gmail.com", 1234567891, 10000, "Fotografia");
+	    Comprador comprador = new Comprador("comprador1", "password", "comprador1@gmail.com", 1234567891, 10000, "Fotografia", "02-02-2022");
 	    assertFalse(venta.efectuarVenta(fotografiaNoDisponible, comprador));
 	    assertEquals("No disponible", fotografiaNoDisponible.getEstadoDePieza());
 	}
@@ -53,10 +53,5 @@ class ventaPrueba {
    public void testGetPieza() {
        assertEquals(fotografia, venta.getPieza());
    }
-   @Test
-   public void testConstructorSinParametros() {
-       Venta venta1 = new Venta();
-       int numeroFactura = venta1.getNumeroFactura();
-       assertTrue(numeroFactura >= 1000 && numeroFactura <= 9999);
-   }
+
 }

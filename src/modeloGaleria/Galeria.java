@@ -127,7 +127,8 @@ public class Galeria {
 	                int numeroDeTelefono= Integer.valueOf(partes[3]);
 	                int valorMax = Integer.valueOf(partes[4]);
 	                String piezas= partes[5];
-	                Comprador comprador = crearComprador(login,contrasena,correo, numeroDeTelefono, valorMax, piezas);
+	                String fechas= partes[6];
+	                Comprador comprador = crearComprador(login,contrasena,correo, numeroDeTelefono, valorMax, piezas, fechas);
 	                clientes.put(login,comprador);
 	                linea = br.readLine();
 	            }
@@ -325,8 +326,8 @@ public class Galeria {
 			return propietario;
 		}
 
-		private Comprador crearComprador (String loginPropietario, String contraseñaPropietario, String correo, int numeroDeTelefono, int valorMax, String piezas) {
-			Comprador comprador = new Comprador(loginPropietario, contraseñaPropietario, correo, numeroDeTelefono, valorMax, piezas);
+		private Comprador crearComprador (String loginPropietario, String contraseñaPropietario, String correo, int numeroDeTelefono, int valorMax, String piezas,String fechas) {
+			Comprador comprador = new Comprador(loginPropietario, contraseñaPropietario, correo, numeroDeTelefono, valorMax, piezas, fechas);
 			return comprador;
 		}
 		
