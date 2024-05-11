@@ -84,6 +84,11 @@ public class InterfazAdministrador {
             	System.out.println(piezas.keySet());
             } else if (opcion == 1) {
                 admin.pedir_crearPieza(propietarios, piezas,  esculturas,pinturas, fotografias, videos, impresiones);
+                admin.almacenarEsculturas(esculturas);
+                admin.almacenarPinturas(pinturas);
+                admin.almacenarFotografias(fotografias);
+                admin.almacenarImpresiones(impresiones);
+                admin.almacenarVideos(videos);
                 }
             else if (opcion == 3) {
             	String nombre = input("Ingrese el titulo de la obra");

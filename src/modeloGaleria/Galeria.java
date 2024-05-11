@@ -73,10 +73,23 @@ public class Galeria {
 	
 	 public void cargarInformacion() {
 	        try {
-
+	        	File videos = new File(
+	             		"./src/data/Videos.txt");
+	        	File fotografias = new File(
+	             		"./src/data/Fotografias.txt");
+	        	File impresiones = new File(
+	             		"./src/data/Impresiones.txt");
+	        	File pinturas = new File(
+	             		"./src/data/Pinturas.txt");
+	        	File esculturas = new File(
+	             		"./src/data/Esculturas.txt");
 	            cargarUsuarios();
 	            cargarPropietario();
-	            cargarPieza();
+	            cargarPieza(videos);
+	            cargarPieza(fotografias);
+	            cargarPieza(impresiones);
+	            cargarPieza(pinturas);
+	            cargarPieza(esculturas);
 	            cargarComprador();
 	            cargarArtista();
 
@@ -181,9 +194,7 @@ public class Galeria {
         }
     }
 		 
-	 public  void cargarPieza() {
-		    File archivo = new File(
-         		"./src/data/Piezas.txt");
+	 public  void cargarPieza(File archivo) {
 	        System.out.println("Cargando piezas desde Archivo");
 	        try {
 	            BufferedReader br = new BufferedReader(new FileReader(archivo));
