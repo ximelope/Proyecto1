@@ -7,7 +7,7 @@ public class Fotografia extends Pieza {
 	private float ancho;
 	private float alto;
 	public Fotografia(String tipo, String titulo, int ano, String lugarCreacion, String autor, boolean exhibida,
-			boolean permisoVenta, int valorFijo, int valorMinimoSubasta, Propietario propietario, String fechas, String propietarios,String precio,
+			boolean permisoVenta, int valorFijo, int valorMinimoSubasta, Propietario propietario, String propietarios, String fechas, String precio,
 			float resolucion, String tecnica, float ancho, float alto) {
 		super(tipo, titulo, ano, lugarCreacion, autor, exhibida, permisoVenta, valorFijo, valorMinimoSubasta, propietario, propietarios, fechas, precio);
 		this.resolucion= resolucion;

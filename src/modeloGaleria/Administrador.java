@@ -74,7 +74,7 @@ public class Administrador extends Usuario {
        
 	}
 		
-		public Pieza crearPiezaEscultura(HashMap<String, Propietario> propietarios,HashMap<String, Escultura> esculturas, String tipo,String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoVenta,
+		protected Pieza crearPiezaEscultura(HashMap<String, Propietario> propietarios,HashMap<String, Escultura> esculturas, String tipo,String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoVenta,
 				int valorFijo, int valorMinimoSubasta, String loginPropietario, String fechasVendidas,
 				String propie, String precios, float alto, float ancho, float profundidad, String material, float peso, boolean electricidad, 
 				String otros) {
@@ -87,10 +87,10 @@ public class Administrador extends Usuario {
 			
 			
 			esculturas.put(pie.getTitulo(), pie);
-			return pieza;
+			return(pieza);
 			}
 			
-		public Pieza crearPiezaPintura(HashMap<String, Propietario> propietarios,HashMap<String, Pintura> pinturas,String tipo,String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoVenta,
+		protected Pieza crearPiezaPintura(HashMap<String, Propietario> propietarios,HashMap<String, Pintura> pinturas,String tipo,String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoVenta,
 				int  valorFijo, int valorMinimoSubasta, String loginPropietario, String fechasVendidas,
 				String propie, String precios, float alto, float ancho, String materialBase, String tipoPinturas) {
 			Propietario propietario = propietarios.get(loginPropietario);
@@ -102,7 +102,7 @@ public class Administrador extends Usuario {
 			return pieza;
 			
 		}
-		public Pieza crearPiezaVideo(HashMap<String, Propietario> propietarios,HashMap<String, Video> videos,String tipo,String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoVenta,
+		protected Pieza crearPiezaVideo(HashMap<String, Propietario> propietarios,HashMap<String, Video> videos,String tipo,String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoVenta,
 				int valorFijo, int valorMinimoSubasta, String loginPropietario, String fechasVendidas,
 				String propie, String precios, float duracion, boolean necesidadElectricidad) {
 			Propietario propietario = propietarios.get(loginPropietario);
@@ -112,7 +112,7 @@ public class Administrador extends Usuario {
 			return pieza;
 			
 		}
-		public Pieza crearPiezaFotografia(HashMap<String, Propietario> propietarios,HashMap<String, Fotografia> fotografias,String tipo, String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoVenta,
+		protected Pieza crearPiezaFotografia(HashMap<String, Propietario> propietarios,HashMap<String, Fotografia> fotografias,String tipo, String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoVenta,
 				int valorFijo, int valorMinimoSubasta, String loginPropietario, String fechasVendidas,
 				String propie, String precios, float resolucion,String metodo, float ancho, float alto) {
 			Propietario propietario = propietarios.get(loginPropietario);
@@ -123,7 +123,7 @@ public class Administrador extends Usuario {
 
 			
 		}
-		public Pieza crearPiezaImpresion(HashMap<String, Propietario> propietarios,HashMap<String, Impresion> impresiones,String tipo, String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoVenta,
+		protected Pieza crearPiezaImpresion(HashMap<String, Propietario> propietarios,HashMap<String, Impresion> impresiones,String tipo, String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoVenta,
 				int valorFijo, int valorMinimoSubasta, String loginPropietario, String fechasVendidas,
 				String propie, String precios, float resolucion,String metodo, float ancho, float alto) {
 			Propietario propietario = propietarios.get(loginPropietario);
@@ -160,14 +160,17 @@ public class Administrador extends Usuario {
 	public void almacenarEsculturas(HashMap<String, Escultura> esculturas) {
 		 try (
 	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-	                		"./src/data/Esculturas.txt")))) {
+	                		"./src/data/Piezas.txt")))) {
 	            String textos = "";
 				for(Escultura pieza : esculturas.values()) {
 					String login =  (pieza.getPropietario()).getLogin() ;
+					String contrasena =  (pieza.getPropietario()).getContrasena() ;
+					String correo =  (pieza.getPropietario()).getCorreoElectronico() ;
+					int numero =  (pieza.getPropietario()).getNumeroDeTelefono() ;
 					String tipo = pieza.getTipo();
 					
 					textos+=tipo + ";" + pieza.getTitulo() + ";" + pieza.getAno() + ";" + pieza.getLugarCreacion() + ";" + pieza.getAutor()+ ";" + pieza.isExhibida() + ";" 
-					+ pieza.isPermisoVenta() + ";" + pieza.getValorFijo() + ";" + pieza.getValorMinimoSubasta()  + ";" + login  + ";" + pieza.getFechasVendidas() + ";" + pieza.getPropietarios() + ";" + pieza.getPrecios()  + ";" + pieza.getEstadoDePieza()+
+					+ pieza.isPermisoVenta() + ";" + pieza.getValorFijo() + ";" + pieza.getValorMinimoSubasta()  + ";" + login  + ";" + contrasena + ";" + correo  + ";" + numero  + ";" + pieza.getEstadoDePieza()+
 					";" + pieza.getAlto() + ";" + pieza.getAncho() + ";" + pieza.getProfundidad() + ";" + pieza.getMaterialEscultura() + ";" + pieza.getPeso() + ";" + pieza.getNecesidadElectricidad()+ ";" + pieza.getDetallesInstalacion()+"\n";
 			}
 			bw.write(textos);
@@ -181,14 +184,17 @@ public class Administrador extends Usuario {
 	 public void almacenarPinturas(HashMap<String, Pintura> pinturas) {
 		 try (
 	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-	                		"./src/data/Pinturas.txt")))) {
+	                		"./src/data/Piezas.txt")))) {
 	            String textos = "";
 				for(Pintura pieza : pinturas.values()) {
 					String login =  (pieza.getPropietario()).getLogin() ;
+					String contrasena =  (pieza.getPropietario()).getContrasena() ;
+					String correo =  (pieza.getPropietario()).getCorreoElectronico() ;
+					int numero =  (pieza.getPropietario()).getNumeroDeTelefono() ;
 					String tipo = pieza.getTipo();
 					
 					textos+= tipo + ";" + pieza.getTitulo() + ";" + pieza.getAno() + ";" + pieza.getLugarCreacion() + ";" + pieza.getAutor()+ ";" + pieza.isExhibida() + ";" 
-					+ pieza.isPermisoVenta() + ";" + pieza.getValorFijo() + ";" + pieza.getValorMinimoSubasta()  + ";" + login  + ";" + pieza.getFechasVendidas() + ";" + pieza.getPropietarios() + ";" + pieza.getPrecios()  + ";" + pieza.getEstadoDePieza()+
+					+ pieza.isPermisoVenta() + ";" + pieza.getValorFijo() + ";" + pieza.getValorMinimoSubasta()  + ";" + login  + ";" + contrasena + ";" + correo  + ";" + numero  + ";" + pieza.getEstadoDePieza()+
 					";" + pieza.getAlto() + ";" + pieza.getAncho() + ";" + pieza.getMaterialBase() + ";" + pieza.getTipoPinturas() +"\n";
 				}
 				bw.write(textos);
@@ -202,14 +208,17 @@ public class Administrador extends Usuario {
 	 public void almacenarFotografias(HashMap<String, Fotografia> fotografias) {
 		 try (
 	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-	                		"./src/data/Fotografias.txt")))) {
+	                		"./src/data/Piezas.txt")))) {
 	            String textos = "";
 				for(Fotografia pieza : fotografias.values()) {
 					String login =  (pieza.getPropietario()).getLogin() ;
+					String contrasena =  (pieza.getPropietario()).getContrasena() ;
+					String correo =  (pieza.getPropietario()).getCorreoElectronico() ;
+					int numero =  (pieza.getPropietario()).getNumeroDeTelefono() ;
 					String tipo = pieza.getTipo();
 					
 					textos+= tipo + ";" + pieza.getTitulo() + ";" + pieza.getAno() + ";" + pieza.getLugarCreacion() + ";" + pieza.getAutor()+ ";" + pieza.isExhibida() + ";" 
-					+ pieza.isPermisoVenta() + ";" + pieza.getValorFijo() + ";" + pieza.getValorMinimoSubasta()  + ";" + login  + ";" + pieza.getFechasVendidas() + ";" + pieza.getPropietarios() + ";" + pieza.getPrecios()  + ";" + pieza.getEstadoDePieza()+
+					+ pieza.isPermisoVenta() + ";" + pieza.getValorFijo() + ";" + pieza.getValorMinimoSubasta()  + ";" + login  + ";" + contrasena + ";" + correo  + ";" + numero  + ";" + pieza.getEstadoDePieza()+
 					";" + pieza.getResolucion() + ";" + pieza.getTecnica() + ";" + pieza.getAncho() + ";" + pieza.getAlto() +"\n";
 				}
 				bw.write(textos);
@@ -223,13 +232,16 @@ public class Administrador extends Usuario {
 	 public void almacenarImpresiones(HashMap<String, Impresion> impresiones) {
 		 try (
 	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-	                		"./src/data/Impresiones.txt")))) {
+	                		"./src/data/Piezas.txt")))) {
 	            String textos = "";
 
 				for(Impresion pieza : impresiones.values()) {
 					String login =  (pieza.getPropietario()).getLogin() ;
+					String contrasena =  (pieza.getPropietario()).getContrasena() ;
+					String correo =  (pieza.getPropietario()).getCorreoElectronico() ;
+					int numero =  (pieza.getPropietario()).getNumeroDeTelefono() ;
 					String tipo = pieza.getTipo();
-					textos += tipo + ";" + pieza.getTitulo() + ";" + pieza.getAno() + ";" + pieza.getLugarCreacion() + ";" + pieza.getAutor()+ ";" + pieza.isExhibida() + ";" + pieza.isPermisoVenta() + ";" + pieza.getValorFijo() + ";" + pieza.getValorMinimoSubasta()  + ";" + login  + ";" + pieza.getFechasVendidas() + ";" + pieza.getPropietarios() + ";" + pieza.getPrecios()  + ";" + pieza.getEstadoDePieza()+ ";" + pieza.getResolucion() + ";" + pieza.getTecnica() + ";" + pieza.getAncho() + ";" + pieza.getAlto() +"\n";
+					textos += tipo + ";" + pieza.getTitulo() + ";" + pieza.getAno() + ";" + pieza.getLugarCreacion() + ";" + pieza.getAutor()+ ";" + pieza.isExhibida() + ";" + pieza.isPermisoVenta() + ";" + pieza.getValorFijo() + ";" + pieza.getValorMinimoSubasta()  + ";" + login  + ";" + contrasena + ";" + correo  + ";" + numero  + ";" + pieza.getEstadoDePieza()+ ";" + pieza.getResolucion() + ";" + pieza.getTecnica() + ";" + pieza.getAncho() + ";" + pieza.getAlto() +"\n";
 				 }
 	            bw.write(textos);
 	            bw.close();
@@ -243,14 +255,17 @@ public class Administrador extends Usuario {
 	 public void almacenarVideos(HashMap<String, Video> videos) {
 		 try (
 	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-	                		"./src/data/Videos.txt")))) {
+	                		"./src/data/Piezas.txt")))) {
 	            String textos = "";
 				for(Video pieza : videos.values()) {
 					String login =  (pieza.getPropietario()).getLogin() ;
+					String contrasena =  (pieza.getPropietario()).getContrasena() ;
+					String correo =  (pieza.getPropietario()).getCorreoElectronico() ;
+					int numero =  (pieza.getPropietario()).getNumeroDeTelefono() ;
 					String tipo = pieza.getTipo();
 					
 					textos+= tipo + ";" + pieza.getTitulo() + ";" + pieza.getAno() + ";" + pieza.getLugarCreacion() + ";" + pieza.getAutor()+ ";" + pieza.isExhibida() + ";" 
-				+ pieza.isPermisoVenta() + ";" + pieza.getValorFijo() + ";" + pieza.getValorMinimoSubasta()  + ";" + login  + ";" + pieza.getFechasVendidas() + ";" + pieza.getPropietarios()  + ";" + pieza.getPrecios()  + ";" + pieza.getEstadoDePieza()+
+				+ pieza.isPermisoVenta() + ";" + pieza.getValorFijo() + ";" + pieza.getValorMinimoSubasta()  + ";" + login  + ";" + contrasena + ";" + correo  + ";" + numero  + ";" + pieza.getEstadoDePieza()+
 				";" + pieza.getDuracion() + ";" + pieza.getNecesidadElectricidad()  + "\n";
 				}
 				bw.write(textos);

@@ -73,23 +73,10 @@ public class Galeria {
 	
 	 public void cargarInformacion() {
 	        try {
-	        	File videos = new File(
-	             		"./src/data/Videos.txt");
-	        	File fotografias = new File(
-	             		"./src/data/Fotografias.txt");
-	        	File impresiones = new File(
-	             		"./src/data/Impresiones.txt");
-	        	File pinturas = new File(
-	             		"./src/data/Pinturas.txt");
-	        	File esculturas = new File(
-	             		"./src/data/Esculturas.txt");
+
 	            cargarUsuarios();
 	            cargarPropietario();
-	            cargarPieza(videos);
-	            cargarPieza(fotografias);
-	            cargarPieza(impresiones);
-	            cargarPieza(pinturas);
-	            cargarPieza(esculturas);
+	            cargarPieza();
 	            cargarComprador();
 	            cargarArtista();
 
@@ -167,22 +154,13 @@ public class Galeria {
 	                String piezasString = partes[1];
 	                String[] piezasList = piezasString.split("-");
 	                Collection<Pieza> piezasCollection= new ArrayList<>();
-	                if (piezasList.length == 1) {
-			    		boolean piezakey = piezas.containsKey(piezasList[0]);
-			    		if (piezakey == true) {
-			    			Pieza piezaObj = piezas.get(piezasList[0]);
-			    			piezasCollection.add(piezaObj);
-			    		}
-			    	}
-			        if (partes.length != 1 && partes.length != 0) {
-			        	for (String parte: partes) {
-			        		boolean piezakey = piezas.containsKey(parte);
-			        		if (piezakey == true) {
-			        			Pieza piezaObj = piezas.get(parte);
-			        			piezasCollection.add(piezaObj);
-			        		}
-			        	}
-			        }
+	                for (String parte: piezasList) {
+		        		boolean piezakey = piezas.containsKey(parte);
+		        		if (piezakey == true) {
+		        			Pieza piezaObj = piezas.get(parte);
+		        			piezasCollection.add(piezaObj);
+		        		}
+		        	}
 	                Artista artista = crearArtista(nombre, piezasCollection);
 	                artistas.put(nombre,artista);
 	                linea = br.readLine();
@@ -194,7 +172,9 @@ public class Galeria {
         }
     }
 		 
-	 public  void cargarPieza(File archivo) {
+	 public  void cargarPieza() {
+		    File archivo = new File(
+         		"./src/data/Piezas.txt");
 	        System.out.println("Cargando piezas desde Archivo");
 	        try {
 	            BufferedReader br = new BufferedReader(new FileReader(archivo));
