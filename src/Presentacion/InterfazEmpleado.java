@@ -40,7 +40,8 @@ public class InterfazEmpleado {
 				boolean result = galeria.login(usuario, contrasena);
 				if (result == true) {
 					infoEmpleado(usuario, contrasena);
-					
+				}else {
+					System.out.println("Usuario o contraseña incorrecta");
 				}
 			} else if (opcion == 2) {
 				System.out.println("Saliendo de la app...");
@@ -72,7 +73,7 @@ public class InterfazEmpleado {
 	public void infoEmpleado(String usuario, String contrasena){
 		System.out.println("Como empleado puede ser Operador o cajero ");
 		System.out.println("1.) Cajero");
-		System.out.println("1.) Operador");
+		System.out.println("2.) Operador");
 		int opcion = Integer.parseInt(input("\nSeleccione una opcion"));
 		do {
 			if (opcion==1) {
@@ -93,7 +94,13 @@ public class InterfazEmpleado {
         HashMap<String, Subasta> subastas = galeria.getSubastas();
         HashMap<String, Registro> registros  = galeria.getRegistros();
         HashMap<String, Comprador> clientes = galeria.getClientes();
+        HashMap<String, Artista> artistas = galeria.getArtistas();
         Administrador administrador = galeria.getAdministrador();
+        File registro = new File("./src/data/Registros.txt");
+        operador.cargarRegistros(registro, piezas,registros, clientes, administrador);
+        File subasta = new File("./src/data/Subastas.txt");
+        operador.cargarSubastas(subasta, piezas, subastas);
+        
         do {
             System.out.println("Opciones Operador");
             System.out.println("1.) Crear Subasta");
@@ -101,8 +108,7 @@ public class InterfazEmpleado {
             System.out.println("3.) Cerrar Subasta (mostar el nuevo dueño) ");
             System.out.println("4.) Mostrar la historia de una pieza");
             System.out.println("5.) Mostrar la historia de un artista");
-            System.out.println("6.) Mostrar la historia de un comprador");
-            System.out.println("7.) Cerrar Sesión ");
+            System.out.println("6.) Cerrar Sesión ");
             opcion = Integer.parseInt(input("\nSeleccione una opcion"));
             if (opcion == 1) {
             	operador.crearSubasta_pedir(piezas, subastas);
@@ -118,16 +124,35 @@ public class InterfazEmpleado {
             	operador.historiaDePieza(pieza);
      
             }else if (opcion == 5) {
+            	String nombre = input("Ingrese el nombre del artista");
+            	Boolean verificarNombre = artistas.containsKey(nombre);
+            	if (verificarNombre == true) {
+            		Artista artista = artistas.get(nombre);
+            		System.out.println("Artista: " + artista.getNombre());
+            		System.out.println("Obras del artista: " + artista.getPiezasLista().size());
+            		for (Pieza pieza: artista.getPiezasLista()) {
+            			System.out.println("Pieza: " + pieza.getTitulo());
+            			System.out.println("Año: " + pieza.getAno());
+            			System.out.println("Valor de pieza: " );
+						String [] precios = pieza.getPrecios().split("-");
+						for (String precio: precios) {
+							System.out.println(precio);
+							}
+						System.out.println("Fecha de venta: ");
+						String [] fechas = pieza.getFechasVendidas().split("-");
+						for (String fecha: fechas) {
+							System.out.println(fecha);
+							}
+						}
+            	}
             	
             }else if (opcion == 6) {
-            	
-            }else if (opcion == 7) {
                 operador.almacenarRegistros(registros);
                 operador.almacenarSubastas(subastas);
             } else {
                 System.out.println("Opcion Inválida");
             }
-        } while (opcion != 7);
+        } while (opcion != 6);
     }
  public void infoCajero(String usuario, String contrasena) {
         int opcion;
@@ -142,8 +167,7 @@ public class InterfazEmpleado {
             System.out.println("2.) Confirmar pago-Dar factura ");
             System.out.println("3.) Mostrar la historia de una pieza");
             System.out.println("4.) Mostrar la historia de un artista");
-            System.out.println("5.) Mostrar la historia de un comprador");
-            System.out.println("6.) Cerrar sesión ");
+            System.out.println("5.) Cerrar sesión ");
             opcion = Integer.parseInt(input("\nSeleccione una opcion"));
             if (opcion == 1) {
             	admin.pedirVenta(piezas, clientes, ventas);
@@ -153,30 +177,9 @@ public class InterfazEmpleado {
                 System.out.println("La factura es: " + factura);
                 
             } else if (opcion == 3) {
-            	//Ver si funciona
             	String nombre = input("Ingrese el titulo de la obra");
             	Pieza pieza = piezas.get(nombre);
-            	System.out.println("Los datos básicos de la pieza son: ");
-        		System.out.println("Tipo: "+ pieza.getTipo()+", Nombre: "+ pieza.getTitulo()+ ", Autor: " + pieza.getAutor()+ ", Año de creación: "+pieza.getAno()+ ", Lugar de creación: "+ pieza.getLugarCreacion()+ ", Propietario actual: " + pieza.getPropietario().getLogin()) ;
-        		
-        		String propie= pieza.getPropietarios();
-        		String[] partes = propie.split("-");
-        		System.out.println("Los dueños de esta pieza han sido: ");
-        		for (String parte : partes) {
-        		    System.out.println(parte);
-        		}
-        		System.out.println("Esta pieza ha sido vendida por : ");
-        		String precios= pieza.getPrecios();
-        		String[] precio = precios.split("-");
-        		for (String par : precio) {
-        		    System.out.println(par+ " pesos ");
-        		}
-        		System.out.println("Esta pieza ha sido vendida en estas fechas : ");
-        		String fechas= pieza.getFechasVendidas();
-        		String[] pre = fechas.split(",");
-        		for (String par : pre) {
-        		    System.out.println(par);
-        		}
+            	admin.historiaDePieza(pieza);
             
             } else if (opcion == 4) {
             	String nombre = input("Ingrese el nombre del artista");
@@ -203,15 +206,18 @@ public class InterfazEmpleado {
             	else {
             		System.out.println("Este artista no se encuentra en la base de datos");
             	}
-                
-            } else if (opcion == 5) {
-            	
-            }else if (opcion == 6) {
+            }else if (opcion == 5) {
                 admin.almacenarVentas(ventas);
             } else {
                 System.out.println("Opcion Inválida");
             }
-        } while (opcion != 6);
+        } while (opcion != 5);
     }
+    public static void main(String[] args)  {
+		InterfazEmpleado consola = new InterfazEmpleado();
+		consola.ejecutar();
+		
+	}
+ 
 }
 

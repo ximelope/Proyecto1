@@ -1,0 +1,5 @@
+Video;Lluvia;2002;Quetame;Camilo;true;true;2000;2000;Santiago;02-02-2022;Santiago;500;Disponible;2.0;true
+Video;Sol;2022;Quetame;Camilo;true;true;2000;2000;Santiago;02-02-2022;Santiago;500;Disponible;2.0;true
+Video;Grito;2020;Colombia;Camilo;true;true;4000;4000;Santiago;02-02-2022;Santiago;500;Disponible;1.0;true
+Video;Loca;2022;Bogota;Camilo;true;true;3;3;Santiago;02-02-2022;Santiago;500;Disponible;1.0;true
+Video;Linda;2002;Quetame;Camilo;true;true;2000;2000;Santiago;02-02-2022;Santiago;500;Disponible;2.0;true

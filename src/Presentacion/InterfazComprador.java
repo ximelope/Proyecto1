@@ -27,7 +27,8 @@ public class InterfazComprador {
 				boolean result = galeria.login(usuario, contrasena);
 				if (result == true) {
 					infoComprador(usuario, contrasena);
-					
+				}else {
+					System.out.println("Usuario o contraseña incorrecta");
 				}
 			} else if (opcion == 2) {
 				System.out.println("Saliendo de la app...");
@@ -61,30 +62,9 @@ public class InterfazComprador {
 	            opcion = Integer.parseInt(input("\nSeleccione una opcion"));
 	            if (opcion == 1)
 	            {
-	            	//Ver si funciona
 	            	String nombre = input("Ingrese el titulo de la obra");
 	            	Pieza pieza = piezas.get(nombre);
-	            	System.out.println("Los datos básicos de la pieza son: ");
-	        		System.out.println("Tipo: "+ pieza.getTipo()+", Nombre: "+ pieza.getTitulo()+ ", Autor: " + pieza.getAutor()+ ", Año de creación: "+pieza.getAno()+ ", Lugar de creación: "+ pieza.getLugarCreacion()+ ", Propietario actual: " + pieza.getPropietario().getLogin()) ;
-	        		
-	        		String propie= pieza.getPropietarios();
-	        		String[] partes = propie.split("-");
-	        		System.out.println("Los dueños de esta pieza han sido: ");
-	        		for (String parte : partes) {
-	        		    System.out.println(parte);
-	        		}
-	        		System.out.println("Esta pieza ha sido vendida por : ");
-	        		String precios= pieza.getPrecios();
-	        		String[] precio = precios.split("-");
-	        		for (String par : precio) {
-	        		    System.out.println(par+ " pesos ");
-	        		}
-	        		System.out.println("Esta pieza ha sido vendida en estas fechas : ");
-	        		String fechas= pieza.getFechasVendidas();
-	        		String[] pre = fechas.split(",");
-	        		for (String par : pre) {
-	        		    System.out.println(par);
-	        		}
+	            	comprador.historiaDePieza(pieza);
 	            } else if (opcion == 2) {
 	            	String nombre = input("Ingrese el nombre del artista");
 	            	Boolean verificarNombre = artistas.containsKey(nombre);
@@ -126,8 +106,13 @@ public class InterfazComprador {
 			return null;
 		}
 	}
-
+	public static void main(String[] args)  {
+		{
+			InterfazComprador consola = new InterfazComprador();
+			consola.ejecutar();
 		}
+	}
+}
 
 
 

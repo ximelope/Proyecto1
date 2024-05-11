@@ -7,9 +7,6 @@ import modeloGaleria.Propietario;
 import modeloGaleria.Video;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.HashMap;
@@ -39,6 +36,8 @@ public class InterfazAdministrador {
 				if (result == true) {
 					infoAdmin(usuario, contrasena);
 					
+				}else {
+					System.out.println("Usuario o contraseña incorrecta");
 				}
 			} else if (opcion == 2) {
 				System.out.println("Saliendo de la app...");
@@ -84,6 +83,11 @@ public class InterfazAdministrador {
             	System.out.println(piezas.keySet());
             } else if (opcion == 1) {
                 admin.pedir_crearPieza(propietarios, piezas,  esculturas,pinturas, fotografias, videos, impresiones);
+                admin.almacenarEsculturas(esculturas);
+                admin.almacenarPinturas(pinturas);
+                admin.almacenarFotografias(fotografias);
+                admin.almacenarImpresiones(impresiones);
+                admin.almacenarVideos(videos);
                 }
             else if (opcion == 3) {
             	String nombre = input("Ingrese el titulo de la obra");
@@ -141,7 +145,7 @@ public class InterfazAdministrador {
 		}
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args)  {
 		{
 			InterfazAdministrador consola = new InterfazAdministrador();
 			consola.ejecutar();

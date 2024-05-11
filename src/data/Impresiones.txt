@@ -1,0 +1,1 @@
+Impresion;Paisaje;2020;Bogota;Camilo;true;true;300;300;Santiago;Santiago;11-02-2022;2000;Disponible;20.0;Papel;20.0;20.0

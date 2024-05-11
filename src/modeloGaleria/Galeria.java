@@ -72,17 +72,21 @@ public class Galeria {
 	}
 	
 	 public void cargarInformacion() {
-	        try {
+		 File videos = new File("./src/data/Videos.txt");
+ 		 File fotografias = new File("./src/data/Fotografias.txt");
+     	 File esculturas = new File("./src/data/Esculturas.txt");
+     	 File pinturas = new File("./src/data/Pinturas.txt");
+     	 File impresiones = new File("./src/data/Impresiones.txt");
 
-	            cargarUsuarios();
-	            cargarPropietario();
-	            cargarPieza();
-	            cargarComprador();
-	            cargarArtista();
-
-	        } catch (Exception e) {
-	            e.printStackTrace();
-	        }
+         cargarUsuarios();
+         cargarPropietario();
+         cargarPieza(videos);
+         cargarPieza(fotografias);
+         cargarPieza(esculturas);
+         cargarPieza(pinturas);
+         cargarPieza(impresiones);
+         cargarComprador();
+         cargarArtista();
 
 	    }
 	 public void cargarPropietario() {
@@ -172,9 +176,7 @@ public class Galeria {
         }
     }
 		 
-	 public  void cargarPieza() {
-		    File archivo = new File(
-         		"./src/data/Piezas.txt");
+	 public  void cargarPieza(File archivo) {
 	        System.out.println("Cargando piezas desde Archivo");
 	        try {
 	            BufferedReader br = new BufferedReader(new FileReader(archivo));
@@ -252,7 +254,7 @@ public class Galeria {
 	        
 	    }
 	 
-	 protected Pieza crearPiezaEscultura(HashMap<String, Escultura> esculturas, String tipo,String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoVenta,
+	 public Pieza crearPiezaEscultura(HashMap<String, Escultura> esculturas, String tipo,String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoVenta,
 				int valorFijo, int valorMinimoSubasta, String loginPropietario, String fechasVendidas,
 				String propie, String precios, float alto, float ancho, float profundidad, String material, float peso, boolean electricidad, 
 				String otros) {
@@ -268,7 +270,7 @@ public class Galeria {
 			return(pieza);
 			}
 			
-		protected Pieza crearPiezaPintura(HashMap<String, Pintura> pinturas,String tipo,String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoVenta,
+		public Pieza crearPiezaPintura(HashMap<String, Pintura> pinturas,String tipo,String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoVenta,
 				int  valorFijo, int valorMinimoSubasta, String loginPropietario, String fechasVendidas,
 				String propie, String precios, float alto, float ancho, String materialBase, String tipoPinturas) {
 			Propietario propietario = propietarios.get(loginPropietario);
@@ -280,7 +282,7 @@ public class Galeria {
 			return pieza;
 			
 		}
-		protected Pieza crearPiezaVideo(HashMap<String, Video> videos,String tipo,String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoVenta,
+		public Pieza crearPiezaVideo(HashMap<String, Video> videos,String tipo,String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoVenta,
 				int valorFijo, int valorMinimoSubasta, String loginPropietario, String fechasVendidas,
 				String propie, String precios, float duracion, boolean necesidadElectricidad) {
 			Propietario propietario = propietarios.get(loginPropietario);
@@ -290,7 +292,7 @@ public class Galeria {
 			return pieza;
 			
 		}
-		protected Pieza crearPiezaFotografia(HashMap<String, Fotografia> fotografias,String tipo, String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoVenta,
+		public Pieza crearPiezaFotografia(HashMap<String, Fotografia> fotografias,String tipo, String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoVenta,
 				int valorFijo, int valorMinimoSubasta, String loginPropietario, String fechasVendidas,
 				String propie, String precios, float resolucion,String metodo, float ancho, float alto) {
 			Propietario propietario = propietarios.get(loginPropietario);
@@ -301,7 +303,7 @@ public class Galeria {
 
 			
 		}
-		protected Pieza crearPiezaImpresion(HashMap<String, Impresion> impresiones,String tipo, String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoVenta,
+		public Pieza crearPiezaImpresion(HashMap<String, Impresion> impresiones,String tipo, String titulo, int ano, String lugarCreacion, String autor, boolean exhibida, boolean permisoVenta,
 				int valorFijo, int valorMinimoSubasta, String loginPropietario, String fechasVendidas,
 				String propie, String precios, float resolucion,String metodo, float ancho, float alto) {
 			Propietario propietario = propietarios.get(loginPropietario);
@@ -311,33 +313,32 @@ public class Galeria {
 			return pieza;
 		}
 				
-		private Propietario crearPropietario(String loginPropietario, String contraseñaPropietario,
+		public Propietario crearPropietario(String loginPropietario, String contraseñaPropietario,
 				String correo, int numeroDeTelefono, String piezas) {
 			Propietario propietario = new Propietario(loginPropietario, contraseñaPropietario, correo, numeroDeTelefono, piezas);
 			return propietario;
 		}
 
-		private Comprador crearComprador (String loginPropietario, String contraseñaPropietario, String correo, int numeroDeTelefono, int valorMax, String piezas,String fechas) {
+		public Comprador crearComprador (String loginPropietario, String contraseñaPropietario, String correo, int numeroDeTelefono, int valorMax, String piezas,String fechas) {
 			Comprador comprador = new Comprador(loginPropietario, contraseñaPropietario, correo, numeroDeTelefono, valorMax, piezas, fechas);
 			return comprador;
 		}
 		
-		private Artista crearArtista (String nombre, Collection<Pieza> piezasLista) {
+		public Artista crearArtista (String nombre, Collection<Pieza> piezasLista) {
 			Artista artista = new Artista(nombre, piezasLista);
 			return artista;
 		}
 
-		private void añadirPieza (Pieza pieza,HashMap<String, Pieza> piezas) {
+		public void añadirPieza (Pieza pieza,HashMap<String, Pieza> piezas) {
 			piezas.put(pieza.getTitulo(), pieza);
 			
 		}
 
 	public boolean login(String usuario, String contrasena) {
-
+	
         if (contrasena.equals(usuarios.get(usuario))) {
             return true;
         } else {
-            System.out.println("Usuario o contraseña incorrecta");
             return false;
         }
 
@@ -353,7 +354,7 @@ public class Galeria {
 	            return null;
 	        }
 	    }
-	 private void cargarUsuarios() {
+	 public void cargarUsuarios() {
 	        System.out.println("Cargando base de datos de Usuarios");
 	        try {
 	            BufferedReader br = new BufferedReader(new FileReader(new File(
@@ -375,102 +376,5 @@ public class Galeria {
 	            e.printStackTrace();
 	        }
 	    }
-	 
-	 public void almacenarRegistros() {
-		 try (
-	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-	                		"./src/data/Registros.txt")))) {
-	            String textos = "";
-				for(Registro pieza : registros.values()) {
-	                Date fecha = pieza.getFecha();
-	                SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy"); // Define el formato de fecha que deseas
-	                String fechaString = sdf.format(fecha);
-	                float monto= pieza.getMonto();
-	                String login = pieza.getCliente().getLogin();
-	                String contrasena= pieza.getCliente().getContrasena();
-	                String correo= pieza.getCliente().getCorreoElectronico();
-	                int numero= pieza.getCliente().getNumeroDeTelefono();
-	                int valorMax = pieza.getCliente().getValorMax();
-	                String titulo= pieza.getPieza().getTitulo();
-	                String idSubasta= pieza.getSubasta().getId();
-					
-	                
-					textos+= fechaString +";"+ monto + ";"+ login+";"+ contrasena+";"+correo +";"+ numero+ ";"+valorMax+";"+titulo+";"+idSubasta+"\n";
-				}
-				bw.write(textos);
-	            bw.close();
-	        } catch (IOException e) {
-
-	            e.printStackTrace();
-	        }
-
-	    }
-	 
-	 
-	 public void almacenarVentas() {
-		 try (
-	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-	                		"./src/data/Ventas.txt")))) {
-	            String textos = "";
-				for(Venta pieza : ventas.values()) {
-					String titulo= pieza.getPieza().getTitulo();
-	                String fecha=  pieza.getFechaVenta();
-	                String login= "Nicolas";
-					
-					textos+= titulo+ ";"+ fecha+";"+login+"\n";
-				}
-				bw.write(textos);
-	            bw.close();
-	        } catch (IOException e) {
-
-	            e.printStackTrace();
-	        }
-
-	    }
-	 public void almacenarPropietarios() {
-		 try (
-	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-	                		"./src/data/Propietarios.txt")))) {
-	            String textos = "";
-				for(Propietario propietario : propietarios.values()) {
-					String login= propietario.getLogin();
-	                String contrasena=  propietario.getContrasena();
-	                String correo = propietario.getCorreoElectronico();
-	                int numero= propietario.getNumeroDeTelefono();
-					
-					textos+= login+ ";"+ contrasena+";"+correo+";"+ numero+"\n";
-				}
-				bw.write(textos);
-	            bw.close();
-	        } catch (IOException e) {
-
-	            e.printStackTrace();
-	        }
-		 
-	 }
-	 public void almacenarComprador() {
-		 try (
-	                BufferedWriter bw = new BufferedWriter(new FileWriter(new File(
-	                		"./src/data/Comprador.txt")))) {
-	            String textos = "";
-				for(Comprador propietario : clientes.values()) {
-					String login= propietario.getLogin();
-	                String contrasena=  propietario.getContrasena();
-	                String correo = propietario.getCorreoElectronico();
-	                int numero= propietario.getNumeroDeTelefono();
-	                int maximo = propietario.getValorMax();
-					
-					textos+= login+ ";"+ contrasena+";"+correo+";"+ numero+";"+ maximo+"\n";
-				}
-				bw.write(textos);
-	            bw.close();
-	        } catch (IOException e) {
-
-	            e.printStackTrace();
-	        }
-		 
-	 }
-
-
 
 }

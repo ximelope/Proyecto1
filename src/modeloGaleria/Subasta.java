@@ -45,7 +45,7 @@ public class Subasta {
 		if (!registros.isEmpty()) {
 				return registros.get(registros.size() - 1);
 			} else {
-				return null; // O lanzar una excepción.
+				return null; 
 			}
 	}
 

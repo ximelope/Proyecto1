@@ -1,0 +1,1 @@
+Fotografia;Hola;2020;Bogota;Camilo;true;true;300;300;Santiago;Santiago;11-02-2022;200;Disponible;20.0;30;30.0;30.0

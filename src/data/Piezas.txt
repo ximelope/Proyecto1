@@ -1,3 +1,0 @@
-Video;Lluvia;2002;Quetame;Camilo;true;true;2000;2000;Santiago;123;a;12345;Disponible;2.0;true
-Video;Sol;2022;Quetame;Camilo;true;true;2000;2000;Santiago;123;a;12345;Disponible;2.0;true
-Video;Linda;2002;Quetame;Camilo;true;true;2000;2000;Santiago;123;a;12345;Disponible;2.0;true
