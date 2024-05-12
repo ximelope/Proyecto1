@@ -20,6 +20,8 @@ public class Operador extends Usuario {
 	public String ganador(String id ) {
 		Subasta subasta = subastas.get(id);
 		Registro registro = subasta.getUltimoRegistro();
+		float d= registro.getMonto();
+		System.out.println(d);
 		String nombre = registro.getCliente().getLogin();
 		return "El ganador de la subasta es: " + nombre;
 	}
@@ -89,7 +91,7 @@ public class Operador extends Usuario {
                 String titulo= partes[7];
                 String idSubasta= partes[8];
                 Pieza pieza = piezas.get(titulo);
-                registrarOferta(registros, clientes,fecha, monto, login, contrasena, correo, numero, valorMax, idSubasta, pieza, administrador );
+                registrarOferta(registros, clientes, fecha, monto, login, contrasena, correo, numero, valorMax, idSubasta, pieza, administrador );
                 
                 linea = br.readLine();
             }
@@ -132,6 +134,8 @@ public class Operador extends Usuario {
 	
 	
 	private void registrarOferta(HashMap<String, Registro> registros,HashMap<String, Comprador> clientes,String fecha, float monto, String login, String contraseña, String correo,int numero, int valorMax, String idSubasta, Pieza pieza, Administrador administrador)  {
+		System.out.println(login);
+		System.out.println(clientes.keySet());
 		Comprador cliente = clientes.get(login);
 		administrador.verificacionDeCliente(cliente);
 		int valorInicial = subastas.get(idSubasta).getMonto();

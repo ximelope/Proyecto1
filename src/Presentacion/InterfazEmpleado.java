@@ -96,10 +96,10 @@ public class InterfazEmpleado {
         HashMap<String, Comprador> clientes = galeria.getClientes();
         HashMap<String, Artista> artistas = galeria.getArtistas();
         Administrador administrador = galeria.getAdministrador();
-        File registro = new File("./src/data/Registros.txt");
-        operador.cargarRegistros(registro, piezas,registros, clientes, administrador);
         File subasta = new File("./src/data/Subastas.txt");
         operador.cargarSubastas(subasta, piezas, subastas);
+        File registro = new File("./src/data/Registros.txt");
+        operador.cargarRegistros(registro, piezas,registros, clientes, administrador);
         
         do {
             System.out.println("Opciones Operador");
