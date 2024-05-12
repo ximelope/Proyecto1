@@ -40,7 +40,7 @@ public class InterfazEmpleado {
 				boolean result = galeria.login(usuario, contrasena);
 				if (result == true) {
 					infoEmpleado(usuario, contrasena);
-				}else {
+				}else {	
 					System.out.println("Usuario o contraseña incorrecta");
 				}
 			} else if (opcion == 2) {
@@ -60,30 +60,25 @@ public class InterfazEmpleado {
 			System.out.flush();
 		}
 	}
-	public String input(String mensaje) {
-		try {
-			System.out.print(mensaje + ": ");
-			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-			return reader.readLine();
-		} catch (IOException e) {
-			return null;
-		}
-	}
 
 	public void infoEmpleado(String usuario, String contrasena){
-		System.out.println("Como empleado puede ser Operador o cajero ");
-		System.out.println("1.) Cajero");
-		System.out.println("2.) Operador");
-		int opcion = Integer.parseInt(input("\nSeleccione una opcion"));
+		int opcion= 0;
 		do {
+			System.out.println("Como empleado puede ser Operador o cajero ");
+			System.out.println("1.) Cajero");
+			System.out.println("2.) Operador");
+			System.out.println("3.) Salir");
+			opcion = Integer.parseInt(input("\nSeleccione una opcion"));
 			if (opcion==1) {
 				infoCajero(usuario,contrasena);
 			}
 			else if (opcion== 2) {
 				infoOperador(usuario,contrasena);
-			}
-			else {
-				System.out.println("Opcion Inválida");
+			
+			} else if (opcion == 3) {
+            System.out.println("Saliendo del menú de empleado...");
+			} else {
+            System.out.println("Opcion Inválida");
 			}
 		}while (opcion != 3);
 	}
@@ -152,9 +147,9 @@ public class InterfazEmpleado {
             } else {
                 System.out.println("Opcion Inválida");
             }
-        } while (opcion != 6);
+        }while (opcion != 6);
     }
- public void infoCajero(String usuario, String contrasena) {
+	public void infoCajero(String usuario, String contrasena) {
         int opcion;
         Cajero admin = new Cajero(usuario, contrasena);
         HashMap<String, Comprador> clientes = galeria.getClientes();
@@ -213,6 +208,15 @@ public class InterfazEmpleado {
             }
         } while (opcion != 5);
     }
+	public String input(String mensaje) {
+		try {
+			System.out.print(mensaje + ": ");
+			BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+			return reader.readLine();
+		} catch (IOException e) {
+			return null;
+		}
+	}
     public static void main(String[] args)  {
 		InterfazEmpleado consola = new InterfazEmpleado();
 		consola.ejecutar();
