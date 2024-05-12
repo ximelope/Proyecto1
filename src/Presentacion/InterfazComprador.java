@@ -11,6 +11,7 @@ import modeloGaleria.Comprador;
 public class InterfazComprador {
 	Galeria galeria = new Galeria();
 	public void mostrarMenuId() {
+		System.out.println("Para comprador ingrese como: Santiago");
 		System.out.println("1.) Registrarse");
 		System.out.println("2.) Salir ");
 	}
@@ -51,7 +52,6 @@ public class InterfazComprador {
 	public void infoComprador(String usuario, String contraseña) {
 		int opcion;
 		Comprador comprador = galeria.getClientes().get(usuario);
-		HashMap<String, Comprador> clientes = galeria.getClientes();
 		HashMap<String, Artista> artistas = galeria.getArtistas();
 		HashMap<String, Pieza> piezas = galeria.getPiezas();
 		do {
