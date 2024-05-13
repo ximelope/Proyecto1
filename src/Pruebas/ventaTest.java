@@ -53,5 +53,10 @@ class ventaPrueba {
    public void testGetPieza() {
        assertEquals(fotografia, venta.getPieza());
    }
+   @Test
+   void testVentaConstructor() {
+       Venta venta = new Venta();
+       assertNotNull(venta.getNumeroFactura());
+   }
 
 }

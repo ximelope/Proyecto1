@@ -53,12 +53,12 @@ public class Cajero extends Usuario{
 	
 	public void  crearVenta(Pieza pieza, String fecha, Comprador comprador,HashMap<String, Venta> ventas) {
 		Venta venta = new Venta (pieza, fecha);
-		ventas.put(venta.getPieza().getTitulo() , venta);
 		if (venta.efectuarVenta(pieza, comprador)==true) {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 	        Date ParsedFecha = null;
 			try {
 				ParsedFecha = sdf.parse(fecha);
+				ventas.put(venta.getPieza().getTitulo() , venta);
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

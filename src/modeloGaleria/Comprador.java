@@ -1,4 +1,5 @@
 package modeloGaleria;
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class Comprador extends Usuario{
@@ -6,8 +7,8 @@ public class Comprador extends Usuario{
     private int numeroDeTelefono;
     private String estado;// Verificado, Bloqueado, NoAplica
     private int valorMax;
-    protected Collection<Pieza> infocompras;
-    private String piezas;
+    public Collection<Pieza> infocompras;
+   	private String piezas;
     private String fechas;
 	
     public Comprador (String login, String contraseña, String correo, int numero, int valorMax, String piezas, String fechas) {
@@ -18,6 +19,7 @@ public class Comprador extends Usuario{
         this.estado = "NoAplica";
         this.piezas= piezas;
         this.fechas= fechas;
+        this.infocompras = new ArrayList<Pieza>();
     }
 
     public String getCorreoElectronico() {
@@ -44,6 +46,13 @@ public class Comprador extends Usuario{
     public void cambiarEstado( String nuevoEstado) {
     	this.estado= nuevoEstado;
     }
+    public Collection<Pieza> getInfocompras() {
+		return infocompras;
+	}
+
+	public void setInfocompras(Collection<Pieza> infocompras) {
+		this.infocompras = infocompras;
+	}
 
     
     public void comprarObra(Pieza pieza) {

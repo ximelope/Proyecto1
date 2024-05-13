@@ -1,5 +1,7 @@
 package Pruebas;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.text.ParseException;
@@ -41,5 +43,33 @@ public class SubastaTest {
 	    Pieza fotografia = new Fotografia("Fotografía", "Ayuda", 2024, "Cucuta", "jujuli", false, true, 5000, 5000, propietario, name, "07/05/2024", "5000", 300, "Digital", 10, 10);
 		subasta = new Subasta("11", fechaInicialDate, fechaFinalDate, fotografia);
 	}
+	    @Test
+	    void testSubastaConstructor() {
+	        Date fechaInicial = new Date();
+	        Date fechaFinal = new Date();
+	        Propietario propietario = new Propietario("prop123", "123", "prop123@gmail.com", 1234567890, "Ayuda");
+	        Pieza fotografia = new Fotografia("Fotografía", "Ayuda", 2024, "Cucuta", "jujuli", true, true, 5000, 5000, propietario, propietario.getLogin(), "07/05/2024", "5000", 300, "Digital", 10, 10);
+			Subasta subasta = new Subasta("sub123", fechaInicial, fechaFinal, fotografia);
 
+	        assertEquals("sub123", subasta.getId());
+	        assertEquals(fechaInicial, subasta.getFechaInicial());
+	        assertEquals(fechaFinal, subasta.getFechaFinal());
+	        assertEquals(fotografia, subasta.getPieza());
+	        assertEquals(fotografia.getValorMinimoSubasta() * 3 / 4, subasta.getMonto());
+	        assertTrue(subasta.getRegistros().isEmpty());
+	        assertNull(subasta.getUltimoRegistro());
+	    }
+
+	    @Test
+	    void testCambiarMonto() {
+	        Date fechaInicial = new Date();
+	        Date fechaFinal = new Date();
+	        Propietario propietario = new Propietario("prop123", "123", "prop123@gmail.com", 1234567890, "Ayuda");
+	        Pieza fotografia = new Fotografia("Fotografía", "Ayuda", 2024, "Cucuta", "jujuli", true, true, 5000, 5000, propietario, propietario.getLogin(), "07/05/2024", "5000", 300, "Digital", 10, 10);
+			Subasta subasta = new Subasta("sub123", fechaInicial, fechaFinal, fotografia);
+
+	        subasta.cambiarMonto(5000);
+	        assertEquals(5000, subasta.getMonto());
+	    
+	}
 }

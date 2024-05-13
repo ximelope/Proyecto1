@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.HashMap;
 
 public class Operador extends Usuario {
-	HashMap<String, Subasta> subastas = new HashMap<>();
+	public HashMap<String, Subasta> subastas = new HashMap<>();
 
 	public Operador(String login, String contrasena) {
 		super(login, contrasena);
@@ -131,7 +131,7 @@ public class Operador extends Usuario {
 	}
 	
 	
-	private void registrarOferta(HashMap<String, Registro> registros,HashMap<String, Comprador> clientes,String fecha, float monto, String login, String contraseña, String correo,int numero, int valorMax, String idSubasta, Pieza pieza, Administrador administrador)  {
+	public void registrarOferta(HashMap<String, Registro> registros,HashMap<String, Comprador> clientes,String fecha, float monto, String login, String contraseña, String correo,int numero, int valorMax, String idSubasta, Pieza pieza, Administrador administrador)  {
 
 		Comprador cliente = clientes.get(login);
 		administrador.verificacionDeCliente(cliente);
