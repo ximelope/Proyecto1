@@ -294,9 +294,24 @@ public class Administrador extends Usuario {
 		System.out.println(total);
 		
 	}
+	public String historiaClienteInterfaz(Comprador comprador,HashMap<String, Propietario> propietarios, HashMap<String, Pieza> coleccionPiezas) {
+		int total = 0;
+		String piezas = "Nada";
+		String nombre = comprador.getLogin();
+		Propietario propietario = propietarios.get(nombre);
+		if (propietario!= null) {
+			piezas = propietario.getPiezas();
+			String[] coleccion = piezas.split("-");
+			System.out.println("Las piezas de las que es propietario son : ");
+			for (String pieza : coleccion) {
+			    System.out.println(pieza);
+			    total+= coleccionPiezas.get(pieza).getValorFijo();
+			}
+			
+		}
+		String respuesta = ("Las pieza que ha comprado: "+ comprador.getPiezas()+ "   " +
+	"Las fechas en las que las ha comprado: "+ comprador.getFechas()+ "   "+
+				" Es propietario de: " + piezas+  "   "+ "El valor de su coleccion es: "+ total   );
+		return respuesta;
+	}
 }
-
-
-
-
-

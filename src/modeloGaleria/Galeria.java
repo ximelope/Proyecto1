@@ -69,6 +69,7 @@ public class Galeria {
 	public Galeria() {
 		Administrador administrador = new Administrador("Sofia","123");
 		this.administrador= administrador;
+		cargarInformacion();
 	}
 	
 	 public void cargarInformacion() {

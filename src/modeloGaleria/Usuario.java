@@ -1,5 +1,7 @@
 package modeloGaleria;
 
+import java.util.ArrayList;
+
 public abstract class Usuario {
 	protected String login;
 	protected String contrasena;
@@ -39,5 +41,21 @@ public abstract class Usuario {
 		    System.out.println(par);
 		}
 	}
-
+	public String historiaPiezaInterfaz(Pieza pieza) {
+		String respuesta = ("Tipo: "+ pieza.getTipo()+", Nombre: "+ pieza.getTitulo()+ ", Autor: " + pieza.getAutor()+ ", Año de creación: "+pieza.getAno()+ ", Lugar de creación: "+ pieza.getLugarCreacion()+ ", Propietario actual: " + pieza.getPropietario().getLogin()+ "   "+
+	"Sus dueños han sido: "+ pieza.getPropietarios()+ "   "+ "Ha sido vendida (pesos) por: "+ pieza.getPrecios()+"   "+ "Ha sido vendida en estas fechas: "+ pieza.getFechasVendidas());
+		return respuesta;
+	}
+	public String historiaArtista(Artista artista) {
+		String total = "Ninguna";
+		ArrayList<String> lista = new ArrayList<String>( );
+		for (Pieza pieza: artista.getPiezasLista()) {
+			total = "Pieza: " + pieza.getTitulo()+ "Año: " + pieza.getAno()+"Fecha de venta: "+ pieza.getFechasVendidas()+
+					"Valor de pieza: "+pieza.getPrecios();
+			lista.add(total);
+			}
+		String respuesta= "Artista: "+ artista.getNombre() + "    " +
+			"Piezas: "+total;
+		return respuesta;
+	}
 }
