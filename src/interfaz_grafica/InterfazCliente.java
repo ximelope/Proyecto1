@@ -44,9 +44,12 @@ public class InterfazCliente extends JFrame implements ActionListener {
 		this.botones[1][0] = new JButton("2.) Mostrar la historia de un artista");
 		this.botones[1][0].addActionListener(this);
 		menuBotones.add(this.botones[1][0]);
-		this.botones[2][0] = new JButton("3.) Ventas realizadas en el año");
+		this.botones[2][0] = new JButton("3.) Realizar pago de una pieza");
 		this.botones[2][0].addActionListener(this);
 		menuBotones.add(this.botones[2][0]);
+		this.botones[3][0] = new JButton("4.) Ventas realizadas en el año");
+		this.botones[3][0].addActionListener(this);
+		menuBotones.add(this.botones[3][0]);
 		this.add(menuBotones, BorderLayout.CENTER);
 		this.setVisible(true);
 		
@@ -61,7 +64,10 @@ public class InterfazCliente extends JFrame implements ActionListener {
 		else if (bOprimido.getText()=="2.) Mostrar la historia de un artista") {
 			new InterfazHistoriaA(cliente, galeria);
 		}
-		else if (bOprimido.getText()=="3.) Ventas realizadas en el año") {
+		else if (bOprimido.getText()=="3.) Realizar pago de una pieza") {
+			
+		}
+		else if (bOprimido.getText()=="4.) Ventas realizadas en el año") {
 			
 		}
 	}
