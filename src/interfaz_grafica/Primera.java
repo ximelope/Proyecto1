@@ -15,6 +15,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import modeloGaleria.Administrador;
+import modeloGaleria.Comprador;
 import modeloGaleria.Galeria;
 
 
@@ -78,7 +79,8 @@ public class Primera extends JFrame implements ActionListener {
             		Administrador administrador = new Administrador(username,password);
             		new InterfazAdministrador(administrador, galeria);
             	}else if (userType == "Cliente") {
-            		new InterfazCliente();
+            		Comprador comprador = galeria.getClientes().get(username);
+            		new InterfazCliente(galeria, comprador);
             		
             	}else {
             		new InterfazEmpleado();

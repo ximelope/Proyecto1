@@ -31,7 +31,7 @@ public class InterfazAdministrador extends JFrame implements ActionListener {
 		this.setLayout(new BorderLayout());
 		this.setVisible(true);
 		
-		JLabel menu = new JLabel("Menú");
+		JLabel menu = new JLabel("Menú Administrador");
 		JPanel titulo = new JPanel();
 		titulo.setLayout(new FlowLayout());
 		titulo.add(menu);
@@ -73,6 +73,9 @@ public class InterfazAdministrador extends JFrame implements ActionListener {
 		}
 		else if (bOprimido.getText()=="4.) Mostrar la historia de un comprador") {
 			new IntergazHistoriaC(administrador, galeria);
+		}
+		else if (bOprimido.getText()=="5.) Ventas realizadas en el año") {
+			
 		}
 	}
 	
