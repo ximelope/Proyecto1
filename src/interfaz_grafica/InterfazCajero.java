@@ -66,7 +66,7 @@ public class InterfazCajero extends JFrame implements ActionListener {
 			new InterfazHistoriaA(cajero, galeria);
 		}
 		else if (bOprimido.getText()=="4.) Ventas realizadas en el año") {
-			
+			DiagramaVentas.showChart(galeria);
 		}
 	}
 

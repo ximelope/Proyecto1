@@ -69,7 +69,7 @@ public class InterfazOperador extends JFrame implements ActionListener{
 			new InterfazHistoriaA(operador, galeria);
 		}
 		else if (bOprimido.getText()=="4.) Ventas realizadas en el año") {
-			
+			DiagramaVentas.showChart(galeria);
 		}
 	}
 

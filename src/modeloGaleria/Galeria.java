@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
+
+import Tarjetalol.PaymentInfo;
 
 public class Galeria {
 	private HashMap<String, Escultura> esculturas = new HashMap<>();
@@ -18,6 +21,7 @@ public class Galeria {
 	private HashMap<String, String> usuarios = new HashMap<>();
 	private HashMap<String, Comprador> clientes = new HashMap<>();
 	private HashMap<String, Venta> ventas = new HashMap<>();
+	private static HashMap<String,List<PaymentInfo>> ventasGrafico = new HashMap<>();
 	private HashMap<String, Propietario> propietarios = new HashMap<>();
 	private HashMap<String, Artista> artistas = new HashMap<>();
 	private  Administrador administrador;
@@ -63,6 +67,9 @@ public class Galeria {
 	public HashMap<String, Artista> getArtistas() {
 		return artistas;
 	}
+	public HashMap<String, List<PaymentInfo>> getVentasGrafico() {
+		return ventasGrafico;
+	}
 	public void setAdministrador(Administrador administrador) {
 		this.administrador= administrador;
 	}
@@ -88,6 +95,7 @@ public class Galeria {
          cargarPieza(impresiones);
          cargarComprador();
          cargarArtista();
+         cargarVentasGrafico();
 
 	    }
 	 public void cargarPropietario() {
@@ -144,6 +152,46 @@ public class Galeria {
         }
         
     }
+	
+	 //CAMBIOS
+	 public void cargarVentasGrafico() {
+		    File archivo = new File("./src/data/transacciones.txt");
+		    System.out.println("Cargando ventas desde Archivo");
+		    try {
+		        BufferedReader br = new BufferedReader(new FileReader(archivo));
+		        String linea;
+		        linea = br.readLine(); // Skip header
+		        while ((linea = br.readLine()) != null) {
+		            String[] partes = linea.split(";");
+		            String date = partes[0];
+		            String nombre = partes[1];
+		            String status = partes[2];
+		            PaymentInfo paymentInfo = new PaymentInfo(nombre, status);
+
+		            if (!ventasGrafico.containsKey(date)) {
+		                ventasGrafico.put(date, new ArrayList<>());
+		            }
+		            ventasGrafico.get(date).add(paymentInfo);
+		        }
+		        br.close();
+		    } catch (Exception e) {
+		        e.printStackTrace();
+		    }
+		}
+
+
+	 public static void addSale(String date, PaymentInfo paymentInfo) {
+		    if (!ventasGrafico.containsKey(date)) {
+		        ventasGrafico.put(date, new ArrayList<>());
+		    }
+		    ventasGrafico.get(date).add(paymentInfo);
+		    System.out.println(ventasGrafico.keySet());
+		}
+
+
+	    public static List<PaymentInfo> getSale(String date) {
+	        return ventasGrafico.get(date);
+	    }
 	 
 	 public void cargarArtista() {
 		 File archivo = new File(

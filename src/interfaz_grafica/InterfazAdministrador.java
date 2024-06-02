@@ -75,7 +75,7 @@ public class InterfazAdministrador extends JFrame implements ActionListener {
 			new IntergazHistoriaC(administrador, galeria);
 		}
 		else if (bOprimido.getText()=="5.) Ventas realizadas en el año") {
-			
+			DiagramaVentas.showChart(galeria);
 		}
 	}
 	

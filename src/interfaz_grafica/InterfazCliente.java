@@ -65,10 +65,10 @@ public class InterfazCliente extends JFrame implements ActionListener {
 			new InterfazHistoriaA(cliente, galeria);
 		}
 		else if (bOprimido.getText()=="3.) Realizar pago de una pieza") {
-			
+			new MenuGaleria(galeria);
 		}
 		else if (bOprimido.getText()=="4.) Ventas realizadas en el año") {
-			
+			DiagramaVentas.showChart(galeria);
 		}
 	}
 
