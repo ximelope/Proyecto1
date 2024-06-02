@@ -17,7 +17,7 @@ import modeloGaleria.Galeria;
 
 public class InterfazCliente extends JFrame implements ActionListener {
 	private Galeria galeria;
-	private JButton botones[][] = new JButton[3][1];
+	private JButton botones[][] = new JButton[4][1];
 	private Comprador cliente;
 
 	public InterfazCliente (Galeria galeria, Comprador cliente) {
@@ -37,7 +37,7 @@ public class InterfazCliente extends JFrame implements ActionListener {
 		this.add(titulo, BorderLayout.NORTH);
 		
 		JPanel menuBotones = new JPanel();
-		menuBotones.setLayout(new GridLayout(3, 1, 10, 10));
+		menuBotones.setLayout(new GridLayout(4, 1, 10, 10));
 		this.botones[0][0] = new JButton("1.) Mostrar la historia de una pieza");
 		this.botones[0][0].addActionListener(this);
 		menuBotones.add(this.botones[0][0]);
