@@ -83,7 +83,7 @@ public class Primera extends JFrame implements ActionListener {
             		new InterfazCliente(galeria, comprador);
             		
             	}else {
-            		new InterfazEmpleado();
+            		new InterfazEmpleado(galeria, username, password);
             	}
                 
             } else {

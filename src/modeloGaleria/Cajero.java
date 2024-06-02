@@ -20,7 +20,6 @@ public class Cajero extends Usuario{
 		super(login, contrasena);
 	}
 	public void cargarVenta(File archivo, HashMap<String, Pieza> piezas,HashMap<String, Comprador> clientes,HashMap<String, Venta> ventas) {
-		System.out.println("Cargando Registros desde Archivo");
         try {
             BufferedReader br = new BufferedReader(new FileReader(archivo));
             String linea;

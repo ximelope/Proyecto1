@@ -1,0 +1,3 @@
+Linda;17-02-2000;Santiago
+Sol;21-04-2024;Juliana
+Lluvia;21-04-2024;Santiago

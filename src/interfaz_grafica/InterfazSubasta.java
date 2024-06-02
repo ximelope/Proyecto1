@@ -13,24 +13,24 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import modeloGaleria.Administrador;
 import modeloGaleria.Galeria;
+import modeloGaleria.Operador;
 
-public class IntergazHistoriaC extends JFrame implements ActionListener  {
+public class InterfazSubasta extends JFrame implements ActionListener   {
 	private JTextField nameField;
 	private JButton submitButton ;
-	private Administrador usuario;
+	private Operador usuario;
 	private Galeria galeria; 
 	
-	public IntergazHistoriaC(Administrador usuario, Galeria galeria) {
+	public InterfazSubasta(Operador usuario, Galeria galeria) {
 		this.galeria = galeria;
 		this.usuario= usuario; 
 		this.setSize(800, 800);
-		this.setTitle("Historia de un Cliente ");
+		this.setTitle("Historia de un Artista ");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());
 		
-		JLabel menu = new JLabel("Historia de un Cliente");
+		JLabel menu = new JLabel("Cerrar Subasta");
 		JPanel titulo = new JPanel();
 		titulo.setLayout(new FlowLayout());
 		titulo.add(menu);
@@ -39,7 +39,7 @@ public class IntergazHistoriaC extends JFrame implements ActionListener  {
 		JPanel personaPanel = new JPanel();
         personaPanel.setLayout(new GridLayout(2, 2));
 
-        JLabel nameLabel = new JLabel("Nombre de el Cliente:");
+        JLabel nameLabel = new JLabel("Ingrese el id de la subasta a finalizar(00aa, 00bb)");
         nameField = new JTextField();
 
         submitButton = new JButton("Enviar");
@@ -55,11 +55,10 @@ public class IntergazHistoriaC extends JFrame implements ActionListener  {
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == submitButton) {
             String username = nameField.getText();
-            String respuesta = usuario.historiaClienteInterfaz(galeria.getClientes().get(username), galeria.getPropietarios(), galeria.getPiezas());
+            String respuesta = usuario.ganador(username);
             JOptionPane.showMessageDialog(this, respuesta, "Mensaje", JOptionPane.INFORMATION_MESSAGE);	
 		}
-
-		
+	
 	}
 
 }
